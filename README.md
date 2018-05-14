@@ -22,7 +22,7 @@ pod 'CCToolKit'
 
 ## Author
 
-lgc107, 15645969688@163.com
+Harry_L, 15645969688@163.com
 
 ## License
 
