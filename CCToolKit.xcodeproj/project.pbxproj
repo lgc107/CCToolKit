@@ -10,6 +10,14 @@
 		B6FA0ACD20A984EF000CECA0 /* CCToolKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
 		B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AC620A984EF000CECA0 /* CCToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FA0AE520A985DD000CECA0 /* CCError.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0ADD20A985DC000CECA0 /* CCError.m */; };
+		B6FA0AE620A985DD000CECA0 /* CCError.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0ADE20A985DC000CECA0 /* CCError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FA0AE720A985DD000CECA0 /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0ADF20A985DD000CECA0 /* UIImage+Extensions.m */; };
+		B6FA0AE820A985DD000CECA0 /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AE020A985DD000CECA0 /* CCVersion.m */; };
+		B6FA0AE920A985DD000CECA0 /* CCVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AE120A985DD000CECA0 /* CCVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FA0AEA20A985DD000CECA0 /* UIImage+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AE220A985DD000CECA0 /* UIImage+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FA0AEB20A985DD000CECA0 /* CCAppInfoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AE320A985DD000CECA0 /* CCAppInfoManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FA0AEC20A985DD000CECA0 /* CCAppInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AE420A985DD000CECA0 /* CCAppInfoManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		B6FA0ACC20A984EF000CECA0 /* CCToolKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCToolKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCToolKitTests.m; sourceTree = "<group>"; };
 		B6FA0AD320A984EF000CECA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6FA0ADD20A985DC000CECA0 /* CCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCError.m; sourceTree = "<group>"; };
+		B6FA0ADE20A985DC000CECA0 /* CCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCError.h; sourceTree = "<group>"; };
+		B6FA0ADF20A985DD000CECA0 /* UIImage+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extensions.m"; sourceTree = "<group>"; };
+		B6FA0AE020A985DD000CECA0 /* CCVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVersion.m; sourceTree = "<group>"; };
+		B6FA0AE120A985DD000CECA0 /* CCVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVersion.h; sourceTree = "<group>"; };
+		B6FA0AE220A985DD000CECA0 /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extensions.h"; sourceTree = "<group>"; };
+		B6FA0AE320A985DD000CECA0 /* CCAppInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAppInfoManager.h; sourceTree = "<group>"; };
+		B6FA0AE420A985DD000CECA0 /* CCAppInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAppInfoManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +88,14 @@
 			isa = PBXGroup;
 			children = (
 				B6FA0AC620A984EF000CECA0 /* CCToolKit.h */,
+				B6FA0AE320A985DD000CECA0 /* CCAppInfoManager.h */,
+				B6FA0AE420A985DD000CECA0 /* CCAppInfoManager.m */,
+				B6FA0ADE20A985DC000CECA0 /* CCError.h */,
+				B6FA0ADD20A985DC000CECA0 /* CCError.m */,
+				B6FA0AE120A985DD000CECA0 /* CCVersion.h */,
+				B6FA0AE020A985DD000CECA0 /* CCVersion.m */,
+				B6FA0AE220A985DD000CECA0 /* UIImage+Extensions.h */,
+				B6FA0ADF20A985DD000CECA0 /* UIImage+Extensions.m */,
 				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 			);
 			path = CCToolKit;
@@ -94,6 +118,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
+				B6FA0AEB20A985DD000CECA0 /* CCAppInfoManager.h in Headers */,
+				B6FA0AE920A985DD000CECA0 /* CCVersion.h in Headers */,
+				B6FA0AE620A985DD000CECA0 /* CCError.h in Headers */,
+				B6FA0AEA20A985DD000CECA0 /* UIImage+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +223,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6FA0AE520A985DD000CECA0 /* CCError.m in Sources */,
+				B6FA0AE820A985DD000CECA0 /* CCVersion.m in Sources */,
+				B6FA0AE720A985DD000CECA0 /* UIImage+Extensions.m in Sources */,
+				B6FA0AEC20A985DD000CECA0 /* CCAppInfoManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,15 +362,24 @@
 		B6FA0AD820A984EF000CECA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+				);
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CCToolKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.freedom.CCToolKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -349,15 +390,24 @@
 		B6FA0AD920A984EF000CECA0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+				);
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CCToolKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.freedom.CCToolKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

@@ -16,4 +16,7 @@ FOUNDATION_EXPORT const unsigned char CCToolKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <CCToolKit/PublicHeader.h>
 
-
+#import <CCToolKit/CCAppInfoManager.h>
+#import <CCToolKit/CCError.h>
+#import <CCToolKit/CCVersion.h>
+#import <CCToolKit/UIImage+Extensions.h>
