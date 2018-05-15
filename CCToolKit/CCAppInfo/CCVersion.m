@@ -88,6 +88,11 @@ static NSString *const kBundleVerionIdentifier = @"CFBundleVersion";
     }
 }
 
+-(NSString *)description{
+    return [NSString stringWithFormat:@"CCVersion -> address:%p,versionString:%@",self,self.stringValue];
+}
+
+
 @end
 
 

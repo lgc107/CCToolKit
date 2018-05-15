@@ -20,4 +20,7 @@
    return [CCError errorWithDomain:domain code:code userInfo:nil];
 }
 
+-(NSString *)description{
+    return [@"CCError_Reason:" stringByAppendingString:self.domain];
+}
 @end

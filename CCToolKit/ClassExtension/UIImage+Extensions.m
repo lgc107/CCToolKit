@@ -55,17 +55,17 @@
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     //This function is equivalent to calling the UIGraphicsBeginImageContextWithOptions function with the opaque parameter set to NO and a scale factor of 1.0.
     UIGraphicsBeginImageContext(size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, color.CGColor);//Fill Color
-    CGContextFillRect(context, rect);
+    CGContextRef bitmap = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(bitmap, color.CGColor);//Fill Color
+    CGContextFillRect(bitmap, rect);
     
     //shadowColor
     if (shadow) {
         CGPathRef roundedRect = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0].CGPath;
-        CGContextAddPath(context, roundedRect);
-        CGContextSetShadowWithColor(context, shadow.offset, shadow.blur, shadow.color);
-        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-        CGContextStrokePath(context);
+        CGContextAddPath(bitmap, roundedRect);
+        CGContextSetShadowWithColor(bitmap, shadow.offset, shadow.blur, shadow.color);
+        CGContextSetStrokeColorWithColor(bitmap, [UIColor whiteColor].CGColor);
+        CGContextStrokePath(bitmap);
     }
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -193,10 +193,10 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
  
     
     UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
-    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextRef bitmap = UIGraphicsGetCurrentContext();
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    CGContextScaleCTM(context, 1, -1);
-    CGContextTranslateCTM(context, 0, -rect.size.height);
+    CGContextScaleCTM(bitmap, 1, -1);
+    CGContextTranslateCTM(bitmap, 0, -rect.size.height);
     
     CGFloat minSize = MIN(self.size.width, self.size.height);
    
@@ -211,10 +211,10 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, borderWidth, borderWidth) byRoundingCorners:corners cornerRadii:CGSizeMake(radius, borderWidth)];
         [path closePath];
         
-        CGContextSaveGState(context);
+        CGContextSaveGState(bitmap);
         [path addClip];
-        CGContextDrawImage(context, rect, self.CGImage);
-        CGContextRestoreGState(context);
+        CGContextDrawImage(bitmap, rect, self.CGImage);
+        CGContextRestoreGState(bitmap);
     }
     
     if (borderColor && borderWidth < minSize / 2 && borderWidth > 0) {
@@ -250,11 +250,11 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
     cornerImage(imgData, width, height, radius);
     
     // 二进制流转换为图片
-    CGDataProviderRef pv = CGDataProviderCreateWithData(NULL, imgData, width * height * 4, releaseData);
-    CGImageRef content = CGImageCreate(width, height, 8, 32, 4 * width , CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast, pv, NULL, true, kCGRenderingIntentDefault);
+    CGDataProviderRef dataProviderRef = CGDataProviderCreateWithData(NULL, imgData, width * height * 4, releaseData);
+    CGImageRef content = CGImageCreate(width, height, 8, 32, 4 * width , CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast, dataProviderRef, NULL, true, kCGRenderingIntentDefault);
     UIImage *result = [UIImage imageWithCGImage:content];
     
-    CGDataProviderRelease(pv);      // 释放空间
+    CGDataProviderRelease(dataProviderRef);      // 释放空间
     CGImageRelease(content);
     
     return result;
