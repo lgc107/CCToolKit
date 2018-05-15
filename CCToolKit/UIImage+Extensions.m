@@ -82,6 +82,38 @@
 }
 
 
+#pragma mark -- append
++ (UIImage *)verticalImageFromArray:(NSArray <UIImage *>*)imagesArray
+{
+    if (imagesArray == nil || imagesArray.count == 0) {
+        return nil;
+    }
+    UIImage *unifiedImage = nil;
+    CGSize totalImageSize = verticalAppendedTotalImageSizeFromImagesArray(imagesArray);
+    UIGraphicsBeginImageContextWithOptions(totalImageSize, NO, 0.f);
+    // For each image found in the array, create a new big image vertically
+    int imageOffsetFactor = 0;
+    for (UIImage *img in imagesArray) {
+        [img drawAtPoint:CGPointMake(0, imageOffsetFactor)];
+        imageOffsetFactor += img.size.height;
+    }
+    
+    unifiedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return unifiedImage;
+}
+
+CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
+    CGSize totalSize = CGSizeZero;
+    for (UIImage *im in imagesArray) {
+        CGSize imSize = [im size];
+        totalSize.height += imSize.height;
+        // The total width is gonna be always the wider found on the array
+        totalSize.width = MAX(totalSize.width, imSize.width);
+    }
+    return totalSize;
+}
+
 @end
 
 #pragma mark -- ImageInfo
@@ -206,9 +238,7 @@
 }
 
 
-// ------------------------------------------------------------------
-// ---------------------     Start            -----------------------
-// ------------------------------------------------------------------
+
 -(UIImage *)dealImageWithCornerRadius:(CGFloat)radius{
     // CGDataProviderRef 把 CGImage 转 二进制流
     CGDataProviderRef provider = CGImageGetDataProvider(self.CGImage);
@@ -229,6 +259,12 @@
     
     return result;
 }
+
+
+
+// ------------------------------------------------------------------
+// ---------------------     Start            -----------------------
+// ------------------------------------------------------------------
 
 /**
  Clipping Image, set the alpha of the pixels outside the circle to 0.
@@ -311,6 +347,9 @@ void releaseData(void *info,const void *  data, size_t size){
 // ------------------------------------------------------------------
 // ---------------------         End          -----------------------
 // ------------------------------------------------------------------
+
+
+
 
 @end
 

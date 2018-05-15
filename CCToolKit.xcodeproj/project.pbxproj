@@ -18,6 +18,8 @@
 		B6FA0AEA20A985DD000CECA0 /* UIImage+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AE220A985DD000CECA0 /* UIImage+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6FA0AEB20A985DD000CECA0 /* CCAppInfoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AE320A985DD000CECA0 /* CCAppInfoManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6FA0AEC20A985DD000CECA0 /* CCAppInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AE420A985DD000CECA0 /* CCAppInfoManager.m */; };
+		B6FA0B0920A9B953000CECA0 /* UIColor+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0B0720A9B953000CECA0 /* UIColor+Extensions.h */; };
+		B6FA0B0A20A9B953000CECA0 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0B0820A9B953000CECA0 /* UIColor+Extensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		B6FA0AE220A985DD000CECA0 /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extensions.h"; sourceTree = "<group>"; };
 		B6FA0AE320A985DD000CECA0 /* CCAppInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAppInfoManager.h; sourceTree = "<group>"; };
 		B6FA0AE420A985DD000CECA0 /* CCAppInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAppInfoManager.m; sourceTree = "<group>"; };
+		B6FA0B0720A9B953000CECA0 /* UIColor+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
+		B6FA0B0820A9B953000CECA0 /* UIColor+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 				B6FA0AE020A985DD000CECA0 /* CCVersion.m */,
 				B6FA0AE220A985DD000CECA0 /* UIImage+Extensions.h */,
 				B6FA0ADF20A985DD000CECA0 /* UIImage+Extensions.m */,
+				B6FA0B0720A9B953000CECA0 /* UIColor+Extensions.h */,
+				B6FA0B0820A9B953000CECA0 /* UIColor+Extensions.m */,
 				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 			);
 			path = CCToolKit;
@@ -121,6 +127,7 @@
 				B6FA0AEB20A985DD000CECA0 /* CCAppInfoManager.h in Headers */,
 				B6FA0AE920A985DD000CECA0 /* CCVersion.h in Headers */,
 				B6FA0AE620A985DD000CECA0 /* CCError.h in Headers */,
+				B6FA0B0920A9B953000CECA0 /* UIColor+Extensions.h in Headers */,
 				B6FA0AEA20A985DD000CECA0 /* UIImage+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +234,7 @@
 				B6FA0AE820A985DD000CECA0 /* CCVersion.m in Sources */,
 				B6FA0AE720A985DD000CECA0 /* UIImage+Extensions.m in Sources */,
 				B6FA0AEC20A985DD000CECA0 /* CCAppInfoManager.m in Sources */,
+				B6FA0B0A20A9B953000CECA0 /* UIColor+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

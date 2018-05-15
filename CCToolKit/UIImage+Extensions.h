@@ -68,6 +68,14 @@
  */
 + (UIImage *_Nullable)cc_imageWithColor:(UIColor *_Nullable)color Shadow:(Shadow *_Nullable)shadow Size:(CGSize)size;
 
+
+
+/**
+ Create and return a image vertically through the array of images.
+
+ */
++ (UIImage *_Nullable)verticalImageFromArray:(NSArray <UIImage *>*_Nullable)imagesArray;
+
 @end
 
 @interface  UIImage (ImageInfo)
@@ -165,6 +173,7 @@ the width or height. [0, Min(width | height) / 2)
  
  */
 -(nullable UIImage *)dealImageWithCornerRadius:(CGFloat)radius;
+
 
 
 @end

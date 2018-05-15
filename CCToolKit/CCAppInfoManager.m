@@ -12,6 +12,10 @@
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
 
+
+NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCheckNotification";
+
+
 @implementation CCAppInfoManager
 {
     BOOL _isIphoneX;
@@ -109,8 +113,10 @@
             if (error) {
                 CCError *error1 = [CCError errorWithDomain:error.domain code:error.code];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    completitionHandler(false,nil,nil,error1);
+                    if (completitionHandler) {
+                        completitionHandler(false,nil,nil,error1);
+                    }
+                    [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":error1}];
                 });
                 return;
             }
@@ -118,7 +124,10 @@
                 NSDictionary *appInfoDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                 if ([appInfoDic[@"resultCount"] integerValue] == 0) {
                     CCError *error1 = [CCError errorWithDomain:@"检测出未上架的APP或者查询不到"];
+                    if (completitionHandler) {
                     completitionHandler(false,nil,nil,error1);
+                    }
+                    [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":error1}];
                     return;
                 }
                 else{
@@ -132,21 +141,30 @@
                         {
                         NSLog(@"【4】判断结果：当前版本号%@ < 商店版本号%@ 需要更新\n=================",weakSelf.currentVersion.stringValue,weakSelf.appStoreVersion.stringValue);
                             self.isNeedUpdate = true;
+                            if (completitionHandler) {
                             completitionHandler(true,weakSelf.appStoreVersion,weakSelf.appStoreUrl,nil);
+                            }
+                            [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@true,@"AppStoreVersion":weakSelf.appStoreVersion,@"AppStoreTrackUrl":weakSelf.appStoreUrl}];
                         }
                             break;
                         case NSOrderedDescending:
                         {
                               NSLog(@"【4】判断结果：当前版本号%@ > 商店版本号%@ 不需要更新\n================",weakSelf.currentVersion.stringValue,weakSelf.appStoreVersion.stringValue);
                             self.isNeedUpdate = false;
+                            if (completitionHandler) {
                             completitionHandler(false,weakSelf.appStoreVersion,weakSelf.appStoreUrl,nil);
+                            }
+                            [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@false,@"AppStoreVersion":weakSelf.appStoreVersion,@"AppStoreTrackUrl":weakSelf.appStoreUrl,}];
                         }
                             break;
                         case NSOrderedSame:
                         {
                             NSLog(@"【4】判断结果：当前版本号%@ = 商店版本号%@ 不需要更新\n================",weakSelf.currentVersion.stringValue,weakSelf.appStoreVersion.stringValue);
                             self.isNeedUpdate = false;
+                            if (completitionHandler) {
                             completitionHandler(false,weakSelf.appStoreVersion,weakSelf.appStoreUrl,nil);
+                             }
+                              [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@false,@"AppStoreVersion":weakSelf.appStoreVersion,@"AppStoreTrackUrl":weakSelf.appStoreUrl}];
                         }
                             break;
                         default:

@@ -13,6 +13,12 @@
 @class CCVersion;
 @class CCError;
 
+// After checked app need update , post notification's name.
+extern NSString *const CCAppStoreVersionDidCheckNotification;
+//Success : userInfo : @{@"IsSuccess":@true,@"IsNeedUpdate":@false | @true,@"AppStoreVersion":(CCVersion *)appStoreVersion,@"AppStoreTrackUrl":(NSString *)appStoreUrl}
+//failture : userInfo : @{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":(CCError *)error}
+
+
 typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVersion, NSString *trackUrl,CCError *error);
 
 @interface CCAppInfoManager : NSObject
