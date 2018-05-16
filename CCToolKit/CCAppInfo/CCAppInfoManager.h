@@ -4,8 +4,9 @@
 //
 //  Created by Harry_L on 2018/5/11.
 //  Copyright © 2018年 Harry_L. All rights reserved.
-//
-
+/*
+    LMS's good
+*/
 #import <Foundation/Foundation.h>
 #import <CCToolKit/CCVersion.h>
 #import <CCToolKit/CCError.h>
