@@ -25,7 +25,6 @@
     if (hexNumber > 0xFFFFFF) return nil;
     
     CGFloat red = ((hexNumber & 0xFF0000) >> 16) / 255.0;
-    
     CGFloat green = ((hexNumber & 0x00FF00) >> 8) / 255.0;
     CGFloat blue  = (hexNumber & 0x0000FF) / 255.0;
     

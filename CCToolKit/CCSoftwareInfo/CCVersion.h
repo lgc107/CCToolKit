@@ -28,12 +28,12 @@
 /**
  The object's localString Value.
  */
-@property (nonatomic, strong, readonly) NSString *stringValue;
+@property (nonatomic,copy,readonly) NSString *stringValue;
 
 /**
    The object's localString Components.
  */
-@property (nonatomic, strong, readonly) NSArray *versionComponents;
+@property (nonatomic,copy,readonly) NSArray *versionComponents;
 
 
 

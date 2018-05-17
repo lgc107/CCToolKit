@@ -22,7 +22,7 @@ extern NSString *const CCAppStoreVersionDidCheckNotification;
 
 typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVersion, NSString *trackUrl,CCError *error);
 
-@interface CCAppInfoManager : NSObject
+@interface CCSoftwareManager : NSObject
 
 
 /**
@@ -70,50 +70,50 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
 /**
   Get App BundleId.
  */
-@property (nonatomic,copy,readonly) NSString *bundleId;
+@property (nonatomic,readonly) NSString *bundleId;
 /**
    Get App build Version.
  */
-@property (nonatomic,copy,readonly) NSString *buildVersion;
+@property (nonatomic,readonly) NSString *buildVersion;
 
 /**
   Get the result of updating after checking the version update. Default is false.
  */
-@property (nonatomic,assign,readonly) BOOL isNeedUpdate;
+@property (nonatomic,assign,getter=isNeedUpdate) BOOL needUpdate;
 
 /**
    whether the device is iphoneX
  */
-@property (nonatomic,assign,readonly) BOOL isIphoneX;
+@property (nonatomic,assign) BOOL isIphoneX;
 
 /**
  The name identifying the device.
  */
-@property (nonatomic,copy,readonly) NSString *deviceName;
+@property (nonatomic,readonly) NSString *deviceName;
 /**
  The name of the operating system running on the device.
  */
-@property (nonatomic,copy,readonly) NSString *deviceSystemName;
+@property (nonatomic,readonly) NSString *deviceSystemName;
 
 /**
  The current version of the operating system.
  */
-@property (nonatomic,copy,readonly) NSString *deviceSystemVersion;
+@property (nonatomic,readonly) NSString *deviceSystemVersion;
 
 /**
  The model of the device as a localized string.For example ,"iPhone"
  */
-@property (nonatomic,copy,readonly) NSString *deviceLocalizedModel;
+@property (nonatomic,readonly) NSString *deviceLocalizedModel;
 
 /**
  The model Name of the device as a localized string. For example,"iPhone 7"
  */
-@property (nonatomic,copy,readonly) NSString *deviceModelName;
+@property (nonatomic,readonly) NSString *deviceModelName;
 
 /**
   The name of the user’s home cellular service provider. For example, "中国联通"
  */
-@property (nonatomic,copy,readonly) NSString *carrierName;
+@property (nonatomic,readonly) NSString *carrierName;
 
 
 
