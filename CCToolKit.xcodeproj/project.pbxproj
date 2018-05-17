@@ -15,6 +15,8 @@
 		B623DA7820AAD3D700220F3F /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7420AAD3D700220F3F /* CCSoftwareManager.m */; };
 		B623DA7920AAD3D700220F3F /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7520AAD3D700220F3F /* CCSoftwareManager.h */; };
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
+		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
+		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; };
 		B6FA0ACD20A984EF000CECA0 /* CCToolKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
 		B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AC620A984EF000CECA0 /* CCToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,6 +43,8 @@
 		B623DA7420AAD3D700220F3F /* CCSoftwareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSoftwareManager.m; sourceTree = "<group>"; };
 		B623DA7520AAD3D700220F3F /* CCSoftwareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSoftwareManager.h; sourceTree = "<group>"; };
 		B623DA7620AAD3D700220F3F /* CCVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVersion.m; sourceTree = "<group>"; };
+		B690F9FC20AD736C00D3D086 /* CCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileManager.m; sourceTree = "<group>"; };
+		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
 		B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FA0AC620A984EF000CECA0 /* CCToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCToolKit.h; sourceTree = "<group>"; };
 		B6FA0AC720A984EF000CECA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 		B60BF8FC20AC4EB700EB3EAF /* CCStorage */ = {
 			isa = PBXGroup;
 			children = (
+				B690F9FD20AD736C00D3D086 /* CCFileManager.h */,
+				B690F9FC20AD736C00D3D086 /* CCFileManager.m */,
 			);
 			path = CCStorage;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 			files = (
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
 				B623DA6F20AAD38C00220F3F /* UIImage+Extensions.h in Headers */,
+				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
 				B623DA7920AAD3D700220F3F /* CCSoftwareManager.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B623DA7020AAD38C00220F3F /* UIColor+Extensions.h in Headers */,
@@ -255,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FA0AE520A985DD000CECA0 /* CCError.m in Sources */,
+				B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */,
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
 				B623DA6E20AAD38C00220F3F /* UIColor+Extensions.m in Sources */,
