@@ -11,7 +11,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
-
+#import "NSError+Extensions.h"
 
 NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCheckNotification";
 
@@ -106,7 +106,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     __block typeof(self) blockSelf = self;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error) {
-                CCError *error1 = [CCError errorWithDomain:error.domain code:error.code];
+                NSError *error1 = [NSError errorWithDomain:error.domain code:error.code];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (completitionHandler) {
                         completitionHandler(false,nil,nil,error1);
@@ -118,7 +118,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSDictionary *appInfoDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                 if ([appInfoDic[@"resultCount"] integerValue] == 0) {
-                    CCError *error1 = [CCError errorWithDomain:@"检测出未上架的APP或者查询不到"];
+                    NSError *error1 = [NSError errorWithDomain:@"检测出未上架的APP或者查询不到"];
                     if (completitionHandler) {
                     completitionHandler(false,nil,nil,error1);
                     }

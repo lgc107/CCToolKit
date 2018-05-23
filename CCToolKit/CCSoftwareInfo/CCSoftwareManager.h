@@ -8,19 +8,19 @@
     LMS's good
 */
 #import <Foundation/Foundation.h>
-#import <CCToolKit/CCVersion.h>
-#import <CCToolKit/CCError.h>
+#import "CCVersion.h"
+
 
 @class CCVersion;
-@class CCError;
+
 
 // After checked app need update , post notification's name.
 extern NSString *const CCAppStoreVersionDidCheckNotification;
 //Success : userInfo : @{@"IsSuccess":@true,@"IsNeedUpdate":@false | @true,@"AppStoreVersion":(CCVersion *)appStoreVersion,@"AppStoreTrackUrl":(NSString *)appStoreUrl}
-//failture : userInfo : @{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":(CCError *)error}
+//failture : userInfo : @{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":(NSError *)error}
 
 
-typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVersion, NSString *trackUrl,CCError *error);
+typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVersion, NSString *trackUrl,NSError *error);
 
 @interface CCSoftwareManager : NSObject
 

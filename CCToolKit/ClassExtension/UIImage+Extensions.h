@@ -2,7 +2,7 @@
 //  UIImage+Extensions.h
 //  CCToolKit
 //
-//  Created by 季秋 on 2017/5/7.
+//  Created by Harry_L on 2017/5/7.
 //  Copyright © 2017年 Freedom. All rights reserved.
 //
 
@@ -110,6 +110,10 @@
 - (nullable UIImage *)cc_imageByCropToRect:(CGRect)rect;
 
 
+- (nullable UIImage *)cc_imageDrawToCirle;
+
+
+- (nullable UIImage *)cc_imageRoundedByCoreGraphicWithCornerRadius:(CGFloat)radius;
 /**
 Rounds a new image with a given corner size.
 
@@ -161,8 +165,10 @@ the width or height. [0, Min(width | height) / 2)
                                       borderColor:(nullable UIColor *)borderColor
                                    borderLineJoin:(CGLineJoin)borderLineJoin;
 
+
+
 /**
- 自定义图片切圆算法 (性能优先，效果较低，来源于 [一种高效裁剪圆角的算法](http://www.jianshu.com/p/bbb50b2cb7e6)
+ 自定义图片切圆角算法,有毛边效果不是很好. (来源于 [一种高效裁剪圆角的算法](http://www.jianshu.com/p/bbb50b2cb7e6)
  )
  
  Rounds a new image with a given corner size.
@@ -173,7 +179,6 @@ the width or height. [0, Min(width | height) / 2)
  
  */
 -(nullable UIImage *)dealImageWithCornerRadius:(CGFloat)radius;
-
 
 
 @end

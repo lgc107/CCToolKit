@@ -7,7 +7,7 @@
 //
 
 #import "CCFileManager.h"
-#import "CCError.h"
+
 #import <UIKit/UIKit.h>
 @implementation CCFileManager
 {

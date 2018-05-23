@@ -134,9 +134,7 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
 
 @implementation UIImage (Modify)
 
-// ------------------------------------------------------------------
-// --------------------- 以下是自定义图像处理部分 -----------------------
-// ------------------------------------------------------------------
+
 - (UIImage *)cc_imageByResizeToSize:(CGSize)size{
     if (!self || size.width <= 0 || size.height <= 0) { return nil; }
     UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
@@ -164,6 +162,74 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
 }
 
 #pragma mark -- Corner radius
+
+-(UIImage *)cc_imageDrawToCirle{
+    //1.开启图片大小的上下文
+    CGSize size = CGSizeMake(self.size.width *self.scale, self.size.height *self.scale);
+    UIGraphicsBeginImageContext(size);
+    //2.获取上下文
+    CGContextRef ref = UIGraphicsGetCurrentContext();
+    //3.在上下文中画一个园
+    CGRect rect =  CGRectMake(0, 0, size.width, size.height);
+    CGContextAddEllipseInRect(ref, rect);
+    //4.裁剪出边界
+    CGContextClip(ref);
+    //5.绘制图片
+    [self drawInRect:rect];
+    //6.获得图片
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+- (UIImage *)cc_imageRoundedByCoreGraphicWithCornerRadius:(CGFloat)radius{
+//    int w = .width;
+//    int h = imageSize.height;
+//    int radius = imageSize.width/2;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, self.size.width, self.size.height, 8, 4 * self.size.width, colorSpace, kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGContextBeginPath(context);
+    addRoundedRectToPath(context, rect, radius, radius);
+    CGContextClosePath(context);
+    CGContextClip(context);
+    CGContextDrawImage(context, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(context);
+    UIImage *img = [UIImage imageWithCGImage:imageMasked];
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    CGImageRelease(imageMasked);
+    return img;
+}
+
+static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,
+                                 float ovalHeight)
+{
+    float fw, fh;
+    
+    if (ovalWidth == 0 || ovalHeight == 0)
+    {
+        CGContextAddRect(context, rect);
+        return;
+    }
+    
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGContextScaleCTM(context, ovalWidth, ovalHeight);
+    fw = CGRectGetWidth(rect) / ovalWidth;
+    fh = CGRectGetHeight(rect) / ovalHeight;
+    
+    CGContextMoveToPoint(context, fw, fh/2);  // Start at lower right corner
+    CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 1);  // Top right corner
+    CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 1); // Top left corner
+    CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 1); // Lower left corner
+    CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 1); // Back to lower right
+    
+    CGContextClosePath(context);
+    CGContextRestoreGState(context);
+}
 
 - (UIImage *)cc_imageByRoundCornerRadius:(CGFloat)radius {
     return [self cc_imageByRoundCornerRadius:radius borderWidth:0 borderColor:nil];
@@ -238,9 +304,12 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
 }
 
 
-
+// ------------------------------------------------------------------
+// --------------------- 以下是自定义图像处理部分 ---------------------
+// ------------------------------------------------------------------
 -(UIImage *)dealImageWithCornerRadius:(CGFloat)radius{
     // CGDataProviderRef 把 CGImage 转 二进制流
+  
     CGDataProviderRef provider = CGImageGetDataProvider(self.CGImage);
     void *imgData = (void *)CFDataGetBytePtr(CGDataProviderCopyData(provider));
     
@@ -259,6 +328,7 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
     
     return result;
 }
+
 
 
 
@@ -287,43 +357,52 @@ void cornerImage(UInt32 * const img, int width, int height, CGFloat cornerRadius
     for (int y = 0; y < c; y++) {
         for (int x = 0; x < c-y; x++) {
             // y*w+x pointer
-            UInt32 *p = img + y * width + x;    // p 32位指针，RGBA排列，各8位
+        
+            UInt32 *leftTopP = img + y * width + x; // p 32位指针，RGBA排列，各8位
             // to 0.
             if (isCircle(c, c, c, x, y) == false) {
-                *p = 0;
+               
+                     *leftTopP = 0;
+//                    //优化 找到对称点 省去另外三个角的遍历
+                    UInt32 *rightTopP = img + y * width +(width - x);
+                    UInt32 *leftBottomP = img + (height -y) * width + x;
+                    UInt32 *rightBottomP = img + (height -y) * width + (width - x);
+                    *rightTopP = 0;
+                    *leftBottomP = 0;
+                    *rightBottomP = 0;
             }
         }
     }
-    // 右上 y:[0, c), x:[w-c+y, w)
-    int tmp = width-c;
-    for (int y=0; y<c; y++) {
-        for (int x=tmp+y; x<width; x++) {
-            UInt32 *p = img + y * width + x;
-            if (isCircle(width-c, c, c, x, y) == false) {
-                *p = 0;
-            }
-        }
-    }
-    // 左下 y:[h-c, h), x:[0, y-h+c)
-    tmp = height-c;
-    for (int y=height-c; y<height; y++) {
-        for (int x=0; x<y-tmp; x++) {
-            UInt32 *p = img + y * width + x;
-            if (isCircle(c, height-c, c, x, y) == false) {
-                *p = 0;
-            }
-        }
-    }
-    // 右下 y~[h-c, h), x~[w-c+h-y, w)
-    tmp = width-c+height;
-    for (int y=height-c; y<height; y++) {
-        for (int x=tmp-y; x<width; x++) {
-            UInt32 *p = img + y * width + x;
-            if (isCircle(width-c, height-c, c, x, y) == false) {
-                *p = 0;
-            }
-        }
-    }
+//    // 右上 y:[0, c), x:[w-c+y, w)
+//    int tmp = width-c;
+//    for (int y=0; y<c; y++) {
+//        for (int x=tmp+y; x<width; x++) {
+//            UInt32 *p = img + y * width + x;
+//            if (isCircle(width-c, c, c, x, y) == false) {
+//                *p = 0;
+//            }
+//        }
+//    }
+//    // 左下 y:[h-c, h), x:[0, y-h+c)
+//    tmp = height-c;
+//    for (int y=height-c; y<height; y++) {
+//        for (int x=0; x<y-tmp; x++) {
+//            UInt32 *p = img + y * width + x;
+//            if (isCircle(c, height-c, c, x, y) == false) {
+//                *p = 0;
+//            }
+//        }
+//    }
+//    // 右下 y~[h-c, h), x~[w-c+h-y, w)
+//    tmp = width-c+height;
+//    for (int y=height-c; y<height; y++) {
+//        for (int x=tmp-y; x<width; x++) {
+//            UInt32 *p = img + y * width + x;
+//            if (isCircle(width-c, height-c, c, x, y) == false) {
+//                *p = 0;
+//            }
+//        }
+//    }
 }
 
 
@@ -332,12 +411,16 @@ void cornerImage(UInt32 * const img, int width, int height, CGFloat cornerRadius
  
  @return  false  or  true .
  */
-static inline bool isCircle(float cx, float cy, float px, float py, float r){
-    if ((px - cx) * (px - cx) + (py - cy) * (py - cy) > r * r) {
-        return  false;
+static inline bool isCircle(float cx, float cy, float r, float px, float py) {
+    if ((px-cx) * (px-cx) + (py-cy) * (py-cy) > r * r ) {
+        return false;
     }
-    return  true;
+    return true;
 }
+
+
+
+
 
 void releaseData(void *info,const void *  data, size_t size){
     free((void *)data);

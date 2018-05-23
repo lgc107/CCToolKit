@@ -2,8 +2,8 @@
 //  UIColor+Extensions.m
 //  CCToolKit
 //
-//  Created by Harry_L on 2018/5/14.
-//  Copyright © 2018年 Harry_L. All rights reserved.
+//  Created by Harry_L on 2017/5/14.
+//  Copyright © 2017年 Harry_L. All rights reserved.
 //
 
 #import "UIColor+Extensions.h"
