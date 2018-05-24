@@ -429,7 +429,7 @@
     if (mode == CcCryptorCBCMode && [iv length] < 8) {
         return nil;
     }
-
+    
     CCCryptorStatus status = kCCSuccess;
     CCOptions options = 0;
     switch (mode) {
@@ -679,7 +679,7 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
 }
 @end
 
-
+#pragma mark - Zlib
 @implementation NSData (Zlib)
 
 - (NSData *)cc_zlibInflate
