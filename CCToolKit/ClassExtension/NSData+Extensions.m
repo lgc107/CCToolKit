@@ -9,64 +9,69 @@
 #import "NSData+Extensions.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
+#import <zlib.h>
 
 #pragma mark - Encoding
 @implementation NSData (Encoding)
 
 - (instancetype)initWithHexEncodedString:(NSString *)string{
-    self = [super init];
-    if (self) {
-        if (!string || [string length] == 0) {
-            return nil;
-        }
-        
-        NSMutableData *hexData = [NSMutableData data];
-        NSRange range;
-        if ([self length] % 2 == 0) {
-            range = NSMakeRange(0, 2);
-        } else {
-            range = NSMakeRange(0, 1);
-        }
-        for (NSInteger i = range.location; i < [self length]; i += 2) {
-            unsigned int anInt;
-            NSString *hexCharStr = [string substringWithRange:range];
-            NSScanner *scanner = [[NSScanner alloc] initWithString:hexCharStr];
-            
-            [scanner scanHexInt:&anInt];
-            NSData *entity = [[NSData alloc] initWithBytes:&anInt length:1];
-            [hexData appendData:entity];
-            
-            range.location += range.length;
-            range.length = 2;
-        }
-        self = [NSData dataWithData:hexData];
+    
+    
+    if (!string || [string length] == 0) {
+        return nil;
     }
+    
+    NSMutableData *hexData = [NSMutableData data];
+    NSRange range;
+    if ([string length] % 2 == 0) {
+        range = NSMakeRange(0, 2);
+    } else {
+        range = NSMakeRange(0, 1);
+    }
+    for (NSInteger i = range.location; i < [string length]; i += 2) {
+        unsigned int anInt;
+        NSString *hexCharStr = [string substringWithRange:range];
+        NSScanner *scanner = [[NSScanner alloc] initWithString:hexCharStr];
+        
+        [scanner scanHexInt:&anInt];
+        NSData *entity = [[NSData alloc] initWithBytes:&anInt length:1];
+        [hexData appendData:entity];
+        
+        range.location += range.length;
+        range.length = 2;
+    }
+    self = [NSData dataWithData:hexData];
+    
     return self;
 }
 
-
-- (NSString *)cc_hexEncodedString
-{
-
-    if (!self || [self length] == 0) {
-        return @"";
+- (NSString *)cc_utf8EncodedString {
+    if (self.length > 0) {
+        return [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
     }
-    
-    NSMutableString *string = [[NSMutableString alloc] initWithCapacity:[self length]];
-    
-    [self enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-        unsigned char *dataBytes = (unsigned char*)bytes;
-        for (NSInteger i = 0; i < byteRange.length; i++) {
-            NSString *hexStr = [NSString stringWithFormat:@"%x", (dataBytes[i]) & 0xff];
-            if ([hexStr length] == 2) {
-                [string appendString:hexStr];
-            } else {
-                [string appendFormat:@"0%@", hexStr];
-            }
+    return @"";
+}
+
+- (NSString *)cc_hexEncodedString {
+    if (self.length > 0) {
+        NSUInteger length = self.length;
+        NSMutableString *result = [NSMutableString stringWithCapacity:length * 2];
+        const unsigned char *byte = self.bytes;
+        for (int i = 0; i < length; i++, byte++) {
+            [result appendFormat:@"%02x", *byte];
         }
-    }];
-   
-    return string;
+        return result;
+    }
+    return @"";
+}
+
+- (id)cc_jsonValueDecoded {
+    NSError *error = nil;
+    id value = [NSJSONSerialization JSONObjectWithData:self options:kNilOptions error:&error];
+    if (error) {
+        NSLog(@"jsonValueDecoded error:%@", error);
+    }
+    return value;
 }
 
 @end
@@ -309,7 +314,7 @@
 }
 
 - (NSString *)cc_hmacStringUsingAlg:(CCHmacAlgorithm)alg withKey:(id)key {
-     NSParameterAssert([key isKindOfClass: [NSData class]] || [key isKindOfClass: [NSString class]]);
+    NSParameterAssert([key isKindOfClass: [NSData class]] || [key isKindOfClass: [NSString class]]);
     size_t size;
     switch (alg) {
         case kCCHmacAlgMD5: size = CC_MD5_DIGEST_LENGTH; break;
@@ -326,7 +331,7 @@
         keyData = (NSMutableData *) [key mutableCopy];
     else
         keyData = [[key dataUsingEncoding: NSUTF8StringEncoding] mutableCopy];
-  
+    
     CCHmac(alg, keyData.bytes, strlen(keyData.bytes), self.bytes, self.length, result);
     NSMutableString *hash = [NSMutableString stringWithCapacity:size * 2];
     for (int i = 0; i < size; i++) {
@@ -347,12 +352,15 @@
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error
 {
-  
-   return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmAES
-                               key:key
-              InitializationVector:iv ? iv :NULL
-                              Mode:mode
-                             error:error];
+    NSAssert(mode == CcCryptorCBCMode && [iv length] >= 16, @"With CBC Mode, InitializationVector  must be greater than 16 bits");
+    if (mode == CcCryptorCBCMode && [iv length] < 16) {
+        return nil;
+    }
+    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmAES
+                                      key:key
+                     InitializationVector:iv ? iv :NULL
+                                     Mode:mode
+                                    error:error];
 }
 
 -(NSData *)cc_decryptAESUsingkey:(id)key
@@ -360,6 +368,11 @@
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error
 {
+    NSAssert(mode == CcCryptorCBCMode && [iv length] >= 16, @"With CBC Mode, InitializationVector  must be greater than 16 bits");
+    if (mode == CcCryptorCBCMode && [iv length] < 16) {
+        return nil;
+    }
+    
     return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmAES
                                       key:key
                      InitializationVector:iv ? iv :NULL
@@ -375,7 +388,7 @@
                            error:(NSError *__autoreleasing *)error
 {
     
-    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmAES
+    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmDES
                                       key:key
                      InitializationVector:iv ? iv :NULL
                                      Mode:mode
@@ -387,12 +400,21 @@
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error
 {
-    return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmAES
+ 
+    return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmDES
                                       key:key
                      InitializationVector:iv ? iv :NULL
                                      Mode:mode
                                     error:error];
     
+}
+
+- (NSData *)cc_encryptRC4{
+    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmRC4 key:nil InitializationVector:NULL Mode:CcCryptorNoneMode error:nil];
+}
+
+- (NSData *)cc_decryptRC4{
+    return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmRC4 key:nil InitializationVector:NULL Mode:CcCryptorNoneMode error:nil];
 }
 
 #pragma mark - lowCommonCrypto
@@ -402,8 +424,14 @@
                                 Mode:(CcCryptorMode)mode
                                error:(NSError**)error
 {
+    NSAssert(mode == CcCryptorCBCMode && iv != nil && iv != NULL, @"With CBC Mode , InitializationVector  must have value");
+    NSAssert(mode == CcCryptorCBCMode && [iv length] >= 8, @"With CBC Mode, InitializationVector  must be greater than 8 bits");
+    if (mode == CcCryptorCBCMode && [iv length] < 8) {
+        return nil;
+    }
+
     CCCryptorStatus status = kCCSuccess;
-    CCOptions options;
+    CCOptions options = 0;
     switch (mode) {
         case CcCryptorCBCMode:
             options = kCCOptionPKCS7Padding;
@@ -412,6 +440,8 @@
             options = kCCOptionPKCS7Padding | kCCOptionECBMode;
             iv = NULL;
             break;
+        case CcCryptorNoneMode:
+            iv = NULL;
         default:
             break;
     }
@@ -422,7 +452,7 @@
                                   initializationVector:iv
                                                options:options
                                                  error:&status];
-   
+    
     if ( result != nil )
         return ( result );
     
@@ -437,8 +467,15 @@
                                 Mode:(CcCryptorMode)mode
                                error:(NSError**)error
 {
+    
+    NSAssert(mode == CcCryptorCBCMode && iv != nil && iv != NULL, @"With CBC Mode , InitializationVector  must have value");
+    NSAssert(mode == CcCryptorCBCMode && [iv length] >= 8, @"With CBC Mode, InitializationVector  must be greater than 8 bits");
+    if (mode == CcCryptorCBCMode && [iv length] < 8) {
+        return nil;
+    }
+
     CCCryptorStatus status = kCCSuccess;
-    CCOptions options;
+    CCOptions options = 0;
     switch (mode) {
         case CcCryptorCBCMode:
             options = kCCOptionPKCS7Padding;
@@ -446,6 +483,8 @@
         case CcCryptorECBMode:
             options = kCCOptionPKCS7Padding | kCCOptionECBMode;
             break;
+        case CcCryptorNoneMode:
+            iv = NULL;
         default:
             break;
     }
@@ -468,12 +507,13 @@
 
 #pragma mark - RootCrypto
 - (NSData *)cc_cryptologyUsingOperation:(CCOperation)operation
-                        Algorithm: (CCAlgorithm) algorithm
-                              key: (id) key
-             initializationVector: (id) iv
-                          options: (CCOptions) options
-                            error: (CCCryptorStatus *) error
+                              Algorithm: (CCAlgorithm) algorithm
+                                    key: (id) key
+                   initializationVector: (id) iv
+                                options: (CCOptions) options
+                                  error: (CCCryptorStatus *) error
 {
+    
     CCCryptorRef cryptor = NULL;
     CCCryptorStatus status = kCCSuccess;
     
@@ -502,7 +542,7 @@
                              [keyData bytes], [keyData length], [ivData bytes],
                              &cryptor );
     
-
+    
     if ( status != kCCSuccess )
     {
         if ( error != NULL )
@@ -557,14 +597,17 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
     {
         case kCCAlgorithmAES128:
         {
+            // 16
             if ( keyLength <= kCCKeySizeAES128 )
             {
                 [keyData setLength: kCCKeySizeAES128];
             }
+            // 24
             else if ( keyLength <= kCCKeySizeAES192 )
             {
                 [keyData setLength: kCCKeySizeAES192];
             }
+            // 32
             else
             {
                 [keyData setLength: kCCKeySizeAES256];
@@ -575,23 +618,26 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
             
         case kCCAlgorithmDES:
         {
+            // 8
             [keyData setLength: kCCKeySizeDES];
             break;
         }
             
         case kCCAlgorithm3DES:
         {
+            //24
             [keyData setLength: kCCKeySize3DES];
             break;
         }
             
         case kCCAlgorithmCAST:
         {
-            if ( keyLength <= kCCKeySizeMinCAST )
+            //[5,16]
+            if ( keyLength < kCCKeySizeMinCAST )
             {
                 [keyData setLength: kCCKeySizeMinCAST];
             }
-            else if ( keyLength >= kCCKeySizeMaxCAST )
+            else if ( keyLength > kCCKeySizeMaxCAST )
             {
                 [keyData setLength: kCCKeySizeMaxCAST];
             }
@@ -601,21 +647,213 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
             
         case kCCAlgorithmRC4:
         {
+            // [1,512]
             if ( keyLength >= kCCKeySizeMaxRC4 )
                 [keyData setLength: kCCKeySizeMaxRC4 ];
             break;
+        }
+        case kCCAlgorithmRC2:
+        {
+            // [1,128]
+            if ( keyLength >= kCCKeySizeMaxRC2 )
+                [keyData setLength: kCCKeySizeMaxRC2 ];
+        }
+        case kCCAlgorithmBlowfish:
+        {
+            // [8,56]
+            if (keyLength <= kCCKeySizeMinBlowfish) {
+                [keyData setLength:kCCKeySizeMinBlowfish];
+            }
+            else if ( keyLength >= kCCKeySizeMaxBlowfish ){
+                 [keyData setLength: kCCKeySizeMaxBlowfish ];
+            }
+            
         }
             
         default:
             break;
     }
-   
+    
     
     [ivData setLength: [keyData length]];
 }
 @end
 
 
+@implementation NSData (Zlib)
+
+- (NSData *)cc_zlibInflate
+{
+    
+    if ([self length] == 0) return self;
+    
+    NSUInteger full_length = [self length];
+    NSUInteger half_length = [self length] / 2;
+    
+    NSMutableData *decompressed = [NSMutableData dataWithLength: full_length + half_length];
+    BOOL done = NO;
+    int status;
+    
+    z_stream strm;
+    strm.next_in = (Bytef *)[self bytes];
+    strm.avail_in = (unsigned)[self length];
+    strm.total_out = 0;
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    
+    if (inflateInit (&strm) != Z_OK) return nil;
+    
+    while (!done)
+    {
+        // Make sure we have enough room and reset the lengths.
+        if (strm.total_out >= [decompressed length])
+            [decompressed increaseLengthBy: half_length];
+        strm.next_out = [decompressed mutableBytes] + strm.total_out;
+        strm.avail_out = (uint)([decompressed length] - strm.total_out);
+        
+        // Inflate another chunk.
+        status = inflate (&strm, Z_SYNC_FLUSH);
+        if (status == Z_STREAM_END) done = YES;
+        else if (status != Z_OK) break;
+    }
+    if (inflateEnd (&strm) != Z_OK) return nil;
+    
+    // Set real length.
+    if (done)
+    {
+        [decompressed setLength: strm.total_out];
+        return [NSData dataWithData: decompressed];
+    }
+    else return nil;
+}
+
+- (NSData *)cc_zlibDeflate
+{
+    if ([self length] == 0) return self;
+    
+    z_stream strm;
+    
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+    strm.total_out = 0;
+    strm.next_in=(Bytef *)[self bytes];
+    strm.avail_in = (uint)[self length];
+    
+    // Compresssion Levels:
+    //   Z_NO_COMPRESSION
+    //   Z_BEST_SPEED
+    //   Z_BEST_COMPRESSION
+    //   Z_DEFAULT_COMPRESSION
+    
+    if (deflateInit(&strm, Z_DEFAULT_COMPRESSION) != Z_OK) return nil;
+    
+    NSMutableData *compressed = [NSMutableData dataWithLength:16384];  // 16K chuncks for expansion
+    
+    do {
+        
+        if (strm.total_out >= [compressed length])
+            [compressed increaseLengthBy: 16384];
+        
+        strm.next_out = [compressed mutableBytes] + strm.total_out;
+        strm.avail_out = (uint)([compressed length] - strm.total_out);
+        
+        deflate(&strm, Z_FINISH);
+        
+    } while (strm.avail_out == 0);
+    
+    deflateEnd(&strm);
+    
+    [compressed setLength: strm.total_out];
+    return [NSData dataWithData: compressed];
+}
+
+- (NSData *)cc_gzipInflate
+{
+    if ([self length] == 0) return self;
+    
+    NSInteger full_length = [self length];
+    NSInteger half_length = [self length] / 2;
+    
+    NSMutableData *decompressed = [NSMutableData dataWithLength: full_length + half_length];
+    BOOL done = NO;
+    int status;
+    
+    z_stream strm;
+    strm.next_in = (Bytef *)[self bytes];
+    strm.avail_in = (uint)[self length];
+    strm.total_out = 0;
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    
+    if (inflateInit2(&strm, (15+32)) != Z_OK) return nil;
+    while (!done)
+    {
+        // Make sure we have enough room and reset the lengths.
+        if (strm.total_out >= [decompressed length])
+            [decompressed increaseLengthBy: half_length];
+        strm.next_out = [decompressed mutableBytes] + strm.total_out;
+        strm.avail_out = (uint)([decompressed length] - strm.total_out);
+        
+        // Inflate another chunk.
+        status = inflate (&strm, Z_SYNC_FLUSH);
+        if (status == Z_STREAM_END) done = YES;
+        else if (status != Z_OK) break;
+    }
+    if (inflateEnd (&strm) != Z_OK) return nil;
+    
+    // Set real length.
+    if (done)
+    {
+        [decompressed setLength: strm.total_out];
+        return [NSData dataWithData: decompressed];
+    }
+    else return nil;
+}
+
+- (NSData *)cc_gzipDeflate
+{
+    if ([self length] == 0) return self;
+    
+    z_stream strm;
+    
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+    strm.total_out = 0;
+    strm.next_in=(Bytef *)[self bytes];
+    strm.avail_in = (uint)[self length];
+    
+    // Compresssion Levels:
+    //   Z_NO_COMPRESSION
+    //   Z_BEST_SPEED
+    //   Z_BEST_COMPRESSION
+    //   Z_DEFAULT_COMPRESSION
+    
+    if (deflateInit2(&strm, Z_DEFAULT_COMPRESSION, Z_DEFLATED, (15+16), 8, Z_DEFAULT_STRATEGY) != Z_OK) return nil;
+    
+    NSMutableData *compressed = [NSMutableData dataWithLength:16384];  // 16K chunks for expansion
+    
+    do {
+        
+        if (strm.total_out >= [compressed length])
+            [compressed increaseLengthBy: 16384];
+        
+        strm.next_out = [compressed mutableBytes] + strm.total_out;
+        strm.avail_out = (uint)([compressed length] - strm.total_out);
+        
+        deflate(&strm, Z_FINISH);
+        
+    } while (strm.avail_out == 0);
+    
+    deflateEnd(&strm);
+    
+    [compressed setLength: strm.total_out];
+    return [NSData dataWithData:compressed];
+}
+
+
+@end
 
 
 

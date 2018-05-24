@@ -11,19 +11,19 @@
 
 #pragma mark - enum
 typedef enum : NSUInteger {
+    CcCryptorNoneMode,
     CcCryptorECBMode,
     CcCryptorCBCMode
 }CcCryptorMode;
 
-
 typedef enum : NSUInteger {
-    CcCryptoAlgorithmAES = 0,
-    CcCryptoAlgorithmDES,
-    CcCryptoAlgorithm3DES,
-    CcCryptoAlgorithmCAST,
-    CcCryptoAlgorithmRC4,
+    CcCryptoAlgorithmAES = 0, //Advanced Encryption Standard, 128-bit block.
+    CcCryptoAlgorithmDES,     //Data Encryption Standard.
+    CcCryptoAlgorithm3DES,    //Triple-DES, three key, EDE configuration
+    CcCryptoAlgorithmCAST,    //CAST
+    CcCryptoAlgorithmRC4,     //RC4 stream cipher
     CcCryptoAlgorithmRC2,
-    CcCryptoAlgorithmBLOWFISH
+    CcCryptoAlgorithmBLOWFISH  // Blowfish block cipher
 }CcCryptoAlgorithm;
 
 
@@ -34,6 +34,10 @@ typedef enum : NSUInteger {
 - (instancetype)initWithHexEncodedString:(NSString *)string;
 
 - (NSString *)cc_hexEncodedString;
+
+- (NSString *)cc_utf8EncodedString;
+
+- (id)cc_jsonValueDecoded;
 
 @end
 
@@ -232,7 +236,7 @@ typedef enum : NSUInteger {
  @param key A key length of 8 (64bits).
             NSString or NSData Object.
  
- @param iv An initialization vector
+ @param iv An initialization vector length of 8(64bits) at least.
            Pass nil when you don't want to use iv or mode is ECB.
            NSString or NSData Object.
  
@@ -251,7 +255,7 @@ typedef enum : NSUInteger {
  @param key A key length of 8 (64bits).
             NSString or NSData Object.
  
- @param iv An initialization vector
+ @param iv An initialization vector length of 8(64bits) at least
            Pass nil when you don't want to use iv or mode is ECB.
            NSString or NSData Object.
  
@@ -263,6 +267,17 @@ typedef enum : NSUInteger {
             InitializationVector:(id)iv
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error;
+
+
+#pragma mark - Symmetric encryption algorithm （RC4）
+/**
+ return An  encrypted NSData Using RC4.
+ */
+- (NSData *)cc_encryptRC4;
+/**
+ return An  decrypted NSData Using RC4.
+ */
+- (NSData *)cc_decryptRC4;
 
 #pragma mark - lowCommonCryptor
 
@@ -279,3 +294,27 @@ typedef enum : NSUInteger {
                                error:(NSError**)error;
 @end
 
+@interface NSData (Zlib)
+
+/**
+ Comperss data to zlib in default compresssion level.
+ @return Deflated data.
+ */
+- (NSData *)cc_zlibDeflate;
+/**
+Decompress data from zlib data.
+ @return Deflated data.
+ */
+-(NSData *)cc_zlibInflate;
+/**
+ Comperss data to gzip in default compresssion level.
+ @return Deflated data.
+ */
+- (NSData *)cc_gzipDeflate;
+/**
+ Decompress data from gzip data.
+ @return Inflated data.
+ */
+- (NSData *)cc_gzipInflate;
+
+@end
