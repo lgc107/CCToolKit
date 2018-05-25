@@ -7,23 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSError+Extensions.h"
+
 
 #pragma mark - enum
 typedef enum : NSUInteger {
     CcCryptorNoneMode,
-    CcCryptorECBMode,
-    CcCryptorCBCMode
+    CcCryptorECBMode = 1,
+    CcCryptorCBCMode = 2
+    
 }CcCryptorMode;
 
 typedef enum : NSUInteger {
-    CcCryptoAlgorithmAES = 0, //Advanced Encryption Standard, 128-bit block.
-    CcCryptoAlgorithmDES,     //Data Encryption Standard.
-    CcCryptoAlgorithm3DES,    //Triple-DES, three key, EDE configuration
-    CcCryptoAlgorithmCAST,    //CAST
-    CcCryptoAlgorithmRC4,     //RC4 stream cipher
-    CcCryptoAlgorithmRC2,
-    CcCryptoAlgorithmBLOWFISH  // Blowfish block cipher
+    CcCryptorNoPadding = 0,
+    CcCryptorPKCS7Padding = 1,
+    CcCryptorZeroPadding = 2,
+    CcCryptorANSIX923,
+    CcCryptorISO10126
+    
+}CcCryptorPadding;
+
+typedef enum : NSUInteger {
+    CcCryptoAlgorithmAES = 0, //Advanced Encryption Standard, 128-bit block.  key 16 24 32 Length
+    CcCryptoAlgorithmDES,     //Data Encryption Standard.  Key 8 Length
+    CcCryptoAlgorithm3DES,    //Triple-DES, three key 24 Length, EDE configuration
+    CcCryptoAlgorithmCAST,    //CAST, [8,16]Length
+    CcCryptoAlgorithmRC4,     //RC4 stream cipher [1,512]Length
+    CcCryptoAlgorithmRC2,     // [1,128]Length
+    CcCryptoAlgorithmBLOWFISH  // Blowfish block cipher [8,56Length]
 }CcCryptoAlgorithm;
 
 
@@ -193,13 +203,13 @@ typedef enum : NSUInteger {
 #pragma mark - Symmetric encryption algorithm （AES）
 /**
  Returns an encrypted NSData using AES.
-
+ 
  @param key A key length of 16, 24 or 32 (128, 192 or 256bits).
-            NSString or NSData Object.
+ NSString or NSData Object.
  
  @param iv An initialization vector length of 16(128bits).
-           Pass nil when you don't want to use iv or mode is ECB.
-           NSString or NSData Object.
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
  
  @param mode CcCryptorMode. CBC or ECB
  
@@ -207,6 +217,7 @@ typedef enum : NSUInteger {
  */
 -(NSData *)cc_encryptAESUsingkey:(id)key
             InitializationVector:(id)iv
+                         Padding:(CcCryptorPadding)padding
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error;
 
@@ -214,11 +225,11 @@ typedef enum : NSUInteger {
  Returns an decrypted NSData using AES.
  
  @param key A key length of 16, 24 or 32 (128, 192 or 256bits).
-            NSString or NSData Object.
+ NSString or NSData Object.
  
  @param iv An initialization vector length of 16(128bits).
-           Pass nil when you don't want to use iv or mode is ECB.
-           NSString or NSData Object.
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
  
  @param mode CcCryptorMode. CBC or ECB
  
@@ -226,6 +237,7 @@ typedef enum : NSUInteger {
  */
 -(NSData *)cc_decryptAESUsingkey:(id)key
             InitializationVector:(id)iv
+                         Padding:(CcCryptorPadding)padding
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error;
 
@@ -234,11 +246,11 @@ typedef enum : NSUInteger {
  Returns an encrypted NSData using DES.
  
  @param key A key length of 8 (64bits).
-            NSString or NSData Object.
+ NSString or NSData Object.
  
  @param iv An initialization vector length of 8(64bits) at least.
-           Pass nil when you don't want to use iv or mode is ECB.
-           NSString or NSData Object.
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
  
  @param mode CcCryptorMode. CBC or ECB
  
@@ -246,6 +258,7 @@ typedef enum : NSUInteger {
  */
 -(NSData *)cc_encryptDESUsingkey:(id)key
             InitializationVector:(id)iv
+                         Padding:(CcCryptorPadding)padding
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error;
 
@@ -253,11 +266,11 @@ typedef enum : NSUInteger {
  Returns an decrypted NSData using DES.
  
  @param key A key length of 8 (64bits).
-            NSString or NSData Object.
+ NSString or NSData Object.
  
  @param iv An initialization vector length of 8(64bits) at least
-           Pass nil when you don't want to use iv or mode is ECB.
-           NSString or NSData Object.
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
  
  @param mode CcCryptorMode. CBC or ECB
  
@@ -265,6 +278,7 @@ typedef enum : NSUInteger {
  */
 -(NSData *)cc_decryptDESUsingkey:(id)key
             InitializationVector:(id)iv
+                         Padding:(CcCryptorPadding)padding
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error;
 
@@ -285,12 +299,14 @@ typedef enum : NSUInteger {
                                  key:(id)key
                 InitializationVector:(id)iv
                                 Mode:(CcCryptorMode)mode
+                             Padding:(CcCryptorPadding)padding
                                error:(NSError**)error;
 
 - (NSData *)cc_decryptUsingAlgorithm:(CcCryptoAlgorithm)algorithm
                                  key:(id)key
                 InitializationVector:(id)iv
                                 Mode:(CcCryptorMode)mode
+                             Padding:(CcCryptorPadding)padding
                                error:(NSError**)error;
 @end
 
@@ -302,7 +318,7 @@ typedef enum : NSUInteger {
  */
 - (NSData *)cc_zlibDeflate;
 /**
-Decompress data from zlib data.
+ Decompress data from zlib data.
  @return Deflated data.
  */
 -(NSData *)cc_zlibInflate;

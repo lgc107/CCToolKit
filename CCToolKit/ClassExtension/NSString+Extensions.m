@@ -130,10 +130,12 @@
 - (NSString *)cc_encryptAESUsingEncoding:(CCEncrpytEncodingOptions)encoding
                                      key:(id)key
                     InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
                                     Mode:(CcCryptorMode)mode
                                    error:(NSError *__autoreleasing *)error
 {
-    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encryptAESUsingkey:key InitializationVector:iv Mode:mode error:error];
+    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encryptAESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error];
+
     switch (encoding) {
         case CCEncrpytHexStringEncoding:
             return aesEncryptData.cc_hexEncodedString;
@@ -150,20 +152,22 @@
 - (NSString *)cc_decryptAESUsingEncoding:(CCDecrpytDecodingOptions)decoding
                                      key:(id)key
                     InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
                                     Mode:(CcCryptorMode)mode
                                    error:(NSError *__autoreleasing *)error
 {
     NSData *aesDecryptData = (decoding == CCDecrpytHexStringDecoding) ? self.cc_dataUsingHexEncoding : self.cc_dataUsingBase64Encoding;
-   return  [aesDecryptData cc_decryptAESUsingkey:key InitializationVector:iv Mode:mode error:error].cc_utf8EncodedString;
+    return  [aesDecryptData cc_decryptAESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
 }
 
 - (NSString *)cc_encryptDESUsingEncoding:(CCEncrpytEncodingOptions)encoding
                                      key:(id)key
                     InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
                                     Mode:(CcCryptorMode)mode
                                    error:(NSError *__autoreleasing *)error
 {
-    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encryptDESUsingkey:key InitializationVector:iv Mode:mode error:error];
+    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encryptDESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error];
     switch (encoding) {
         case CCEncrpytHexStringEncoding:
             return aesEncryptData.cc_hexEncodedString;
@@ -180,11 +184,12 @@
 - (NSString *)cc_decryptDESUsingEncoding:(CCDecrpytDecodingOptions)decoding
                                      key:(id)key
                     InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
                                     Mode:(CcCryptorMode)mode
                                    error:(NSError *__autoreleasing *)error
 {
     NSData *aesDecryptData = (decoding == CCDecrpytHexStringDecoding) ? self.cc_dataUsingHexEncoding : self.cc_dataUsingBase64Encoding;
-    return  [aesDecryptData cc_decryptDESUsingkey:key InitializationVector:iv Mode:mode error:error].cc_utf8EncodedString;
+    return  [aesDecryptData cc_decryptDESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
 }
 
 

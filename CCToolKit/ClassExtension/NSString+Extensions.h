@@ -175,6 +175,7 @@ typedef enum : NSUInteger {
 -(NSString *)cc_encryptAESUsingEncoding:(CCEncrpytEncodingOptions)encoding
                                     key:(id)key
                    InitializationVector:(id)iv
+                                Padding:(CcCryptorPadding)padding
                                    Mode:(CcCryptorMode)mode
                                   error:(NSError *__autoreleasing *)error;
 
@@ -198,6 +199,7 @@ typedef enum : NSUInteger {
 -(NSString *)cc_decryptAESUsingEncoding:(CCDecrpytDecodingOptions)decoding
                                     key:(id)key
                    InitializationVector:(id)iv
+                                Padding:(CcCryptorPadding)padding
                                    Mode:(CcCryptorMode)mode
                                   error:(NSError *__autoreleasing *)error;
 
@@ -221,6 +223,7 @@ typedef enum : NSUInteger {
 -(NSString *)cc_encryptDESUsingEncoding:(CCEncrpytEncodingOptions)encoding
                                     key:(id)key
                    InitializationVector:(id)iv
+                                Padding:(CcCryptorPadding)padding
                                    Mode:(CcCryptorMode)mode
                                   error:(NSError *__autoreleasing *)error;
 
@@ -243,6 +246,7 @@ typedef enum : NSUInteger {
 -(NSString *)cc_decryptDESUsingEncoding:(CCDecrpytDecodingOptions)decoding
                                     key:(id)key
                    InitializationVector:(id)iv
+                                Padding:(CcCryptorPadding)padding
                                    Mode:(CcCryptorMode)mode
                                   error:(NSError *__autoreleasing *)error;
 
