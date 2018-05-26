@@ -127,6 +127,7 @@
 
 @implementation NSString (CommonCryptor)
 
+#pragma mark - AES
 - (NSString *)cc_encryptAESUsingEncoding:(CCEncrpytEncodingOptions)encoding
                                      key:(id)key
                     InitializationVector:(id)iv
@@ -160,6 +161,7 @@
     return  [aesDecryptData cc_decryptAESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
 }
 
+#pragma mark - DES
 - (NSString *)cc_encryptDESUsingEncoding:(CCEncrpytEncodingOptions)encoding
                                      key:(id)key
                     InitializationVector:(id)iv
@@ -191,8 +193,105 @@
     NSData *aesDecryptData = (decoding == CCDecrpytHexStringDecoding) ? self.cc_dataUsingHexEncoding : self.cc_dataUsingBase64Encoding;
     return  [aesDecryptData cc_decryptDESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
 }
+#pragma mark - 3DES
+- (NSString *)cc_encrypt3DESUsingEncoding:(CCEncrpytEncodingOptions)encoding
+                                     key:(id)key
+                    InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
+                                    Mode:(CcCryptorMode)mode
+                                   error:(NSError *__autoreleasing *)error
+{
+    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encrypt3DESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error];
+    switch (encoding) {
+        case CCEncrpytHexStringEncoding:
+            return aesEncryptData.cc_hexEncodedString;
+            break;
+        case CCEncrpytBase64StringEncoding:
+            return [aesEncryptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            
+        default:
+            return aesEncryptData.cc_utf8EncodedString;
+            break;
+    }
+}
 
+- (NSString *)cc_decrypt3DESUsingEncoding:(CCDecrpytDecodingOptions)decoding
+                                     key:(id)key
+                    InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
+                                    Mode:(CcCryptorMode)mode
+                                   error:(NSError *__autoreleasing *)error
+{
+    NSData *aesDecryptData = (decoding == CCDecrpytHexStringDecoding) ? self.cc_dataUsingHexEncoding : self.cc_dataUsingBase64Encoding;
+    return  [aesDecryptData cc_decrypt3DESUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
+}
 
+#pragma mark - CAST
+- (NSString *)cc_encryptCAST128UsingEncoding:(CCEncrpytEncodingOptions)encoding
+                                      key:(id)key
+                     InitializationVector:(id)iv
+                                  Padding:(CcCryptorPadding)padding
+                                     Mode:(CcCryptorMode)mode
+                                    error:(NSError *__autoreleasing *)error
+{
+    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encryptCAST128Usingkey:key InitializationVector:iv Padding:padding Mode:mode error:error];
+    switch (encoding) {
+        case CCEncrpytHexStringEncoding:
+            return aesEncryptData.cc_hexEncodedString;
+            break;
+        case CCEncrpytBase64StringEncoding:
+            return [aesEncryptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            
+        default:
+            return aesEncryptData.cc_utf8EncodedString;
+            break;
+    }
+}
+
+- (NSString *)cc_decryptCAST128UsingEncoding:(CCDecrpytDecodingOptions)decoding
+                                      key:(id)key
+                     InitializationVector:(id)iv
+                                  Padding:(CcCryptorPadding)padding
+                                     Mode:(CcCryptorMode)mode
+                                    error:(NSError *__autoreleasing *)error
+{
+    NSData *aesDecryptData = (decoding == CCDecrpytHexStringDecoding) ? self.cc_dataUsingHexEncoding : self.cc_dataUsingBase64Encoding;
+    return  [aesDecryptData cc_decryptCAST128Usingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
+}
+#pragma mark - BLOWFISH
+- (NSString *)cc_encryptBLOWFISHUsingEncoding:(CCEncrpytEncodingOptions)encoding
+                                      key:(id)key
+                     InitializationVector:(id)iv
+                                  Padding:(CcCryptorPadding)padding
+                                     Mode:(CcCryptorMode)mode
+                                    error:(NSError *__autoreleasing *)error
+{
+    NSData * aesEncryptData = [self.cc_dataUsingUTF8Encoding cc_encryptBLOWFISHUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error];
+    switch (encoding) {
+        case CCEncrpytHexStringEncoding:
+            return aesEncryptData.cc_hexEncodedString;
+            break;
+        case CCEncrpytBase64StringEncoding:
+            return [aesEncryptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            
+        default:
+            return aesEncryptData.cc_utf8EncodedString;
+            break;
+    }
+}
+
+- (NSString *)cc_decryptBLOWFISHUsingEncoding:(CCDecrpytDecodingOptions)decoding
+                                      key:(id)key
+                     InitializationVector:(id)iv
+                                  Padding:(CcCryptorPadding)padding
+                                     Mode:(CcCryptorMode)mode
+                                    error:(NSError *__autoreleasing *)error
+{
+    NSData *aesDecryptData = (decoding == CCDecrpytHexStringDecoding) ? self.cc_dataUsingHexEncoding : self.cc_dataUsingBase64Encoding;
+    return  [aesDecryptData cc_decryptBLOWFISHUsingkey:key InitializationVector:iv Padding:padding Mode:mode error:error].cc_utf8EncodedString;
+}
+
+#pragma mark - RC4
 - (NSString *)cc_encryptRC4UsingEncoding:(CCEncrpytEncodingOptions)encoding{
     NSData *rc4Data = self.cc_dataUsingUTF8Encoding.cc_encryptRC4;
     return (encoding == CCEncrpytHexStringEncoding) ? rc4Data.cc_hexEncodedString : [rc4Data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];

@@ -27,7 +27,7 @@ typedef enum : NSUInteger {
  e.g. "D1178E50-2A4D-4F1F-9BD3-F6AAB00E06B1"
  */
 + (NSString *)cc_uuidString;
-
+#pragma mark - Encoding and Decoding
 /**
  Returns an NSData With HexString.
  */
@@ -59,6 +59,7 @@ typedef enum : NSUInteger {
  */
 - (NSString *)cc_stringByEscapingHTML;
 
+#pragma mark - Utilities
 /**
  nil, @"", @"  ", @"\n" will Returns NO; otherwise Returns YES.
  */
@@ -82,7 +83,7 @@ typedef enum : NSUInteger {
 - (id)cc_jsonValueDecoded;
 @end
 
-
+#pragma mark - CommonDigest
 @interface NSString (CommonDigest)
 
 /**
@@ -119,6 +120,7 @@ typedef enum : NSUInteger {
 - (NSString *)cc_sha512String;
 @end
 
+#pragma mark - HMAC
 @interface NSString (CommonHmac)
 /**
  Returns a lowercase NSString for hmac using algorithm md5 with key.
@@ -153,7 +155,7 @@ typedef enum : NSUInteger {
 
 @end
 
-
+#pragma mark - CommonCryptor
 @interface NSString (CommonCryptor)
 #pragma mark - Symmetric encryption algorithm （AES）
 /**
@@ -249,9 +251,145 @@ typedef enum : NSUInteger {
                                 Padding:(CcCryptorPadding)padding
                                    Mode:(CcCryptorMode)mode
                                   error:(NSError *__autoreleasing *)error;
+#pragma mark - 3DES Algorithm
+/**
+ Returns an encrypted NSString using 3DES.
+ 
+ @param encoding return HexEncoding or Base64Encoding String
+ 
+ @param key A key length of 24 (192bits).
+ NSString or NSData Object.
+ 
+ @param iv An initialization vector length of 8(64bits) at least.
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
+ 
+ @param mode CcCryptorMode. CBC or ECB
+ 
+ @return An NSData encrypted, or nil if an error occurs.
+ */
+-(NSString *)cc_encrypt3DESUsingEncoding:(CCEncrpytEncodingOptions)encoding
+                                    key:(id)key
+                   InitializationVector:(id)iv
+                                Padding:(CcCryptorPadding)padding
+                                   Mode:(CcCryptorMode)mode
+                                  error:(NSError *__autoreleasing *)error;
 
+/**
+ Returns an decrypted NSString using 3DES.
+ 
+ @param decoding Using HexDecoding or Base64Decoding
+ 
+ @param key A key length of 24 (192bits).
+ NSString or NSData Object.
+ 
+ @param iv An initialization vector length of 8(64bits) at least
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
+ 
+ @param mode CcCryptorMode. CBC or ECB
+ 
+ @return An NSData decrypted, or nil if an error occurs.
+ */
+-(NSString *)cc_decrypt3DESUsingEncoding:(CCDecrpytDecodingOptions)decoding
+                                    key:(id)key
+                   InitializationVector:(id)iv
+                                Padding:(CcCryptorPadding)padding
+                                   Mode:(CcCryptorMode)mode
+                                  error:(NSError *__autoreleasing *)error;
+#pragma mark -   CAST-128 Algorithm
+/**
+ Returns an encrypted NSString using CAST-128.
+ 
+ @param encoding return HexEncoding or Base64Encoding String
+ 
+ @param key A key length of 16 (128bits).
+            NSString or NSData Object.
+ 
+ @param iv An initialization vector length of 8(64bits) at least.
+           Pass nil when you don't want to use iv or mode is ECB.
+           NSString or NSData Object.
+ 
+ @param mode CcCryptorMode. CBC or ECB
+ 
+ @return An NSData encrypted, or nil if an error occurs.
+ */
+-(NSString *)cc_encryptCAST128UsingEncoding:(CCEncrpytEncodingOptions)encoding
+                                     key:(id)key
+                    InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
+                                    Mode:(CcCryptorMode)mode
+                                   error:(NSError *__autoreleasing *)error;
 
-#pragma mark - Symmetric encryption algorithm （RC4）
+/**
+ Returns an decrypted NSString using CAST-128.
+ 
+ @param decoding Using HexDecoding or Base64Decoding
+ 
+ @param key A key length of 16 (128bits).
+           NSString or NSData Object.
+ 
+ @param iv An initialization vector length of 8(64bits) at least
+           Pass nil when you don't want to use iv or mode is ECB.
+           NSString or NSData Object.
+ 
+ @param mode CcCryptorMode. CBC or ECB
+ 
+ @return An NSData decrypted, or nil if an error occurs.
+ */
+-(NSString *)cc_decryptCAST128UsingEncoding:(CCDecrpytDecodingOptions)decoding
+                                     key:(id)key
+                    InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
+                                    Mode:(CcCryptorMode)mode
+                                   error:(NSError *__autoreleasing *)error;
+#pragma mark - BLOWFISH Algorithm
+/**
+ Returns an encrypted NSString using BLOWFISH.
+ 
+ @param encoding return HexEncoding or Base64Encoding String
+ 
+ @param key A key length of [8,56].
+ NSString or NSData Object.
+ 
+ @param iv An initialization vector length of 8(64bits) at least.
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
+ 
+ @param mode CcCryptorMode. CBC or ECB
+ 
+ @return An NSData encrypted, or nil if an error occurs.
+ */
+-(NSString *)cc_encryptBLOWFISHUsingEncoding:(CCEncrpytEncodingOptions)encoding
+                                     key:(id)key
+                    InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
+                                    Mode:(CcCryptorMode)mode
+                                   error:(NSError *__autoreleasing *)error;
+
+/**
+ Returns an decrypted NSString using BLOWFISH.
+ 
+ @param decoding Using HexDecoding or Base64Decoding
+ 
+ @param key A key length of [8,56].
+ NSString or NSData Object.
+ 
+ @param iv An initialization vector length of 8(64bits) at least
+ Pass nil when you don't want to use iv or mode is ECB.
+ NSString or NSData Object.
+ 
+ @param mode CcCryptorMode. CBC or ECB
+ 
+ @return An NSData decrypted, or nil if an error occurs.
+ */
+-(NSString *)cc_decryptBLOWFISHUsingEncoding:(CCDecrpytDecodingOptions)decoding
+                                     key:(id)key
+                    InitializationVector:(id)iv
+                                 Padding:(CcCryptorPadding)padding
+                                    Mode:(CcCryptorMode)mode
+                                   error:(NSError *__autoreleasing *)error;
+#pragma mark - RC4 algorithm
 /**
  return An  encrypted NSString Using RC4.
  */

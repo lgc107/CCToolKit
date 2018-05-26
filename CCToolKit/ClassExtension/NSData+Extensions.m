@@ -395,15 +395,12 @@
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error
 {
-    
     return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmDES
                                       key:key
                      InitializationVector:iv
                                      Mode:mode
                                   Padding:padding
                                     error:error];
-    
-    
 }
 
 -(NSData *)cc_decryptDESUsingkey:(id)key
@@ -412,17 +409,112 @@
                             Mode:(CcCryptorMode)mode
                            error:(NSError *__autoreleasing *)error
 {
-    
     return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmDES
                                       key:key
                      InitializationVector:iv
                                      Mode:mode
                                   Padding:padding
                                     error:error];
-    
-    
 }
 
+#pragma mark - 3DES
+-(NSData *)cc_encrypt3DESUsingkey:(id)key
+             InitializationVector:(id)iv
+                          Padding:(CcCryptorPadding)padding
+                             Mode:(CcCryptorMode)mode
+                            error:(NSError *__autoreleasing *)error
+{
+    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithm3DES
+                                      key:key
+                     InitializationVector:iv
+                                     Mode:mode
+                                  Padding:padding
+                                    error:error];
+}
+
+-(NSData *)cc_decrypt3DESUsingkey:(id)key
+             InitializationVector:(id)iv
+                          Padding:(CcCryptorPadding)padding
+                             Mode:(CcCryptorMode)mode
+                            error:(NSError *__autoreleasing *)error
+{
+    return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithm3DES
+                                      key:key
+                     InitializationVector:iv
+                                     Mode:mode
+                                  Padding:padding
+                                    error:error];
+}
+
+#pragma mark - CAST
+-(NSData *)cc_encryptCAST128Usingkey:(id)key
+                InitializationVector:(id)iv
+                             Padding:(CcCryptorPadding)padding
+                                Mode:(CcCryptorMode)mode
+                               error:(NSError *__autoreleasing *)error
+{
+    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmCAST128
+                                      key:key
+                     InitializationVector:iv
+                                     Mode:mode
+                                  Padding:padding
+                                    error:error];
+}
+
+-(NSData *)cc_decryptCAST128Usingkey:(id)key
+                InitializationVector:(id)iv
+                             Padding:(CcCryptorPadding)padding
+                                Mode:(CcCryptorMode)mode
+                               error:(NSError *__autoreleasing *)error
+{
+    return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmCAST128
+                                      key:key
+                     InitializationVector:iv
+                                     Mode:mode
+                                  Padding:padding
+                                    error:error];
+}
+
+#pragma mark - BLOWFISH
+-(NSData *)cc_encryptBLOWFISHUsingkey:(id)key
+                 InitializationVector:(id)iv
+                              Padding:(CcCryptorPadding)padding
+                                 Mode:(CcCryptorMode)mode
+                                error:(NSError *__autoreleasing *)error
+{
+    NSAssert([key length] >= kCCKeySizeMinBlowfish && [key length] <= kCCKeySizeMaxBlowfish, @"error - Key length must be [8,56]");
+    if ([key length] < kCCKeySizeMinBlowfish || [key length] > kCCKeySizeMaxBlowfish) {
+        NSLog(@"error - Key length must be [%d,%d]",kCCKeySizeMinBlowfish,kCCKeySizeMaxBlowfish);
+        return nil;
+    }
+    return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmBLOWFISH
+                                      key:key
+                     InitializationVector:iv
+                                     Mode:mode
+                                  Padding:padding
+                                    error:error];
+}
+
+-(NSData *)cc_decryptBLOWFISHUsingkey:(id)key
+                 InitializationVector:(id)iv
+                              Padding:(CcCryptorPadding)padding
+                                 Mode:(CcCryptorMode)mode
+                                error:(NSError *__autoreleasing *)error
+{
+    NSAssert([key length] >= kCCKeySizeMinBlowfish && [key length] <= kCCKeySizeMaxBlowfish, @"error - Key length must be [8,56]");
+    if ([key length] < kCCKeySizeMinBlowfish || [key length] > kCCKeySizeMaxBlowfish) {
+        NSLog(@"error - Key length must be [%d,%d]",kCCKeySizeMinBlowfish,kCCKeySizeMaxBlowfish);
+        return nil;
+    }
+    return [self cc_decryptUsingAlgorithm:CcCryptoAlgorithmBLOWFISH
+                                      key:key
+                     InitializationVector:iv
+                                     Mode:mode
+                                  Padding:padding
+                                    error:error];
+}
+
+#pragma mark - RC4
 - (NSData *)cc_encryptRC4{
     return [self cc_encryptUsingAlgorithm:CcCryptoAlgorithmRC4
                                       key:nil
@@ -503,12 +595,13 @@
                    initializationVector: (id) iv
                                   error: (CCCryptorStatus *) error
 {
-    
-    NSAssert((mode == CcCryptorCBCMode && iv != nil && iv != NULL) || mode == CcCryptorECBMode, @"With CBC Mode , InitializationVector  must have value");
-    NSAssert((mode == CcCryptorCBCMode && [iv length] >= 8) || mode == CcCryptorECBMode, @"With CBC Mode, InitializationVector  must be greater than 8 bits");
-    if (mode == CcCryptorCBCMode && [iv length] < 8) {
-        NSLog(@"error -- With CBC Mode, InitializationVector  must be greater than 8 bits");
-        return nil;
+    if (algorithm != kCCAlgorithmRC4 || algorithm != kCCAlgorithmRC2) {
+        NSAssert((mode == CcCryptorCBCMode && iv != nil && iv != NULL) || mode == CcCryptorECBMode, @"With CBC Mode , InitializationVector  must have value");
+        NSAssert((mode == CcCryptorCBCMode && [iv length] >= 8) || mode == CcCryptorECBMode, @"With CBC Mode, InitializationVector  must be greater than 8 bits");
+        if (mode == CcCryptorCBCMode && [iv length] < 8) {
+            NSLog(@"error -- With CBC Mode, InitializationVector  must be greater than 8 bits");
+            return nil;
+        }
     }
     
     CCCryptorRef cryptor = NULL;
@@ -537,7 +630,7 @@
     // ensure correct lengths for key and iv data, based on algorithms
     SettingKeyLengths( algorithm, keyData, ivData );
     
-    NSData *sourceData =  addPadding(operation, algorithm, padding, self);
+    NSData *sourceData =  bitPadding(operation, algorithm, padding, self);
     
     //    status = CCCryptorCreateWithMode(operation, mode, algorithm, ccNoPadding, ivData.bytes, keyData.bytes, keyData.length, NULL, 0, 0, kCCModeOptionCTR_LE, &cryptor);
     status = CCCryptorCreateWithMode(operation, mode, algorithm, paddingMode, ivData.bytes, keyData.bytes, keyData.length, NULL, 0, 0, kCCModeOptionCTR_LE, &cryptor);
@@ -582,7 +675,7 @@
     
     NSData *result = [NSData dataWithBytesNoCopy: buf length: bytesTotal];
     
-    result = deletePadding(operation, algorithm, padding, result);
+    result = removeBitPadding(operation, algorithm, padding, result);
     
     if ( (result == nil) && (error != NULL) )
         *error = status;
@@ -593,7 +686,7 @@
 }
 
 
-
+// Check the length of key and IV , fix them.
 static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, NSMutableData * ivData)
 {
     NSUInteger keyLength = [keyData length];
@@ -637,14 +730,15 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
         case kCCAlgorithmCAST:
         {
             //[5,16]
-            if ( keyLength < kCCKeySizeMinCAST )
-            {
-                [keyData setLength: kCCKeySizeMinCAST];
-            }
-            else if ( keyLength > kCCKeySizeMaxCAST )
-            {
-                [keyData setLength: kCCKeySizeMaxCAST];
-            }
+            //            if ( keyLength < kCCKeySizeMinCAST )
+            //            {
+            //                [keyData setLength: kCCKeySizeMinCAST];
+            //            }
+            //            else if ( keyLength > kCCKeySizeMaxCAST )
+            //            {
+            // 16
+            [keyData setLength: kCCKeySizeMaxCAST];
+            //            }
             
             break;
         }
@@ -661,19 +755,8 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
             // [1,128]
             if ( keyLength >= kCCKeySizeMaxRC2 )
                 [keyData setLength: kCCKeySizeMaxRC2 ];
+            break;
         }
-        case kCCAlgorithmBlowfish:
-        {
-            // [8,56]
-            if (keyLength <= kCCKeySizeMinBlowfish) {
-                [keyData setLength:kCCKeySizeMinBlowfish];
-            }
-            else if ( keyLength >= kCCKeySizeMaxBlowfish ){
-                [keyData setLength: kCCKeySizeMaxBlowfish ];
-            }
-            
-        }
-            
         default:
             break;
     }
@@ -682,7 +765,8 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
     [ivData setLength: [keyData length]];
 }
 
-static NSData * addPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *data)
+// Fill in the bytes that need to be encrypted.
+static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *data)
 {
     
     if (padding == CcCryptorPKCS7Padding) {
@@ -693,12 +777,14 @@ static NSData * addPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
         int blockSize = 8;
         switch (algorithm) {
             case kCCAlgorithmAES:
-                blockSize = kCCKeySizeAES128;
+                blockSize = kCCBlockSizeAES128;
                 break;
             case kCCAlgorithmDES:
             case kCCAlgorithm3DES:
+            case kCCAlgorithmCAST:
+            case kCCAlgorithmBlowfish:
             default:
-                blockSize = kCCKeySizeDES;
+                blockSize = 8;
                 break;
         }
         
@@ -748,7 +834,9 @@ static NSData * addPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
     return data;
     
 }
-static NSData * deletePadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *sourceData)
+
+//Remove the filled character  for the decrypted data.
+static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *sourceData)
 {
     if (padding == CcCryptorPKCS7Padding) {
         return sourceData;
@@ -759,12 +847,14 @@ static NSData * deletePadding(CCOperation operation, CCAlgorithm algorithm ,CcCr
         int blockSize = 8;
         switch (algorithm) {
             case kCCAlgorithmAES:
-                blockSize = kCCKeySizeAES128;
+                blockSize = kCCBlockSizeAES128;
                 break;
             case kCCAlgorithmDES:
             case kCCAlgorithm3DES:
+            case kCCAlgorithmCAST:
+            case kCCAlgorithmBlowfish:
             default:
-                blockSize = kCCKeySizeDES;
+                blockSize = 8;
                 break;
         }
         Byte *testByte = (Byte *)[sourceData bytes];
