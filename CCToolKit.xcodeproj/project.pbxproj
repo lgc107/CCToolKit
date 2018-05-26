@@ -31,10 +31,12 @@
 		B623DA7820AAD3D700220F3F /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7420AAD3D700220F3F /* CCSoftwareManager.m */; };
 		B623DA7920AAD3D700220F3F /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7520AAD3D700220F3F /* CCSoftwareManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
-		B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */; };
+		B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */; };
 		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6C03FFB20B94879002A7ED0 /* NSError+CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */; };
+		B6C03FFC20B94879002A7ED0 /* NSError+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */; };
 		B6FA0ACD20A984EF000CECA0 /* CCToolKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
 		B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AC620A984EF000CECA0 /* CCToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,6 +69,8 @@
 		B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
 		B690F9FC20AD736C00D3D086 /* CCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileManager.m; sourceTree = "<group>"; };
 		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
+		B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+CommonCrypto.h"; sourceTree = "<group>"; };
+		B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+CommonCrypto.m"; sourceTree = "<group>"; };
 		B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FA0AC620A984EF000CECA0 /* CCToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCToolKit.h; sourceTree = "<group>"; };
 		B6FA0AC720A984EF000CECA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 				B6FDB1C020AFBC6C00483246 /* NSData+Extensions.m */,
 				B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */,
 				B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */,
+				B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */,
+				B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */,
 			);
 			path = ClassExtension;
 			sourceTree = "<group>";
@@ -181,13 +187,14 @@
 			files = (
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
 				B623DA7920AAD3D700220F3F /* CCSoftwareManager.h in Headers */,
+				B6C03FFB20B94879002A7ED0 /* NSError+CommonCrypto.h in Headers */,
 				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B60E6F9520AECEB4001F593B /* NSString+Extensions.h in Headers */,
 				B623DA7020AAD38C00220F3F /* UIColor+Extensions.h in Headers */,
 				B6FDB1C120AFBC6C00483246 /* NSData+Extensions.h in Headers */,
-				B623DA6F20AAD38C00220F3F /* UIImage+Extensions.h in Headers */,
 				B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */,
+				B623DA6F20AAD38C00220F3F /* UIImage+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B60E6F9620AECEB4001F593B /* NSString+Extensions.m in Sources */,
+				B6C03FFC20B94879002A7ED0 /* NSError+CommonCrypto.m in Sources */,
 				B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */,
 				B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */,
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,
@@ -343,6 +351,7 @@
 		B655415F20B6B7180025A103 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -351,6 +360,7 @@
 		B655416020B6B7180025A103 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonCryptor.h>
+
 
 @interface NSError (Init)
 
@@ -18,8 +18,3 @@
 @end
 
 
-@interface NSError (CommonCryptoErrorDomain)
-
-+ (NSError *) errorWithCCCryptorStatus: (CCCryptorStatus) status;
-
-@end

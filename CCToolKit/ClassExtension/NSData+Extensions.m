@@ -7,7 +7,7 @@
 //
 
 #import "NSData+Extensions.h"
-#import "NSError+Extensions.h"
+#import "NSError+CommonCrypto.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 #import <zlib.h>
