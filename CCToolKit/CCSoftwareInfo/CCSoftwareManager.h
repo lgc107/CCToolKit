@@ -1,12 +1,11 @@
 //
-//  CCAppInfoManager.h
+//  CCSoftwareManager.h
 //  CCToolKit
 //
-//  Created by Harry_L on 2018/5/11.
+//  Created by Harry_L on 2018/5/26.
 //  Copyright © 2018年 Harry_L. All rights reserved.
-/*
-    LMS's good
-*/
+//
+
 #import <Foundation/Foundation.h>
 #import "CCVersion.h"
 
@@ -26,20 +25,20 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
 
 
 /**
-  Returns the shared defaults object.
+ Returns the shared defaults object.
  */
 +(instancetype)manager;
 
 /**
  Check version updates through appleId.
-
+ 
  @param appId iTunes AppId Number
  @param completitionHandler Call CCVersionCheckResultBlock Block After Checking Version.
  */
 +(void)checkAppNeedUpdateWithAppId:(NSString *)appId CompletitionHandler:(CCVersionCheckResultBlock)completitionHandler;
 /**
  Check for updates through automatically detected BundleId
-
+ 
  @param completitionHandler Call CCVersionCheckResultBlock Block After Checking Version.
  */
 +(void)checkAppNeedUpdateWithCompletitionHandler:(CCVersionCheckResultBlock)completitionHandler;
@@ -58,7 +57,7 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
  */
 @property (nonatomic,strong,readonly) CCVersion *currentVersion;
 /**
-  Generate an AppStore Version object after checking for version updates.
+ Generate an AppStore Version object after checking for version updates.
  */
 @property (nonatomic,strong,readonly) CCVersion *appStoreVersion;
 /**
@@ -68,21 +67,21 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
 
 
 /**
-  Get App BundleId.
+ Get App BundleId.
  */
 @property (nonatomic,readonly) NSString *bundleId;
 /**
-   Get App build Version.
+ Get App build Version.
  */
 @property (nonatomic,readonly) NSString *buildVersion;
 
 /**
-  Get the result of updating after checking the version update. Default is false.
+ Get the result of updating after checking the version update. Default is false.
  */
 @property (nonatomic,assign,getter=isNeedUpdate) BOOL needUpdate;
 
 /**
-   whether the device is iphoneX
+ whether the device is iphoneX
  */
 @property (nonatomic,assign) BOOL isIphoneX;
 
@@ -111,11 +110,9 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
 @property (nonatomic,readonly) NSString *deviceModelName;
 
 /**
-  The name of the user’s home cellular service provider. For example, "中国联通"
+ The name of the user’s home cellular service provider. For example, "中国联通"
  */
 @property (nonatomic,readonly) NSString *carrierName;
-
-
 
 
 @end

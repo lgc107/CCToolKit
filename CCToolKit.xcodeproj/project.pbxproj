@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		B655415E20B6B7180025A103 /* CCToolKits */ = {
+		B6C0400620B94F2B002A7ED0 /* CCToolKits */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = B655416120B6B7180025A103 /* Build configuration list for PBXAggregateTarget "CCToolKits" */;
+			buildConfigurationList = B6C0400720B94F2B002A7ED0 /* Build configuration list for PBXAggregateTarget "CCToolKits" */;
 			buildPhases = (
-				B655416220B6B79D0025A103 /* ShellScript */,
+				B6C0400A20B94F32002A7ED0 /* ShellScript */,
 			);
 			dependencies = (
+				B6C0400C20B94FD0002A7ED0 /* PBXTargetDependency */,
 			);
 			name = CCToolKits;
 			productName = CCToolKits;
@@ -28,8 +29,6 @@
 		B623DA7020AAD38C00220F3F /* UIColor+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA6C20AAD38C00220F3F /* UIColor+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA6D20AAD38C00220F3F /* UIImage+Extensions.m */; };
 		B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7320AAD3D700220F3F /* CCVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B623DA7820AAD3D700220F3F /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7420AAD3D700220F3F /* CCSoftwareManager.m */; };
-		B623DA7920AAD3D700220F3F /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7520AAD3D700220F3F /* CCSoftwareManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
 		B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */; };
@@ -37,7 +36,8 @@
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6C03FFB20B94879002A7ED0 /* NSError+CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */; };
 		B6C03FFC20B94879002A7ED0 /* NSError+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */; };
-		B6FA0ACD20A984EF000CECA0 /* CCToolKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */; };
+		B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
 		B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AC620A984EF000CECA0 /* CCToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6FDB1C120AFBC6C00483246 /* NSData+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FDB1BF20AFBC6C00483246 /* NSData+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,6 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B6C0400B20B94FD0002A7ED0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6FA0ABA20A984EF000CECA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6FA0AC220A984EF000CECA0;
+			remoteInfo = CCToolKit;
+		};
 		B6FA0ACE20A984EF000CECA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B6FA0ABA20A984EF000CECA0 /* Project object */;
@@ -62,8 +69,6 @@
 		B623DA6C20AAD38C00220F3F /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
 		B623DA6D20AAD38C00220F3F /* UIImage+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extensions.m"; sourceTree = "<group>"; };
 		B623DA7320AAD3D700220F3F /* CCVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVersion.h; sourceTree = "<group>"; };
-		B623DA7420AAD3D700220F3F /* CCSoftwareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSoftwareManager.m; sourceTree = "<group>"; };
-		B623DA7520AAD3D700220F3F /* CCSoftwareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSoftwareManager.h; sourceTree = "<group>"; };
 		B623DA7620AAD3D700220F3F /* CCVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVersion.m; sourceTree = "<group>"; };
 		B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+Extensions.h"; sourceTree = "<group>"; };
 		B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
@@ -71,10 +76,12 @@
 		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
 		B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+CommonCrypto.h"; sourceTree = "<group>"; };
 		B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+CommonCrypto.m"; sourceTree = "<group>"; };
-		B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSoftwareManager.h; sourceTree = "<group>"; };
+		B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCSoftwareManager.m; sourceTree = "<group>"; };
+		B6C0400320B94D54002A7ED0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CCToolKit.framework; path = "/Users/Harry_L/Documents/CCToolKit/build/Release-iphoneos/CCToolKit.framework"; sourceTree = "<absolute>"; };
+		B6C0400520B94F0D002A7ED0 /* CCToolKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = CCToolKitTests.xctest; path = "/Users/Harry_L/Documents/CCToolKit/build/Release-iphoneos/CCToolKitTests.xctest"; sourceTree = "<absolute>"; };
 		B6FA0AC620A984EF000CECA0 /* CCToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCToolKit.h; sourceTree = "<group>"; };
 		B6FA0AC720A984EF000CECA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6FA0ACC20A984EF000CECA0 /* CCToolKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCToolKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCToolKitTests.m; sourceTree = "<group>"; };
 		B6FA0AD320A984EF000CECA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6FDB1BF20AFBC6C00483246 /* NSData+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Extensions.h"; sourceTree = "<group>"; };
@@ -93,7 +100,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6FA0ACD20A984EF000CECA0 /* CCToolKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,10 +137,10 @@
 		B623DA7220AAD3D700220F3F /* CCSoftwareInfo */ = {
 			isa = PBXGroup;
 			children = (
-				B623DA7520AAD3D700220F3F /* CCSoftwareManager.h */,
-				B623DA7420AAD3D700220F3F /* CCSoftwareManager.m */,
 				B623DA7320AAD3D700220F3F /* CCVersion.h */,
 				B623DA7620AAD3D700220F3F /* CCVersion.m */,
+				B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */,
+				B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */,
 			);
 			path = CCSoftwareInfo;
 			sourceTree = "<group>";
@@ -144,27 +150,17 @@
 			children = (
 				B6FA0AC520A984EF000CECA0 /* CCToolKit */,
 				B6FA0AD020A984EF000CECA0 /* CCToolKitTests */,
-				B6FA0AC420A984EF000CECA0 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		B6FA0AC420A984EF000CECA0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */,
-				B6FA0ACC20A984EF000CECA0 /* CCToolKitTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		B6FA0AC520A984EF000CECA0 /* CCToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 				B6FA0AC620A984EF000CECA0 /* CCToolKit.h */,
 				B60BF8FC20AC4EB700EB3EAF /* CCStorage */,
 				B623DA6920AAD38C00220F3F /* ClassExtension */,
 				B623DA7220AAD3D700220F3F /* CCSoftwareInfo */,
-				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 			);
 			path = CCToolKit;
 			sourceTree = "<group>";
@@ -186,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
-				B623DA7920AAD3D700220F3F /* CCSoftwareManager.h in Headers */,
+				B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */,
 				B6C03FFB20B94879002A7ED0 /* NSError+CommonCrypto.h in Headers */,
 				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
@@ -216,7 +212,7 @@
 			);
 			name = CCToolKit;
 			productName = CCToolKit;
-			productReference = B6FA0AC320A984EF000CECA0 /* CCToolKit.framework */;
+			productReference = B6C0400320B94D54002A7ED0 /* CCToolKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		B6FA0ACB20A984EF000CECA0 /* CCToolKitTests */ = {
@@ -234,7 +230,7 @@
 			);
 			name = CCToolKitTests;
 			productName = CCToolKitTests;
-			productReference = B6FA0ACC20A984EF000CECA0 /* CCToolKitTests.xctest */;
+			productReference = B6C0400520B94F0D002A7ED0 /* CCToolKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -246,7 +242,7 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Harry_L;
 				TargetAttributes = {
-					B655415E20B6B7180025A103 = {
+					B6C0400620B94F2B002A7ED0 = {
 						CreatedOnToolsVersion = 9.3.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -268,13 +264,13 @@
 				en,
 			);
 			mainGroup = B6FA0AB920A984EF000CECA0;
-			productRefGroup = B6FA0AC420A984EF000CECA0 /* Products */;
+			productRefGroup = B6FA0AB920A984EF000CECA0;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				B6FA0AC220A984EF000CECA0 /* CCToolKit */,
 				B6FA0ACB20A984EF000CECA0 /* CCToolKitTests */,
-				B655415E20B6B7180025A103 /* CCToolKits */,
+				B6C0400620B94F2B002A7ED0 /* CCToolKits */,
 			);
 		};
 /* End PBXProject section */
@@ -297,7 +293,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B655416220B6B79D0025A103 /* ShellScript */ = {
+		B6C0400A20B94F32002A7ED0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,7 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Sets the target folders and the final framework product.\n# 如果工程名称和Framework的Target名称不一样的话,要自定义FMKNAME\n# 例如: FMK_NAME = \"MyFramework\"\nFMK_NAME=${PROJECT_NAME}\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n# -configuration ${CONFIGURATION}\n# Clean and Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos clean build\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator clean build\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\nmkdir -p \"${INSTALL_DIR}\"\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/${FMK_NAME}\"\nrm -r \"${WRK_DIR}\"\nopen \"${INSTALL_DIR}\"\n";
+			shellScript = "UNIVERSAL_OUTPUTFOLDER=../build/\n\n# 创建输出目录，并删除之前的framework文件\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\"\n\n# 分别编译模拟器和真机的Framework\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -        configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# 拷贝framework到univer目录\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# 合并framework，输出最终的framework到build目录\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -324,8 +320,8 @@
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,
 				B6FDB1C220AFBC6C00483246 /* NSData+Extensions.m in Sources */,
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
+				B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */,
 				B623DA6E20AAD38C00220F3F /* UIColor+Extensions.m in Sources */,
-				B623DA7820AAD3D700220F3F /* CCSoftwareManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +336,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B6C0400C20B94FD0002A7ED0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6FA0AC220A984EF000CECA0 /* CCToolKit */;
+			targetProxy = B6C0400B20B94FD0002A7ED0 /* PBXContainerItemProxy */;
+		};
 		B6FA0ACF20A984EF000CECA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B6FA0AC220A984EF000CECA0 /* CCToolKit */;
@@ -348,19 +349,17 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		B655415F20B6B7180025A103 /* Debug */ = {
+		B6C0400820B94F2B002A7ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		B655416020B6B7180025A103 /* Release */ = {
+		B6C0400920B94F2B002A7ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -557,11 +556,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B655416120B6B7180025A103 /* Build configuration list for PBXAggregateTarget "CCToolKits" */ = {
+		B6C0400720B94F2B002A7ED0 /* Build configuration list for PBXAggregateTarget "CCToolKits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B655415F20B6B7180025A103 /* Debug */,
-				B655416020B6B7180025A103 /* Release */,
+				B6C0400820B94F2B002A7ED0 /* Debug */,
+				B6C0400920B94F2B002A7ED0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
