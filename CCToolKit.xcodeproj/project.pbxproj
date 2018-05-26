@@ -34,8 +34,6 @@
 		B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */; };
 		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B6C03FFB20B94879002A7ED0 /* NSError+CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */; };
-		B6C03FFC20B94879002A7ED0 /* NSError+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */; };
 		B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
@@ -74,8 +72,6 @@
 		B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
 		B690F9FC20AD736C00D3D086 /* CCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileManager.m; sourceTree = "<group>"; };
 		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
-		B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+CommonCrypto.h"; sourceTree = "<group>"; };
-		B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+CommonCrypto.m"; sourceTree = "<group>"; };
 		B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSoftwareManager.h; sourceTree = "<group>"; };
 		B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCSoftwareManager.m; sourceTree = "<group>"; };
 		B6C0401320B9517F002A7ED0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +111,7 @@
 			path = CCStorage;
 			sourceTree = "<group>";
 		};
-		B623DA6920AAD38C00220F3F /* ClassExtension */ = {
+		B623DA6920AAD38C00220F3F /* CCCategory */ = {
 			isa = PBXGroup;
 			children = (
 				B623DA6C20AAD38C00220F3F /* UIColor+Extensions.h */,
@@ -128,10 +124,8 @@
 				B6FDB1C020AFBC6C00483246 /* NSData+Extensions.m */,
 				B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */,
 				B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */,
-				B6C03FF920B94879002A7ED0 /* NSError+CommonCrypto.h */,
-				B6C03FFA20B94879002A7ED0 /* NSError+CommonCrypto.m */,
 			);
-			path = ClassExtension;
+			path = CCCategory;
 			sourceTree = "<group>";
 		};
 		B623DA7220AAD3D700220F3F /* CCSoftwareInfo */ = {
@@ -161,7 +155,7 @@
 				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 				B6FA0AC620A984EF000CECA0 /* CCToolKit.h */,
 				B60BF8FC20AC4EB700EB3EAF /* CCStorage */,
-				B623DA6920AAD38C00220F3F /* ClassExtension */,
+				B623DA6920AAD38C00220F3F /* CCCategory */,
 				B623DA7220AAD3D700220F3F /* CCSoftwareInfo */,
 			);
 			path = CCToolKit;
@@ -185,7 +179,6 @@
 			files = (
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
 				B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */,
-				B6C03FFB20B94879002A7ED0 /* NSError+CommonCrypto.h in Headers */,
 				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B60E6F9520AECEB4001F593B /* NSString+Extensions.h in Headers */,
@@ -316,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B60E6F9620AECEB4001F593B /* NSString+Extensions.m in Sources */,
-				B6C03FFC20B94879002A7ED0 /* NSError+CommonCrypto.m in Sources */,
 				B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */,
 				B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */,
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,

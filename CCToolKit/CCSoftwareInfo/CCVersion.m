@@ -11,6 +11,8 @@
 static NSString *const kBundleShortVersionIdentifier = @"CFBundleShortVersionString"; // 获取版本号时所使用的关键字
 static NSString *const kBundleVerionIdentifier = @"CFBundleVersion";
 
+
+
 @implementation CCVersion
 {
     NSString *versionString;
