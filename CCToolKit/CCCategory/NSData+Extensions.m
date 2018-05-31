@@ -7,7 +7,7 @@
 //
 
 #import "NSData+Extensions.h"
-#import <CommonCrypto/CommonCrypto.h>
+#import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 #import <zlib.h>
@@ -667,7 +667,8 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
                    initializationVector: (id) iv
                                   error: (CCCryptorStatus *) error
 {
-    if (algorithm != kCCAlgorithmRC4 || algorithm != kCCAlgorithmRC2) {
+    //若不是RC4流算法
+    if (algorithm != kCCAlgorithmRC4 ) {
         NSAssert((mode == CcCryptorCBCMode && iv != nil && iv != NULL) || mode == CcCryptorECBMode, @"With CBC Mode , InitializationVector  must have value");
         NSAssert((mode == CcCryptorCBCMode && [iv length] >= 8) || mode == CcCryptorECBMode, @"With CBC Mode, InitializationVector  must be greater than 8 bits");
         if (mode == CcCryptorCBCMode && [iv length] < 8) {
@@ -718,11 +719,13 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
         return ( nil );
     }
     
+    //确定处理给定输入所需的输出缓冲区大小尺寸。
     size_t bufsize = CCCryptorGetOutputLength( cryptor, (size_t)[sourceData length], true );
     void * buf = malloc( bufsize );
     size_t bufused = 0;
     size_t bytesTotal = 0;
     
+    //处理（加密，解密）一些数据。如果有结果的话,写入提供的缓冲区.
     status = CCCryptorUpdate( cryptor, [sourceData bytes], (size_t)[sourceData length],
                              buf, bufsize, &bufused );
     
@@ -736,14 +739,20 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
     
     // From Brent Royal-Gordon (Twitter: architechies):
     //  Need to update buf ptr past used bytes when calling CCCryptorFinal()
+    
+    //  It is not necessary to call CCCryptorFinal() when performing
+    //symmetric encryption or decryption if padding is disabled, or
+    //   when using a stream cipher.
+    if (mode == CcCryptorPKCS7Padding) {
     status = CCCryptorFinal( cryptor, buf + bufused, bufsize - bufused, &bufused );
     if ( status != kCCSuccess )
     {
         free( buf );
         return ( nil );
     }
-    
     bytesTotal += bufused;
+    }
+    
     
     NSData *result = [NSData dataWithBytesNoCopy: buf length: bytesTotal];
     
@@ -844,7 +853,7 @@ static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
     if (padding == CcCryptorPKCS7Padding) {
         return  data;
     }
-    if (operation == kCCEncrypt && (algorithm != CcCryptoAlgorithmRC4 && algorithm != CcCryptoAlgorithmRC2)  ) {
+    if (operation == kCCEncrypt && (algorithm != CcCryptoAlgorithmRC4)  ) {
         NSMutableData *sourceData = data.mutableCopy;
         int blockSize = 8;
         switch (algorithm) {
@@ -855,6 +864,7 @@ static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
             case kCCAlgorithm3DES:
             case kCCAlgorithmCAST:
             case kCCAlgorithmBlowfish:
+            case kCCAlgorithmRC2:
             default:
                 blockSize = 8;
                 break;
@@ -913,7 +923,7 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
     if (padding == CcCryptorPKCS7Padding) {
         return sourceData;
     }
-    if (operation == kCCDecrypt && (algorithm != CcCryptoAlgorithmRC4 && algorithm != CcCryptoAlgorithmRC2) ) {
+    if (operation == kCCDecrypt && (algorithm != CcCryptoAlgorithmRC4) ) {
         
         int correctLength = 0;
         int blockSize = 8;
@@ -925,6 +935,7 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
             case kCCAlgorithm3DES:
             case kCCAlgorithmCAST:
             case kCCAlgorithmBlowfish:
+            case kCCAlgorithmRC2:
             default:
                 blockSize = 8;
                 break;
@@ -936,18 +947,18 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
         if (padding == CcCryptorZeroPadding && end == 0) {
             for (int i = (short)sourceData.length - 1; i > 0 ; i--) {
                 if (testByte[i] != end) {
-                    correctLength = i;
+                    correctLength = i + 1;
                     break;
                 }
             }
         }
         else if ((padding == CcCryptorANSIX923 || padding == CcCryptorISO10126) && (end > 0 && end < blockSize + 1)){
             if (padding == CcCryptorISO10126 || ( testByte[sourceData.length - 2] == 0 &&  testByte[sourceData.length - end] == 0)) {
-                correctLength = (short)sourceData.length - end - 1;
+                correctLength = (short)sourceData.length - end;
             }
         }
         
-        NSData *data = [NSData dataWithBytes:testByte length:correctLength + 1];
+        NSData *data = [NSData dataWithBytes:testByte length:correctLength];
         return data;
         
     }
