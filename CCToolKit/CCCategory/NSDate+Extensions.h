@@ -215,7 +215,7 @@
 /**
  whether the receiver is in [hour,otherHour]. eg.[0,13], [13,21]. OtherHour > hour.
  */
-- (BOOL)cc_isBetweenFrom:(NSInteger)hour to:(NSInteger)otherHour;
+- (BOOL)cc_isBetweenFromHour:(NSInteger)hour toHour:(NSInteger)otherHour;
 /**
  whether the receiver is eariler than otherDate and later than date.
  */
