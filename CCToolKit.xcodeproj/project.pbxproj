@@ -34,6 +34,8 @@
 		B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */; };
 		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6BAC52120C23AE00026F5F7 /* NSDate+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */; };
+		B6BAC52220C23AE00026F5F7 /* NSDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BAC52020C23AE00026F5F7 /* NSDate+Extensions.m */; };
 		B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
@@ -72,6 +74,8 @@
 		B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
 		B690F9FC20AD736C00D3D086 /* CCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileManager.m; sourceTree = "<group>"; };
 		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
+		B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extensions.h"; sourceTree = "<group>"; };
+		B6BAC52020C23AE00026F5F7 /* NSDate+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extensions.m"; sourceTree = "<group>"; };
 		B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSoftwareManager.h; sourceTree = "<group>"; };
 		B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCSoftwareManager.m; sourceTree = "<group>"; };
 		B6C0401320B9517F002A7ED0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +128,8 @@
 				B6FDB1C020AFBC6C00483246 /* NSData+Extensions.m */,
 				B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */,
 				B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */,
+				B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */,
+				B6BAC52020C23AE00026F5F7 /* NSDate+Extensions.m */,
 			);
 			path = CCCategory;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 				B6FDB1C120AFBC6C00483246 /* NSData+Extensions.h in Headers */,
 				B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */,
 				B623DA6F20AAD38C00220F3F /* UIImage+Extensions.h in Headers */,
+				B6BAC52120C23AE00026F5F7 /* NSDate+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +321,7 @@
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,
 				B6FDB1C220AFBC6C00483246 /* NSData+Extensions.m in Sources */,
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
+				B6BAC52220C23AE00026F5F7 /* NSDate+Extensions.m in Sources */,
 				B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */,
 				B623DA6E20AAD38C00220F3F /* UIColor+Extensions.m in Sources */,
 			);

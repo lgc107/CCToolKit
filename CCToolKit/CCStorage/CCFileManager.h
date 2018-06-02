@@ -57,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(BOOL)writeFileAtPath:(NSString *)path content:(id)content error:(NSError **)error;
 
+
 NS_ASSUME_NONNULL_END
 @end
 

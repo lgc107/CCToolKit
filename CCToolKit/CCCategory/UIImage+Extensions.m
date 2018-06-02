@@ -135,6 +135,17 @@ CGSize verticalAppendedTotalImageSizeFromImagesArray(NSArray *imagesArray){
 @implementation UIImage (Modify)
 
 
+- (UIImage *)cc_synthesizedWithImage:(UIImage *)otherImage Rect:(CGRect)rect {
+        UIGraphicsBeginImageContext(self.size);
+        [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+        // 四个参数为水印的位置
+        [otherImage drawInRect: rect];
+        UIImage * resultingImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return resultingImage;
+
+}
+
 - (UIImage *)cc_imageByResizeToSize:(CGSize)size{
     if (!self || size.width <= 0 || size.height <= 0) { return nil; }
     UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);

@@ -91,7 +91,13 @@
 @interface UIImage (Modify)
 
 /**
- Returns a new image which is scaled from this image.
+ Return a newImage By synthesized with other Image.
+ otherImage add to self with special rect.
+ */
+- (UIImage *)cc_synthesizedWithImage:(UIImage *)otherImage Rect:(CGRect)rect;
+
+/**
+ Return a new image which is scaled from this image.
  The image will be stretched as needed.
  
  @param size  The new size to be scaled, values should be positive.

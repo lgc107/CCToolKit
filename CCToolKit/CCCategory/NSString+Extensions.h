@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSData+Extensions.h"
-
+#import <UIKit/UIKit.h>
 typedef enum : NSUInteger {
     CCEncrpytBase64StringEncoding,
     CCEncrpytHexStringEncoding
@@ -81,6 +81,35 @@ typedef enum : NSUInteger {
  e.g. NSString: @"{"name":"a","count":2}"  => NSDictionary: @[@"name":@"a",@"count":@2]
  */
 - (id)cc_jsonValueDecoded;
+@end
+
+#pragma mark - NSDate
+@interface NSString (Date)
+/**
+ Returns an data With formatted string.
+ see http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns
+ for format description.
+ 
+ @param format   String representing the desired date format.
+ e.g. @"yyyy-MM-dd HH:mm:ss"
+
+ */
+- (NSDate *)cc_dateUsingFormat:(NSString *)format;
+/**
+  Returns an data With formatted string.
+ 
+ see http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns
+ for format description.
+ 
+ @param format    String representing the desired date format.
+ e.g. @"yyyy-MM-dd HH:mm:ss"
+ 
+ @param timeZoneName  Desired time zone.
+ 
+ @param locale    Desired locale.
+ */
+- (NSDate *)cc_dateUsingFormat:(NSString *)format TimeZone:(NSString *)timeZoneName locale:(NSLocale *)locale;
+
 @end
 
 #pragma mark - CommonDigest
@@ -399,6 +428,55 @@ typedef enum : NSUInteger {
  */
 - (NSString *)cc_decryptRC4UsingEncoding:(CCDecrpytDecodingOptions)decoding;
 
-
-
 @end
+
+#pragma  mark - Drawing
+
+@interface NSString (Drawing)
+
+
+///=============================================================================
+/// @name Drawing
+///=============================================================================
+
+/**
+ Returns the size of the string if it were rendered with the specified constraints.
+ 
+ @param font          The font to use for computing the string size.default is 17.
+ 
+ @param size          The maximum acceptable size for the string. This value is
+ used to calculate where line breaks and wrapping would occur.
+ 
+ @param lineBreakMode The line break options for computing the size of the string.
+ For a list of possible values, see NSLineBreakMode.
+ 
+ @return              The width and height of the resulting string's bounding box.
+ These values may be rounded up to the nearest whole number.
+ */
+- (CGSize)cc_sizeForFont:(UIFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode;
+
+/**
+ Returns the width of the string if it were to be rendered with the specified
+ font on a single line.
+ 
+ @param font  The font to use for computing the string width.
+ 
+ @return      The width of the resulting string's bounding box. These values may be
+ rounded up to the nearest whole number.
+ */
+- (CGFloat)cc_widthForFont:(UIFont *)font;
+
+/**
+ Returns the height of the string if it were rendered with the specified constraints.
+ 
+ @param font   The font to use for computing the string size.
+ 
+ @param width  The maximum acceptable width for the string. This value is used
+ to calculate where line breaks and wrapping would occur.
+ 
+ @return       The height of the resulting string's bounding box. These values
+ may be rounded up to the nearest whole number.
+ */
+- (CGFloat)cc_heightForFont:(UIFont *)font width:(CGFloat)width;
+@end
+
