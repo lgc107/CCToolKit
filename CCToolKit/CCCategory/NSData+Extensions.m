@@ -1146,6 +1146,18 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
 
 @end
 
+@implementation NSData (Plist)
+- (NSArray *)cc_plistArray{
+    if (!self) return nil;
+     NSArray *array = [NSPropertyListSerialization propertyListWithData:self options:NSPropertyListImmutable format:NULL error:NULL];
+    if ([array isKindOfClass:[NSArray class]]) return array;
+    return nil;
+}
 
-
-
+- (NSMutableArray *)cc_plistMutableArray{
+    if (!self) return nil;
+    NSMutableArray *array = [NSPropertyListSerialization propertyListWithData:self options:NSPropertyListMutableContainersAndLeaves format:NULL error:NULL];
+    if ([array isKindOfClass:[NSMutableArray class]]) return array;
+    return nil;
+}
+@end

@@ -32,6 +32,8 @@
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
 		B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */; };
+		B65482E220CBBA8100B6D08C /* NSArray+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B65482E020CBBA8100B6D08C /* NSArray+Extensions.h */; };
+		B65482E320CBBA8100B6D08C /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B65482E120CBBA8100B6D08C /* NSArray+Extensions.m */; };
 		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6BAC52120C23AE00026F5F7 /* NSDate+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */; };
@@ -72,6 +74,8 @@
 		B623DA7620AAD3D700220F3F /* CCVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVersion.m; sourceTree = "<group>"; };
 		B64016EE20B3B699001CDAE0 /* NSError+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+Extensions.h"; sourceTree = "<group>"; };
 		B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
+		B65482E020CBBA8100B6D08C /* NSArray+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
+		B65482E120CBBA8100B6D08C /* NSArray+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
 		B690F9FC20AD736C00D3D086 /* CCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileManager.m; sourceTree = "<group>"; };
 		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
 		B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extensions.h"; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */,
 				B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */,
 				B6BAC52020C23AE00026F5F7 /* NSDate+Extensions.m */,
+				B65482E020CBBA8100B6D08C /* NSArray+Extensions.h */,
+				B65482E120CBBA8100B6D08C /* NSArray+Extensions.m */,
 			);
 			path = CCCategory;
 			sourceTree = "<group>";
@@ -192,6 +198,7 @@
 				B6FDB1C120AFBC6C00483246 /* NSData+Extensions.h in Headers */,
 				B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */,
 				B623DA6F20AAD38C00220F3F /* UIImage+Extensions.h in Headers */,
+				B65482E220CBBA8100B6D08C /* NSArray+Extensions.h in Headers */,
 				B6BAC52120C23AE00026F5F7 /* NSDate+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +324,7 @@
 			files = (
 				B60E6F9620AECEB4001F593B /* NSString+Extensions.m in Sources */,
 				B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */,
+				B65482E320CBBA8100B6D08C /* NSArray+Extensions.m in Sources */,
 				B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */,
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,
 				B6FDB1C220AFBC6C00483246 /* NSData+Extensions.m in Sources */,

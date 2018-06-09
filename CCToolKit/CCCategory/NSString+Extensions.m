@@ -461,6 +461,26 @@
 
 @end
 
+@implementation NSString (Plist)
+- (NSArray *)cc_plistArray{
+    if (!self) return nil;
+    NSData* data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *array = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainersAndLeaves format:NULL error:NULL];
+    if ([array isKindOfClass:[NSMutableArray class]]) return array;
+    return nil;
+}
+
+- (NSMutableArray *)cc_plistMutableArray{
+    if (!self) return nil;
+    NSData* data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *array = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainersAndLeaves format:NULL error:NULL];
+    if ([array isKindOfClass:[NSMutableArray class]]) return array;
+    return nil;
+}
+
+
+@end
+
 #pragma mark - NSString Drawing Size
 @implementation NSString (Drawing)
 

@@ -519,3 +519,23 @@ typedef enum : NSUInteger {
 - (NSData *)cc_gzipInflate;
 
 @end
+
+
+#pragma mark - Plist
+
+@interface NSData (Plist)
+
+/**
+ Creates and returns an array from a specified property list data.
+ 
+ @return A new array created from the plist data, or nil if an error occurs.
+ */
+- (NSArray *)cc_plistArray;
+/**
+ Creates and returns an array from a specified property list data.
+ 
+ @return A new array created from the plist data, or nil if an error occurs.
+ */
+- (NSMutableArray *)cc_plistMutableArray;
+
+@end

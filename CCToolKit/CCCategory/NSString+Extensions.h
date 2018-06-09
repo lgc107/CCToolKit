@@ -430,6 +430,20 @@ typedef enum : NSUInteger {
 
 @end
 
+
+@interface NSString (Plist)
+/**
+ Creates and returns an array from a specified property list xml string.
+ @return A new array created from the plist string, or nil if an error occurs.
+ */
+- (NSArray *)cc_plistArray;
+/**
+ Creates and returns an array from a specified property list xml string.
+ @return A new array created from the plist string, or nil if an error occurs.
+ */
+- (NSMutableArray *)cc_plistMutableArray;
+
+@end
 #pragma  mark - Drawing
 
 @interface NSString (Drawing)
