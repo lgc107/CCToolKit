@@ -70,6 +70,14 @@
     return _tmpPath;
 }
 
++ (NSString *)cc_fileNameAtPath:(NSString *)path suffix:(BOOL)suffix {
+    NSString *fileName = [path lastPathComponent];
+    if (!suffix) {
+        fileName = [fileName stringByDeletingPathExtension];
+    }
+    return fileName;
+}
+
 +(NSString *)pathForFileName:(NSString *)name inDircetoryType:(DircetoryType)type{
     
     NSAssert(name != nil, @"Invalid path. Path cannot be nil.");
@@ -253,6 +261,111 @@
 
 + (BOOL)cc_removeItemAtPath:(NSString *)path error:(NSError * _Nullable *)error{
     return [[NSFileManager defaultManager] removeItemAtPath:path error:error];
+}
+
+#pragma mark - clear
++ (BOOL)cc_clearCachesDirectory{
+    NSArray *subFiles = [self cc_listFilesInCachesDirectoryByDeep:NO];
+    BOOL isSuccess = YES;
+    
+    for (NSString *file in subFiles) {
+        NSString *absolutePath = [[CCFileManager shareManager].cachePath stringByAppendingPathComponent:file];
+        isSuccess &= [self cc_removeItemAtPath:absolutePath];
+    }
+    return isSuccess;
+}
+
++ (BOOL)cc_clearTmpDirectory{
+    NSArray *subFiles = [self cc_listFilesInCachesDirectoryByDeep:NO];
+    BOOL isSuccess = YES;
+    for (NSString *file in subFiles) {
+        NSString *absolutePath = [[CCFileManager shareManager].tmpPath stringByAppendingPathComponent:file];
+        isSuccess &= [self cc_removeItemAtPath:absolutePath];
+    }
+    return isSuccess;
+}
+
+#pragma mark - copy
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath {
+    return [self cc_copyItemAtPath:path toPath:toPath overwrite:NO error:nil];
+}
+
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError *__autoreleasing *)error {
+    return [self cc_copyItemAtPath:path toPath:toPath overwrite:NO error:error];
+}
+
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite {
+    return [self cc_copyItemAtPath:path toPath:toPath overwrite:overwrite error:nil];
+}
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError *__autoreleasing *)error{
+    if (![self cc_fileExistsAtFullPath:path]) {
+        [NSException raise:@"非法的源文件路径" format:@"源文件路径%@不存在，请检查源文件路径", path];
+        return false;
+    }
+    //获得目标文件的上级目录
+    NSString *toDirPath = [self directoryAtPath:toPath];
+    if (![self cc_fileExistsAtFullPath:toDirPath]) {
+        // 创建复制路径
+        if (![self cc_createDirectoryAtPath:toDirPath error:error]) {
+            return NO;
+        }
+    }
+    // 如果覆盖，那么先删掉原文件
+    if (overwrite) {
+        if ([self cc_fileExistsAtFullPath:toPath]) {
+            [self cc_removeItemAtPath:toPath error:error];
+        }
+    }
+    // 复制文件，如果不覆盖且文件已存在则会复制失败
+    BOOL isSuccess = [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:error];
+    
+    return isSuccess;
+}
+
+#pragma mark - 移动文件(夹)
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath {
+    return [self cc_moveItemAtPath:path toPath:toPath overwrite:NO error:nil];
+}
+
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError *__autoreleasing *)error {
+    return [self cc_moveItemAtPath:path toPath:toPath overwrite:NO error:error];
+}
+
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite {
+    return [self cc_moveItemAtPath:path toPath:toPath overwrite:overwrite error:nil];
+}
+#pragma mark - 移动文件(夹)
+
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError *__autoreleasing *)error {
+    // 先要保证源文件路径存在，不然抛出异常
+    if (![self cc_fileExistsAtFullPath:path]) {
+        [NSException raise:@"非法的源文件路径" format:@"源文件路径%@不存在，请检查源文件路径", path];
+        return NO;
+    }
+    //获得目标文件的上级目录
+    NSString *toDirPath = [self directoryAtPath:toPath];
+    if (![self cc_fileExistsAtFullPath:toDirPath]) {
+        // 创建移动路径
+        if (![self cc_createDirectoryAtPath:toDirPath error:error]) {
+            return NO;
+        }
+    }
+    // 判断目标路径文件是否存在
+    if ([self cc_fileExistsAtFullPath:toPath]) {
+        //如果覆盖，删除目标路径文件
+        if (overwrite) {
+            //删掉目标路径文件
+            [self cc_removeItemAtPath:toPath error:error];
+        }else {
+               [NSException raise:@"非法的目标路径" format:@"目标路径%@已存在文件，若要移动请覆盖", path];
+            return false;
+        }
+    }
+    
+    // 移动文件，当要移动到的文件路径文件存在，会移动失败
+    BOOL isSuccess = [[NSFileManager defaultManager] moveItemAtPath:path toPath:toPath error:error];
+    
+    return isSuccess;
 }
 
 #pragma mark - Write

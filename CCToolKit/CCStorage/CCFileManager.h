@@ -18,6 +18,11 @@ typedef enum : NSUInteger {
 
 @interface CCFileManager : NSObject
 
+
+/**
+
+ @return a single Object
+ */
 +(instancetype)shareManager;
 
 
@@ -55,7 +60,10 @@ typedef enum : NSUInteger {
  */
 +(NSString *)pathForFileName:(NSString *)name inDircetoryType:(DircetoryType)type;
 
-
+/*参数1：文件路径
+ *参数2、是否需要后缀
+ */
++ (NSString *)cc_fileNameAtPath:(NSString *)path suffix:(BOOL)suffix;
 /**
  根据文件完整路径获取上一级文件夹名称
 
@@ -175,14 +183,50 @@ typedef enum : NSUInteger {
 #pragma mark - remove
 
 /**
- 删除文件
+ 删除指定路径文件
  */
 +(BOOL)cc_removeItemAtPath:(NSString *)path;
 /**
- 删除文件
+ 删除指定路径文件
  */
 +(BOOL)cc_removeItemAtPath:(NSString *)path error:(NSError * _Nullable *_Nullable)error;
 
+/**
+ 清空Caches文件夹
+ */
++ (BOOL)cc_clearCachesDirectory;
+/**
+ 清空tmp文件夹
+ */
++ (BOOL)cc_clearTmpDirectory;
+
+#pragma mark - 复制文件(夹)
+// 复制文件
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath;
+// 复制文件(错误信息error)
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
+// 复制文件，是否覆盖
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
+/*参数1、被复制文件路径
+ *参数2、要复制到的目标文件路径
+ *参数3、当要复制到的文件路径文件存在，会复制失败，这里传入是否覆盖
+ *参数4、错误信息
+ */
++ (BOOL)cc_copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
+
+#pragma mark - 移动文件(夹)
+// 移动文件
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath;
+// 移动文件(错误信息error)
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
+// 移动文件，是否覆盖
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
+/*参数1、被移动文件路径
+ *参数2、要移动到的目标文件路径
+ *参数3、当要移动到的文件路径文件存在，会移动失败，这里传入是否覆盖
+ *参数4、错误信息
+ */
++ (BOOL)cc_moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
 
 #pragma mark - write to file
 /**
@@ -200,6 +244,10 @@ typedef enum : NSUInteger {
 +(BOOL)cc_appendData:(NSData *)data withPath:(NSString *)path;
 
 #pragma mark - Read
+
+/**
+ 获取指定文件二进制数据
+ */
 + (NSData *)cc_getFileData:(NSString *)filePath;
 
 

@@ -8,7 +8,7 @@
 
 
 #import "NSString+Extensions.h"
-
+#import "NSNumber+Extensions.h"
 
 
 @implementation NSString (Utilities)
@@ -192,11 +192,17 @@
     return self.cc_dataUsingUTF8Encoding.cc_jsonValueDecoded;
 }
 
-
-
 - (NSRange)cc_rangeOfAll {
     return NSMakeRange(0, self.length);
 }
+
+
+- (NSString *)cc_stringByTrim {
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    return [self stringByTrimmingCharactersInSet:set];
+}
+
+
 
 @end
 
@@ -520,4 +526,46 @@
     return size.height;
 }
 
+@end
+
+@implementation NSString (NSNumber)
+- (char)charValue {
+    return self.cc_numberValue.charValue;
+}
+
+- (unsigned char) unsignedCharValue {
+    return self.cc_numberValue.unsignedCharValue;
+}
+
+- (short) shortValue {
+    return self.cc_numberValue.shortValue;
+}
+
+- (unsigned short) unsignedShortValue {
+    return self.cc_numberValue.unsignedShortValue;
+}
+
+- (unsigned int) unsignedIntValue {
+    return self.cc_numberValue.unsignedIntValue;
+}
+
+- (long) longValue {
+    return self.cc_numberValue.longValue;
+}
+
+- (unsigned long) unsignedLongValue {
+    return self.cc_numberValue.unsignedLongValue;
+}
+
+- (unsigned long long) unsignedLongLongValue {
+    return self.cc_numberValue.unsignedLongLongValue;
+}
+
+- (NSUInteger) unsignedIntegerValue {
+    return self.cc_numberValue.unsignedIntegerValue;
+}
+
+- (NSNumber *)cc_numberValue {
+    return [NSNumber cc_numberWithString:self];
+}
 @end

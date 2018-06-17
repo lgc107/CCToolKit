@@ -34,6 +34,14 @@
 		B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */; };
 		B65482E220CBBA8100B6D08C /* NSArray+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B65482E020CBBA8100B6D08C /* NSArray+Extensions.h */; };
 		B65482E320CBBA8100B6D08C /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B65482E120CBBA8100B6D08C /* NSArray+Extensions.m */; };
+		B67E50D020D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B67E50CE20D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.h */; };
+		B67E50D120D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E50CF20D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.m */; };
+		B67E50D420D5F2350007E4E8 /* NSDictionary+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B67E50D220D5F2350007E4E8 /* NSDictionary+Extensions.h */; };
+		B67E50D520D5F2350007E4E8 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E50D320D5F2350007E4E8 /* NSDictionary+Extensions.m */; };
+		B67E50D920D610C70007E4E8 /* NSNumber+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B67E50D720D610C70007E4E8 /* NSNumber+Extensions.h */; };
+		B67E50DA20D610C70007E4E8 /* NSNumber+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E50D820D610C70007E4E8 /* NSNumber+Extensions.m */; };
+		B67E50DE20D61A030007E4E8 /* CCXMLDictionaryParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B67E50DC20D61A030007E4E8 /* CCXMLDictionaryParser.h */; };
+		B67E50DF20D61A030007E4E8 /* CCXMLDictionaryParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E50DD20D61A030007E4E8 /* CCXMLDictionaryParser.m */; };
 		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6BAC52120C23AE00026F5F7 /* NSDate+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */; };
@@ -76,6 +84,14 @@
 		B64016EF20B3B699001CDAE0 /* NSError+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extensions.m"; sourceTree = "<group>"; };
 		B65482E020CBBA8100B6D08C /* NSArray+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		B65482E120CBBA8100B6D08C /* NSArray+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
+		B67E50CE20D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+Extensions.h"; sourceTree = "<group>"; };
+		B67E50CF20D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+Extensions.m"; sourceTree = "<group>"; };
+		B67E50D220D5F2350007E4E8 /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
+		B67E50D320D5F2350007E4E8 /* NSDictionary+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extensions.m"; sourceTree = "<group>"; };
+		B67E50D720D610C70007E4E8 /* NSNumber+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Extensions.h"; sourceTree = "<group>"; };
+		B67E50D820D610C70007E4E8 /* NSNumber+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Extensions.m"; sourceTree = "<group>"; };
+		B67E50DC20D61A030007E4E8 /* CCXMLDictionaryParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCXMLDictionaryParser.h; sourceTree = "<group>"; };
+		B67E50DD20D61A030007E4E8 /* CCXMLDictionaryParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCXMLDictionaryParser.m; sourceTree = "<group>"; };
 		B690F9FC20AD736C00D3D086 /* CCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileManager.m; sourceTree = "<group>"; };
 		B690F9FD20AD736C00D3D086 /* CCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileManager.h; sourceTree = "<group>"; };
 		B6BAC51F20C23AE00026F5F7 /* NSDate+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extensions.h"; sourceTree = "<group>"; };
@@ -136,6 +152,12 @@
 				B6BAC52020C23AE00026F5F7 /* NSDate+Extensions.m */,
 				B65482E020CBBA8100B6D08C /* NSArray+Extensions.h */,
 				B65482E120CBBA8100B6D08C /* NSArray+Extensions.m */,
+				B67E50CE20D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.h */,
+				B67E50CF20D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.m */,
+				B67E50D220D5F2350007E4E8 /* NSDictionary+Extensions.h */,
+				B67E50D320D5F2350007E4E8 /* NSDictionary+Extensions.m */,
+				B67E50D720D610C70007E4E8 /* NSNumber+Extensions.h */,
+				B67E50D820D610C70007E4E8 /* NSNumber+Extensions.m */,
 			);
 			path = CCCategory;
 			sourceTree = "<group>";
@@ -149,6 +171,15 @@
 				B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */,
 			);
 			path = CCSoftwareInfo;
+			sourceTree = "<group>";
+		};
+		B67E50DB20D619C20007E4E8 /* CCXMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				B67E50DC20D61A030007E4E8 /* CCXMLDictionaryParser.h */,
+				B67E50DD20D61A030007E4E8 /* CCXMLDictionaryParser.m */,
+			);
+			path = CCXMLParser;
 			sourceTree = "<group>";
 		};
 		B6FA0AB920A984EF000CECA0 = {
@@ -166,6 +197,7 @@
 			children = (
 				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 				B6FA0AC620A984EF000CECA0 /* CCToolKit.h */,
+				B67E50DB20D619C20007E4E8 /* CCXMLParser */,
 				B60BF8FC20AC4EB700EB3EAF /* CCStorage */,
 				B623DA6920AAD38C00220F3F /* CCCategory */,
 				B623DA7220AAD3D700220F3F /* CCSoftwareInfo */,
@@ -191,13 +223,17 @@
 			files = (
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
 				B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */,
+				B67E50D920D610C70007E4E8 /* NSNumber+Extensions.h in Headers */,
 				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
+				B67E50D420D5F2350007E4E8 /* NSDictionary+Extensions.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B60E6F9520AECEB4001F593B /* NSString+Extensions.h in Headers */,
+				B67E50D020D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.h in Headers */,
 				B623DA7020AAD38C00220F3F /* UIColor+Extensions.h in Headers */,
 				B6FDB1C120AFBC6C00483246 /* NSData+Extensions.h in Headers */,
 				B64016F020B3B699001CDAE0 /* NSError+Extensions.h in Headers */,
 				B623DA6F20AAD38C00220F3F /* UIImage+Extensions.h in Headers */,
+				B67E50DE20D61A030007E4E8 /* CCXMLDictionaryParser.h in Headers */,
 				B65482E220CBBA8100B6D08C /* NSArray+Extensions.h in Headers */,
 				B6BAC52120C23AE00026F5F7 /* NSDate+Extensions.h in Headers */,
 			);
@@ -323,12 +359,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B60E6F9620AECEB4001F593B /* NSString+Extensions.m in Sources */,
+				B67E50D120D5EDAE0007E4E8 /* NSHTTPCookie+Extensions.m in Sources */,
+				B67E50D520D5F2350007E4E8 /* NSDictionary+Extensions.m in Sources */,
 				B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */,
 				B65482E320CBBA8100B6D08C /* NSArray+Extensions.m in Sources */,
 				B64016F120B3B699001CDAE0 /* NSError+Extensions.m in Sources */,
+				B67E50DA20D610C70007E4E8 /* NSNumber+Extensions.m in Sources */,
 				B623DA7120AAD38C00220F3F /* UIImage+Extensions.m in Sources */,
 				B6FDB1C220AFBC6C00483246 /* NSData+Extensions.m in Sources */,
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
+				B67E50DF20D61A030007E4E8 /* CCXMLDictionaryParser.m in Sources */,
 				B6BAC52220C23AE00026F5F7 /* NSDate+Extensions.m in Sources */,
 				B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */,
 				B623DA6E20AAD38C00220F3F /* UIColor+Extensions.m in Sources */,

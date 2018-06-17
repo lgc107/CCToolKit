@@ -19,9 +19,17 @@ FOUNDATION_EXPORT const unsigned char CCToolKitVersionString[];
 #import <CCToolKit/CCSoftwareManager.h>
 #import <CCToolKit/CCFileManager.h>
 #import <CCToolKit/CCVersion.h>
+
+#import <CCToolKit/CCXMLDictionaryParser.h>
+
 #import <CCToolKit/UIImage+Extensions.h>
 #import <CCToolKit/NSData+Extensions.h>
 #import <CCToolKit/UIColor+Extensions.h>
 #import <CCToolKit/NSString+Extensions.h>
 #import <CCToolKit/NSError+Extensions.h>
 #import <CCToolKit/NSDate+Extensions.h>
+#import <CCToolKit/NSNumber+Extensions.h>
+#import <CCToolKit/NSArray+Extensions.h>
+#import <CCToolKit/NSDictionary+Extensions.h>
+#import <CCToolKit/NSHTTPCookie+Extensions.h>
+

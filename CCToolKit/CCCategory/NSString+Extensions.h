@@ -81,6 +81,12 @@ typedef enum : NSUInteger {
  e.g. NSString: @"{"name":"a","count":2}"  => NSDictionary: @[@"name":@"a",@"count":@2]
  */
 - (id)cc_jsonValueDecoded;
+/**
+ Trim blank characters (space and newline) in head and tail.
+ @return the trimmed string.
+ */
+- (NSString *)cc_stringByTrim;
+
 @end
 
 #pragma mark - NSDate
@@ -494,3 +500,25 @@ typedef enum : NSUInteger {
 - (CGFloat)cc_heightForFont:(UIFont *)font width:(CGFloat)width;
 @end
 
+
+@interface NSString (NSNumber)
+///=============================================================================
+/// @name NSNumber Compatible
+///=============================================================================
+
+// Now you can use NSString as a NSNumber.
+@property (readonly) char charValue;
+@property (readonly) unsigned char unsignedCharValue;
+@property (readonly) short shortValue;
+@property (readonly) unsigned short unsignedShortValue;
+@property (readonly) unsigned int unsignedIntValue;
+@property (readonly) long longValue;
+@property (readonly) unsigned long unsignedLongValue;
+@property (readonly) unsigned long long unsignedLongLongValue;
+@property (readonly) NSUInteger unsignedIntegerValue;
+/**
+ Try to parse this string and returns an `NSNumber`.
+ @return Returns an `NSNumber` if parse succeed, or nil if an error occurs.
+ */
+- (NSNumber *)cc_numberValue;
+@end
