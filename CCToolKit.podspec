@@ -35,8 +35,5 @@ Pod::Spec.new do |s|
     ss.source_files = 'CCToolKit/CCStorage/*.{h,m}'
   end
 
-  
-  end
-
 end
 
