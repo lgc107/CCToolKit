@@ -31,6 +31,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'CCXMLDictionaryParser' do |ss|
     ss.source_files = 'CCToolKit/CCXMLDictionaryParser/*.{h,m}'
+    ss.dependency 'CCToolKit/CCCategory'
   end
 
 end
