@@ -7,7 +7,6 @@
 //
 
 #import "CCXMLDictionaryParser.h"
-
 @interface CCXMLDictionaryParser ()<NSXMLParserDelegate>
 
 @end
