@@ -9,18 +9,18 @@
 #import "NSDictionary+Extensions.h"
 #import "NSData+Extensions.h"
 #import "NSString+Extensions.h"
-//#import "CCXMLDictionaryParser.h"
+#import "CCXMLDictionaryParser.h"
 @implementation NSDictionary (Convertor)
 
-//+ (NSDictionary *)cc_dictionaryWithXML:(id)xml {
-//    CCXMLDictionaryParser *parser = nil;
-//    if ([xml isKindOfClass:[NSString class]]) {
-//        parser = [[CCXMLDictionaryParser alloc] initWithString:xml];
-//    } else if ([xml isKindOfClass:[NSData class]]) {
-//        parser = [[CCXMLDictionaryParser alloc] initWithData:xml];
-//    }
-//    return parser.root;
-//}
++ (NSDictionary *)cc_dictionaryWithXML:(id)xml {
+    CCXMLDictionaryParser *parser = nil;
+    if ([xml isKindOfClass:[NSString class]]) {
+        parser = [[CCXMLDictionaryParser alloc] initWithString:xml];
+    } else if ([xml isKindOfClass:[NSData class]]) {
+        parser = [[CCXMLDictionaryParser alloc] initWithData:xml];
+    }
+    return parser.root;
+}
 
 
 + (NSDictionary *)cc_dictionaryWithPlistData:(NSData *)plist

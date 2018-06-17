@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Dictionary Convertor
 
-//+ (NSDictionary *)cc_dictionaryWithXML:(id)xml;
++ (NSDictionary *)cc_dictionaryWithXML:(id)xml;
 ///=============================================================================
 /// @name Dictionary Convertor
 ///=============================================================================
