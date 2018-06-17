@@ -20,7 +20,6 @@ Pod::Spec.new do |s|
   s.subspec 'CCXMLParser' do |ss|
     ss.source_files = 'CCToolKit/CCXMLParser/*.{h,m}'
     ss.public_header_files = "CCToolKit/CCXMLParser/*.h"
-    ss.dependency 'CCToolKit/CCCategory'
   
   s.subspec 'CCSoftwareInfo' do |ss|
     ss.source_files = 'CCToolKit/CCSoftwareInfo/*.{h,m}'

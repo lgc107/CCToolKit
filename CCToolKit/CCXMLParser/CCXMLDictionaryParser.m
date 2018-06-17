@@ -7,7 +7,7 @@
 //
 
 #import "CCXMLDictionaryParser.h"
-#import "NSString+Extensions.h"
+
 @interface CCXMLDictionaryParser ()<NSXMLParserDelegate>
 
 @end
@@ -36,7 +36,8 @@
 #define XMLPref @"_"
 
 - (void)textEnd {
-    _text = _text.cc_stringByTrim.mutableCopy;
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    _text = [_text stringByTrimmingCharactersInSet:set].mutableCopy;
     if (_text.length) {
         NSMutableDictionary *top = _stack.lastObject;
         id existing = top[XMLText];
