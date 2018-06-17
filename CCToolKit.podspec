@@ -17,17 +17,14 @@ Pod::Spec.new do |s|
   s.source_files  = "CCToolKit/CCToolKit.h"
   s.public_header_files = "CCToolKit/CCToolKit.h"
 
-  s.subspec 'CCXMLParser' do |ss|
-    ss.source_files = 'CCToolKit/CCXMLParser/*.{h,m}'
-    ss.public_header_files = "CCToolKit/CCXMLParser/*.h"
-  
+    
   s.subspec 'CCSoftwareInfo' do |ss|
     ss.source_files = 'CCToolKit/CCSoftwareInfo/*.{h,m}'
   end
 
   s.subspec 'CCCategory' do |ss|
     ss.source_files = 'CCToolKit/CCCategory/*.{h,m}'
-    ss.dependency 'CCToolKit/CCXMLParser'
+
   end
 
   s.subspec 'CCStorage' do |ss|
