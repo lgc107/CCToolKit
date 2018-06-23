@@ -37,7 +37,7 @@
  @param offset Shadow offset
  @param radius Shadow radius
  */
-- (void)cc_setLayerShadow:(nullable UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
+- (void)cc_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
 /**
  Remove all subviews.
  

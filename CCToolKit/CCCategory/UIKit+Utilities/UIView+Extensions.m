@@ -139,7 +139,7 @@
     return alpha;
 }
 
-- (void)cc_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
+- (void)cc_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius{
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowOffset = offset;
     self.layer.shadowRadius = radius;
