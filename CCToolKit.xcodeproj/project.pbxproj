@@ -164,11 +164,11 @@
 		B66687B920DDFFE6008EDB9E /* UIKit+Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B66687BE20DDFFE6008EDB9E /* UIColor+Extensions.h */,
 				B66687BA20DDFFE6008EDB9E /* UIColor+Extensions.m */,
+				B66687BD20DDFFE6008EDB9E /* UIView+Extensions.h */,
 				B66687BB20DDFFE6008EDB9E /* UIView+Extensions.m */,
 				B66687BC20DDFFE6008EDB9E /* UIImage+Extensions.h */,
-				B66687BD20DDFFE6008EDB9E /* UIView+Extensions.h */,
-				B66687BE20DDFFE6008EDB9E /* UIColor+Extensions.h */,
 				B66687BF20DDFFE6008EDB9E /* UIImage+Extensions.m */,
 			);
 			path = "UIKit+Utilities";
