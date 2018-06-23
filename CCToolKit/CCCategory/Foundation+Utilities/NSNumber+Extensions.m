@@ -51,4 +51,11 @@
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     return [formatter numberFromString:string];
 }
+
+-(NSString *)cc_StringValue{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = kCFNumberFormatterRoundHalfDown;
+    NSString *string = [formatter stringFromNumber:self];
+    return string;
+}
 @end

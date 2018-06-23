@@ -23,4 +23,5 @@
  */
 + (nullable NSNumber *)cc_numberWithString:(NSString *)string;
 
+- (NSString *)cc_StringValue;
 @end
