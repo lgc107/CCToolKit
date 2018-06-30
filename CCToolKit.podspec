@@ -41,6 +41,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'WebKitCategory' do |sss|
     sss.source_files = 'CCToolKit/CCCategory/WebKit+Utilities/*.{h,m}'
+    sss.dependency 'CCToolKit/CCCategory/FoundationCategory'
     end
 
   end
