@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/lgc107/CCToolKit.git", :tag => "#{s.version}" }
   s.requires_arc     = true
 
-  s.frameworks = "UIKit", "Foundation",'CoreTelephony'
+  s.frameworks = "UIKit", "Foundation","CoreTelephony","WebKit"
 
   s.source_files  = "CCToolKit/CCToolKit.h"
   s.public_header_files = "CCToolKit/CCToolKit.h"
