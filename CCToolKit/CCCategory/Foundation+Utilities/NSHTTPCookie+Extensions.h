@@ -10,6 +10,7 @@
 
 @interface NSHTTPCookie (Extensions)
 
+
 /**
  @return javaScript String
  */

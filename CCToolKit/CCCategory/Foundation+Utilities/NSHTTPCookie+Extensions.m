@@ -10,6 +10,8 @@
 
 @implementation NSHTTPCookie (Extensions)
 
+
+
 - (NSString *)cc_javascriptString{
     NSString *string = [NSString stringWithFormat:@"%@=%@;domain=%@;path=%@",
                         self.name,

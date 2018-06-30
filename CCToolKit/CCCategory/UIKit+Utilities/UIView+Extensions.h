@@ -39,6 +39,15 @@
  */
 - (void)cc_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
 /**
+ Shortcut to set the view.layer's shadow
+ You can use the padding to control the length of the four sides of the shadow
+ 
+ @param color  Shadow Color
+ @param insets  to control the length of the four sides of the shadow
+ @param radius Shadow radius
+ */
+- (void)cc_setLayerShadow:(UIColor *)color insets:(UIEdgeInsets)insets radius:(CGFloat)radius;
+/**
  Remove all subviews.
  
  @warning Never call this method inside your view's drawRect: method.

@@ -52,6 +52,11 @@
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */; };
+		B6D0C01B20E773ED0081CFBB /* WKWebView+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6D0C01920E773ED0081CFBB /* WKWebView+Extensions.h */; };
+		B6D0C01C20E773ED0081CFBB /* WKWebView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D0C01A20E773ED0081CFBB /* WKWebView+Extensions.m */; };
+		B6D0C02020E774F70081CFBB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D0C01F20E774F70081CFBB /* WebKit.framework */; };
+		B6D0C02420E777500081CFBB /* NSHTTPCookieStorage+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B6D0C02220E777500081CFBB /* NSHTTPCookieStorage+Extensions.h */; };
+		B6D0C02520E777500081CFBB /* NSHTTPCookieStorage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D0C02320E777500081CFBB /* NSHTTPCookieStorage+Extensions.m */; };
 		B6FA0AD220A984EF000CECA0 /* CCToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */; };
 		B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA0AC620A984EF000CECA0 /* CCToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -107,6 +112,11 @@
 		B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCSoftwareManager.m; sourceTree = "<group>"; };
 		B6C0401320B9517F002A7ED0 /* CCToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C0401420B9517F002A7ED0 /* CCToolKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCToolKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6D0C01920E773ED0081CFBB /* WKWebView+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Extensions.h"; sourceTree = "<group>"; };
+		B6D0C01A20E773ED0081CFBB /* WKWebView+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Extensions.m"; sourceTree = "<group>"; };
+		B6D0C01F20E774F70081CFBB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		B6D0C02220E777500081CFBB /* NSHTTPCookieStorage+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSHTTPCookieStorage+Extensions.h"; path = "CCToolKit/CCCategory/Foundation+Utilities/NSHTTPCookieStorage+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		B6D0C02320E777500081CFBB /* NSHTTPCookieStorage+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSHTTPCookieStorage+Extensions.m"; path = "CCToolKit/CCCategory/Foundation+Utilities/NSHTTPCookieStorage+Extensions.m"; sourceTree = SOURCE_ROOT; };
 		B6FA0AC620A984EF000CECA0 /* CCToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCToolKit.h; sourceTree = "<group>"; };
 		B6FA0AC720A984EF000CECA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6FA0AD120A984EF000CECA0 /* CCToolKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCToolKitTests.m; sourceTree = "<group>"; };
@@ -118,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6D0C02020E774F70081CFBB /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +168,7 @@
 				B66687EB20DE013E008EDB9E /* CCCategory.h */,
 				B66687C020DDFFE6008EDB9E /* Foundation+Utilities */,
 				B66687B920DDFFE6008EDB9E /* UIKit+Utilities */,
+				B6D0C01D20E773F40081CFBB /* WebKit+Utilities */,
 			);
 			path = CCCategory;
 			sourceTree = "<group>";
@@ -181,6 +193,8 @@
 				B66687C220DDFFE6008EDB9E /* NSDate+Extensions.m */,
 				B66687C320DDFFE6008EDB9E /* NSData+Extensions.h */,
 				B66687CC20DDFFE6008EDB9E /* NSData+Extensions.m */,
+				B6D0C02220E777500081CFBB /* NSHTTPCookieStorage+Extensions.h */,
+				B6D0C02320E777500081CFBB /* NSHTTPCookieStorage+Extensions.m */,
 				B66687C420DDFFE6008EDB9E /* NSHTTPCookie+Extensions.h */,
 				B66687CB20DDFFE6008EDB9E /* NSHTTPCookie+Extensions.m */,
 				B66687C520DDFFE6008EDB9E /* NSError+Extensions.h */,
@@ -206,6 +220,23 @@
 			path = CCXMLParser;
 			sourceTree = "<group>";
 		};
+		B6D0C01D20E773F40081CFBB /* WebKit+Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B6D0C01920E773ED0081CFBB /* WKWebView+Extensions.h */,
+				B6D0C01A20E773ED0081CFBB /* WKWebView+Extensions.m */,
+			);
+			path = "WebKit+Utilities";
+			sourceTree = "<group>";
+		};
+		B6D0C01E20E774F70081CFBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6D0C01F20E774F70081CFBB /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B6FA0AB920A984EF000CECA0 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +244,7 @@
 				B6FA0AD020A984EF000CECA0 /* CCToolKitTests */,
 				B6C0401320B9517F002A7ED0 /* CCToolKit.framework */,
 				B6C0401420B9517F002A7ED0 /* CCToolKitTests.xctest */,
+				B6D0C01E20E774F70081CFBB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -252,10 +284,12 @@
 				B66687D520DDFFE6008EDB9E /* UIColor+Extensions.h in Headers */,
 				B66687DD20DDFFE6008EDB9E /* NSString+Extensions.h in Headers */,
 				B66687D720DDFFE6008EDB9E /* NSNumber+Extensions.h in Headers */,
+				B6D0C01B20E773ED0081CFBB /* WKWebView+Extensions.h in Headers */,
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
 				B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */,
 				B66687DE20DDFFE6008EDB9E /* NSDictionary+Extensions.h in Headers */,
 				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
+				B6D0C02420E777500081CFBB /* NSHTTPCookieStorage+Extensions.h in Headers */,
 				B66687DB20DDFFE6008EDB9E /* NSError+Extensions.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B66687DC20DDFFE6008EDB9E /* NSArray+Extensions.h in Headers */,
@@ -390,6 +424,7 @@
 				B66687E420DDFFE6008EDB9E /* NSString+Extensions.m in Sources */,
 				B66687E320DDFFE6008EDB9E /* NSDictionary+Extensions.m in Sources */,
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
+				B6D0C01C20E773ED0081CFBB /* WKWebView+Extensions.m in Sources */,
 				B66687E020DDFFE6008EDB9E /* NSNumber+Extensions.m in Sources */,
 				B66687E120DDFFE6008EDB9E /* NSHTTPCookie+Extensions.m in Sources */,
 				B66687D620DDFFE6008EDB9E /* UIImage+Extensions.m in Sources */,
@@ -397,6 +432,7 @@
 				B6C0400220B94CDE002A7ED0 /* CCSoftwareManager.m in Sources */,
 				B66687D220DDFFE6008EDB9E /* UIView+Extensions.m in Sources */,
 				B66687D120DDFFE6008EDB9E /* UIColor+Extensions.m in Sources */,
+				B6D0C02520E777500081CFBB /* NSHTTPCookieStorage+Extensions.m in Sources */,
 				B66687E220DDFFE6008EDB9E /* NSData+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

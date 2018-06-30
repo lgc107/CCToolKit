@@ -22,6 +22,12 @@
 }
 
 #pragma mark - Encoding & Decoding
+
+- (const char *)cc_asciiValue{
+   return  [self cStringUsingEncoding:NSASCIIStringEncoding];
+}
+
+
 - (NSData *)cc_dataUsingHexEncoding
 {
     if (!self || [self length] == 0) {
@@ -163,6 +169,36 @@
 }
 
 #pragma mark - Utilties
+- (NSString *)cc_convertToPinyinWithCombiningMarks:(BOOL)isCombiningMarks
+{
+    //将NSString装换成NSMutableString
+    NSMutableString *pinyin = [self mutableCopy];
+    //将汉字转换为拼音(带音标)
+    CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformMandarinLatin, NO);
+    //去掉拼音的音标
+    if (isCombiningMarks) {
+            CFStringTransform((__bridge CFMutableStringRef)pinyin, NULL, kCFStringTransformStripCombiningMarks, NO);
+    }
+
+    //返回最近结果
+    return pinyin;
+}
+
+- (NSString *)cc_stringByReversed{
+    uint64_t  i = 0;
+    uint64_t  j = self.length - 1;
+    //  unichar characters[self.length];
+    unichar *characters = malloc(sizeof([self characterAtIndex:0]) * self.length);
+    while (i < j) {
+        characters[j] = [self characterAtIndex:(NSInteger)i];
+        characters[i] = [self characterAtIndex:(NSInteger)j];
+        i ++;
+        j --;
+    }
+    if(i == j)
+        characters[i] = [self characterAtIndex:(NSInteger)i];
+    return [NSString stringWithCharacters:characters length:self.length];
+}
 - (BOOL)cc_isNotBlank {
     if (self == nil || self == NULL) {
         return false;
@@ -568,4 +604,14 @@
 - (NSNumber *)cc_numberValue {
     return [NSNumber cc_numberWithString:self];
 }
+@end
+
+
+@implementation NSString (Compare)
+
+//添加两个字符串比较的方法
+- (NSComparisonResult)compareAgainst:(NSString *)anString {
+    return -[self compare:anString];
+}
+
 @end

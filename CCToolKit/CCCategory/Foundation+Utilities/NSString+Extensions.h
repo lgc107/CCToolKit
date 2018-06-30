@@ -28,6 +28,8 @@ typedef enum : NSUInteger {
  */
 + (NSString *)cc_uuidString;
 #pragma mark - Encoding and Decoding
+
+- (const char *)cc_asciiValue;
 /**
  Returns an NSData With HexString.
  */
@@ -60,6 +62,19 @@ typedef enum : NSUInteger {
 - (NSString *)cc_stringByEscapingHTML;
 
 #pragma mark - Utilities
+
+/**
+ convertToPingyinString
+
+ @param isCombiningMarks Whether with Combining Marks
+
+ */
+- (NSString *)cc_convertToPinyinWithCombiningMarks:(BOOL)isCombiningMarks;
+
+/**
+ reversedString
+ */
+- (NSString *)cc_stringByReversed;
 /**
  nil, @"", @"  ", @"\n" will Returns NO; otherwise Returns YES.
  */
@@ -521,4 +536,11 @@ typedef enum : NSUInteger {
  @return Returns an `NSNumber` if parse succeed, or nil if an error occurs.
  */
 - (NSNumber *)cc_numberValue;
+@end
+
+
+@interface NSString (Compare)
+//添加两个字符串比较的方法 降序排序
+- (NSComparisonResult)compareAgainst:(NSString *)anString;
+
 @end

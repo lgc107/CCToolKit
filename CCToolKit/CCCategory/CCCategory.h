@@ -17,9 +17,12 @@
 #import "NSArray+Extensions.h"
 #import "NSDictionary+Extensions.h"
 #import "NSHTTPCookie+Extensions.h"
+#import "NSHTTPCookieStorage+Extensions.h"
 
 #import "UIImage+Extensions.h"
 #import "UIColor+Extensions.h"
 #import "UIView+Extensions.h"
+
+#import "WKWebView+Extensions.h"
 
 #endif /* CCCategory_h */

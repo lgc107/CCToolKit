@@ -148,6 +148,29 @@
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
 }
 
+- (void)cc_setLayerShadow:(UIColor *)color insets:(UIEdgeInsets)insets radius:(CGFloat)radius{
+    
+    self.layer.shadowColor = color.CGColor;
+    //    self.layer.shadowOffset = offset;
+    self.layer.shadowRadius = radius;
+    self.layer.shadowOpacity = 1;
+    self.layer.shouldRasterize = false;
+    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    //路径阴影
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(-insets.left, -insets.top + 3)];
+    
+    [path addLineToPoint:CGPointMake(self.width +insets.right, -insets.top + 3)];
+    
+    [path addLineToPoint:CGPointMake(self.width + insets.right, self.height+ insets.bottom + 3)];
+    [path addLineToPoint:CGPointMake(-insets.left, self.height + insets.bottom + 3)];
+    [path addLineToPoint:CGPointMake(-insets.left, -insets.top + 3)];
+    //设置阴影路径
+    self.layer.masksToBounds = false;
+    self.layer.shadowPath = path.CGPath;
+}
+
+
 - (void)cc_removeAllSubviews {
     //[self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     while (self.subviews.count) {
