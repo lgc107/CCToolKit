@@ -544,3 +544,14 @@ typedef enum : NSUInteger {
 - (NSComparisonResult)compareAgainst:(NSString *)anString;
 
 @end
+
+
+@interface NSString (Regular)
+
+- (BOOL)cc_isMobilePhoneNumberRegex:(NSString *)phoneNumber;
+
+- (BOOL)cc_isIdentityCardNumberRegex:(NSString *)identityCard;
+
+- (BOOL)cc_isValidEmailAddress:(NSString *)emailAddress;
+
+@end
