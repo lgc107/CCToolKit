@@ -9,7 +9,7 @@
 
 #import "NSString+Extensions.h"
 #import "NSNumber+Extensions.h"
-
+#import "NSDate+Extensions.h"
 
 @implementation NSString (Utilities)
 
@@ -613,5 +613,161 @@
 - (NSComparisonResult)compareAgainst:(NSString *)anString {
     return -[self compare:anString];
 }
+
+@end
+
+
+@implementation NSString (Regular)
+
+- (BOOL)cc_isMobilePhoneNumberRegex{
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    return [self cc_checkWithRegularExpression:@"^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$"];
+}
+//结构和形式
+//1．号码的结构
+//　  公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。
+//2．地址码
+//　  表示编码对象常住户口所在县（市、旗、区）的行政区划代码，按GB/T2260的规定执行。
+//3．出生日期码
+//　  表示编码对象出生的年、月、日，按GB/T7408的规定执行，年、月、日代码之间不用分隔符。
+//4．顺序码
+//　  表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。
+//5．校验码
+//　 根据前面十七位数字码，按照ISO7064:1983.MOD11-2校验码计算出来的检验码。
+
+- (BOOL)cc_isIdentityCardNumberRegex{
+    //1.校验字符串长度
+    NSString *identityCardNumber = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ( !identityCardNumber.cc_isNotBlank || identityCardNumber.length != 18) {
+        return false;
+    }
+    //2.校验地址码（省份）
+    NSArray *provinceIds = @[@"11",@"12", @"13",@"14", @"15",@"21", @"22",@"23", @"31",@"32", @"33",@"34", @"35",@"36", @"37",@"41", @"42",@"43", @"44",@"45", @"46",@"50", @"51",@"52", @"53",@"54", @"61",@"62", @"63",@"64", @"65",@"71", @"81",@"82", @"91"];
+    if (![provinceIds containsObject:[identityCardNumber substringToIndex:2]]) {
+        return false;
+    }
+    //3.校验生日日期
+    NSInteger identityCardYear = [identityCardNumber substringWithRange:NSMakeRange(6,4)].integerValue;
+    if ([NSDate date].year <= identityCardYear || identityCardYear < 1800) {
+        return false;
+    }
+    
+    NSRegularExpression * regularExpression;
+    if ((identityCardYear % 400 == 0) || ((identityCardYear % 100 != 0) && (identityCardYear % 4 == 0))) {
+       
+       regularExpression = [[NSRegularExpression alloc] initWithPattern:@"^[1-9][0-9]{5}19[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}[0-9Xx]$"
+                                                                 options:NSRegularExpressionCaseInsensitive
+                                                                   error:nil];//测试出生日期的合法性
+    }else {
+        regularExpression = [[NSRegularExpression alloc] initWithPattern:@"^[1-9][0-9]{5}19[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|1[0-9]|2[0-8]))[0-9]{3}[0-9Xx]$"
+                                                                 options:NSRegularExpressionCaseInsensitive
+                                                                   error:nil];//测试出生日期的合法性
+    }
+    NSInteger numberofMatch = [regularExpression numberOfMatchesInString:identityCardNumber
+                                                       options:NSMatchingReportProgress
+                                                         range:NSMakeRange(0, identityCardNumber.length)];
+    
+    if(numberofMatch >0) {
+        int S = ([identityCardNumber substringWithRange:NSMakeRange(0,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(10,1)].intValue) *7 + ([identityCardNumber substringWithRange:NSMakeRange(1,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(11,1)].intValue) *9 + ([identityCardNumber substringWithRange:NSMakeRange(2,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(12,1)].intValue) *10 + ([identityCardNumber substringWithRange:NSMakeRange(3,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(13,1)].intValue) *5 + ([identityCardNumber substringWithRange:NSMakeRange(4,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(14,1)].intValue) *8 + ([identityCardNumber substringWithRange:NSMakeRange(5,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(15,1)].intValue) *4 + ([identityCardNumber substringWithRange:NSMakeRange(6,1)].intValue + [identityCardNumber substringWithRange:NSMakeRange(16,1)].intValue) *2 + [identityCardNumber substringWithRange:NSMakeRange(7,1)].intValue *1 + [identityCardNumber substringWithRange:NSMakeRange(8,1)].intValue *6 + [identityCardNumber substringWithRange:NSMakeRange(9,1)].intValue *3;
+        int Y = S %11;
+        NSString *M =@"F";
+        NSString *JYM =@"10X98765432";
+        M = [JYM substringWithRange:NSMakeRange(Y,1)];// 判断校验位
+        if ([M isEqualToString:[identityCardNumber substringWithRange:NSMakeRange(17,1)]]) {
+            return YES;// 检测ID的校验位
+        }else {
+            return NO;
+        }
+        
+    }else {
+        return NO;
+    }
+    return false;
+    
+}
+
+- (BOOL)cc_isValidEmailAddress{
+    return [self cc_checkWithRegularExpression:@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,4}"];
+}
+
+
+- (BOOL)cc_isChinese{
+    return [self cc_checkWithRegularExpression:@"^[\\u4e00-\\u9fa5]+$"];
+}
+
+
+- (BOOL)cc_isNumber{
+    return [self cc_checkWithRegularExpression:@"[0-9]*"];
+}
+
+- (BOOL)cc_isEnglishLetter{
+    return [self cc_checkWithRegularExpression:@"[a-zA-Z]*"];
+}
+
+
+
+/**
+ @brief     是否符合最小长度、最长长度，是否包含中文,首字母是否可以为数字
+ @param     minLenth 账号最小长度
+ @param     maxLenth 账号最长长度
+ @param     containChinese 是否包含中文
+ @param     firstCannotBeDigtal 首字母不能为数字
+ @return    正则验证成功返回YES, 否则返回NO
+ */
+- (BOOL)cc_isValidWithMinLenth:(NSInteger)minLenth
+                   maxLenth:(NSInteger)maxLenth
+             containChinese:(BOOL)containChinese
+        firstCannotBeDigtal:(BOOL)firstCannotBeDigtal
+{
+    //  [\\u4e00-\\u9fa5A-Za-z0-9_]{4,20}
+    NSString *hanzi = containChinese ? @"\\u4e00-\\u9fa5" : @"";
+    NSString *first = firstCannotBeDigtal ? @"^[a-zA-Z_]" : @"";
+    
+    NSString *regex = [NSString stringWithFormat:@"%@[%@A-Za-z0-9_]{%d,%d}", first, hanzi, (int)(minLenth-1), (int)(maxLenth-1)];
+    return [self cc_checkWithRegularExpression:regex];
+
+}
+/**
+ @brief     是否符合最小长度、最长长度，是否包含中文,数字，字母，其他字符，首字母是否可以为数字
+ @param     minLenth 最小长度
+ @param     maxLenth 最长长度
+ @param     containChinese 是否包含中文
+ @param     containDigtal   包含数字
+ @param     containLetter   包含字母
+ @param     containOtherCharacter   其他字符
+ @param     firstCannotBeDigtal 首字母不能为数字
+ @return    正则验证成功返回YES, 否则返回NO
+ 
+ */
+- (BOOL)cc_isValidWithMinLenth:(NSInteger)minLenth
+                   maxLenth:(NSInteger)maxLenth
+             containChinese:(BOOL)containChinese
+              containDigtal:(BOOL)containDigtal
+              containLetter:(BOOL)containLetter
+      containOtherCharacter:(NSString *)containOtherCharacter
+        firstCannotBeDigtal:(BOOL)firstCannotBeDigtal
+{
+    NSString *hanzi = containChinese ? @"\\u4e00-\\u9fa5" : @"";
+    NSString *first = firstCannotBeDigtal ? @"^[a-zA-Z_]" : @"";
+    NSString *lengthRegex = [NSString stringWithFormat:@"(?=^.{%@,%@}$)", @(minLenth), @(maxLenth)];
+    NSString *digtalRegex = containDigtal ? @"(?=(.*\\\\d.*){1})" : @"";
+    NSString *letterRegex = containLetter ? @"(?=(.*[a-zA-Z].*){1})" : @"";
+    NSString *characterRegex = [NSString stringWithFormat:@"(?:%@[%@A-Za-z0-9%@]+)", first, hanzi, containOtherCharacter ? containOtherCharacter : @""];
+    NSString *regex = [NSString stringWithFormat:@"%@%@%@%@", lengthRegex, digtalRegex, letterRegex, characterRegex];
+    return [self cc_checkWithRegularExpression:regex];
+}
+
+
+- (BOOL)cc_checkWithRegularExpression:(NSString *)expression{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:expression];
+    return [predicate evaluateWithObject:self];
+}
+
+
 
 @end

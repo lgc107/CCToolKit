@@ -548,10 +548,60 @@ typedef enum : NSUInteger {
 
 @interface NSString (Regular)
 
-- (BOOL)cc_isMobilePhoneNumberRegex:(NSString *)phoneNumber;
+/**
+  Verify if instance is a mobile number
+ */
+- (BOOL)cc_isMobilePhoneNumberRegex;
+/**
+ Verify if instance is a Identity Card Number
+ */
+- (BOOL)cc_isIdentityCardNumberRegex;
+/**
+ Verify if instance is email address
+ */
+- (BOOL)cc_isValidEmailAddress;
+/**
+ Verify if instance is chinese
+ */
+- (BOOL)cc_isChinese;
+/**
+ Verify if instance is digtal
+ */
+- (BOOL)cc_isNumber;
+/**
+ Verify if instance is letter
+ */
+- (BOOL)cc_isEnglishLetter;
+/**
 
-- (BOOL)cc_isIdentityCardNumberRegex:(NSString *)identityCard;
+ @param minLenth  Minimum length of string
+ @param maxLenth  Maximum length of string
+ @param containChinese whether to contain Chinese
+ @param firstCannotBeDigtal whether the first character of string can be digtal
+ @return true or false
+ */
+- (BOOL)cc_isValidWithMinLenth:(NSInteger)minLenth
+                      maxLenth:(NSInteger)maxLenth
+                containChinese:(BOOL)containChinese
+           firstCannotBeDigtal:(BOOL)firstCannotBeDigtal;
+/**
+ @param     minLenth Minimum length of string
+ @param     maxLenth Maximum length of string
+ @param     containChinese whether to contain Chinese
+ @param     containDigtal   whether to contain Digtal
+ @param     containLetter   whether to contain Letter
+ @param     containOtherCharacter   whether to contain other character
+ @param     firstCannotBeDigtal whether the first character of string can be digtal
 
-- (BOOL)cc_isValidEmailAddress:(NSString *)emailAddress;
+ */
+- (BOOL)cc_isValidWithMinLenth:(NSInteger)minLenth
+                      maxLenth:(NSInteger)maxLenth
+                containChinese:(BOOL)containChinese
+                 containDigtal:(BOOL)containDigtal
+                 containLetter:(BOOL)containLetter
+         containOtherCharacter:(NSString *)containOtherCharacter
+           firstCannotBeDigtal:(BOOL)firstCannotBeDigtal;
 
+
+- (BOOL)cc_checkWithRegularExpression:(NSString *)expression;
 @end
