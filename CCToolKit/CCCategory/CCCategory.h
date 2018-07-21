@@ -18,6 +18,7 @@
 #import "NSDictionary+Extensions.h"
 #import "NSHTTPCookie+Extensions.h"
 #import "NSHTTPCookieStorage+Extensions.h"
+#import "NSObject+Extensions.h"
 
 #import "UIImage+Extensions.h"
 #import "UIColor+Extensions.h"

@@ -24,6 +24,7 @@
 /* Begin PBXBuildFile section */
 		B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7320AAD3D700220F3F /* CCVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
+		B6638B8E2102F94A007397A4 /* CCCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B66687EB20DE013E008EDB9E /* CCCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B66687D120DDFFE6008EDB9E /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687BA20DDFFE6008EDB9E /* UIColor+Extensions.m */; };
 		B66687D220DDFFE6008EDB9E /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687BB20DDFFE6008EDB9E /* UIView+Extensions.m */; };
 		B66687D320DDFFE6008EDB9E /* UIImage+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = B66687BC20DDFFE6008EDB9E /* UIImage+Extensions.h */; };
@@ -46,7 +47,7 @@
 		B66687E420DDFFE6008EDB9E /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687CE20DDFFE6008EDB9E /* NSString+Extensions.m */; };
 		B66687E520DDFFE6008EDB9E /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687CF20DDFFE6008EDB9E /* NSArray+Extensions.m */; };
 		B66687E620DDFFE6008EDB9E /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687D020DDFFE6008EDB9E /* NSError+Extensions.m */; };
-		B67E50DE20D61A030007E4E8 /* CCXMLDictionaryParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B67E50DC20D61A030007E4E8 /* CCXMLDictionaryParser.h */; };
+		B67E50DE20D61A030007E4E8 /* CCXMLDictionaryParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B67E50DC20D61A030007E4E8 /* CCXMLDictionaryParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B67E50DF20D61A030007E4E8 /* CCXMLDictionaryParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E50DD20D61A030007E4E8 /* CCXMLDictionaryParser.m */; };
 		B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B690F9FC20AD736C00D3D086 /* CCFileManager.m */; };
 		B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B690F9FD20AD736C00D3D086 /* CCFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -286,6 +287,8 @@
 				B66687D420DDFFE6008EDB9E /* UIView+Extensions.h in Headers */,
 				B66687DA20DDFFE6008EDB9E /* NSHTTPCookie+Extensions.h in Headers */,
 				B66687D320DDFFE6008EDB9E /* UIImage+Extensions.h in Headers */,
+				B67E50DE20D61A030007E4E8 /* CCXMLDictionaryParser.h in Headers */,
+				B6638B8E2102F94A007397A4 /* CCCategory.h in Headers */,
 				B66687DF20DDFFE6008EDB9E /* NSDate+Extensions.h in Headers */,
 				B66687D520DDFFE6008EDB9E /* UIColor+Extensions.h in Headers */,
 				B66687DD20DDFFE6008EDB9E /* NSString+Extensions.h in Headers */,
@@ -300,7 +303,6 @@
 				B66687DB20DDFFE6008EDB9E /* NSError+Extensions.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B66687DC20DDFFE6008EDB9E /* NSArray+Extensions.h in Headers */,
-				B67E50DE20D61A030007E4E8 /* CCXMLDictionaryParser.h in Headers */,
 				B66687D920DDFFE6008EDB9E /* NSData+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
