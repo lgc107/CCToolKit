@@ -56,6 +56,12 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     }
 }
 
+@synthesize releaseNotes = _releaseNotes;
+- (void)setReleaseNotes:(NSString *)releaseNotes{
+    if (_releaseNotes != releaseNotes) {
+        _releaseNotes = [releaseNotes copy];
+    }
+}
 
 #pragma mark -  Init
 +(instancetype)manager{
@@ -109,7 +115,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
  
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completitionHandler) {
-                    completitionHandler(false,nil,nil,error);
+                    completitionHandler(false,nil,nil,nil,error);
                 }
                 [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":error}];
             });
@@ -120,7 +126,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
             if ([appInfoDic[@"resultCount"] integerValue] == 0) {
                 NSError *error1 = [NSError errorWithDomain:@"检测出未上架的APP或者查询不到" code:0 userInfo:nil];
                 if (completitionHandler) {
-                    completitionHandler(false,nil,nil,error1);
+                    completitionHandler(false,nil,nil,nil,error1);
                 }
                 [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":error1}];
                 return;
@@ -130,6 +136,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
                 
                 blockSelf.appStoreVersion =  [CCVersion versionWithString: appInfoDic[@"results"][0][@"version"]];
                 blockSelf.appStoreUrl = appInfoDic[@"results"][0][@"trackViewUrl"];
+                blockSelf.releaseNotes= appInfoDic[@"results"][0][@"releaseNotes"];
                 
                 switch ([blockSelf.currentVersion compare:blockSelf.appStoreVersion]) {
                     case NSOrderedAscending:
@@ -137,9 +144,9 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
                         NSLog(@"【4】判断结果：当前版本号%@ < 商店版本号%@ 需要更新\n=================",blockSelf.currentVersion.stringValue,blockSelf.appStoreVersion.stringValue);
                         self.needUpdate = true;
                         if (completitionHandler) {
-                            completitionHandler(true,blockSelf.appStoreVersion,blockSelf.appStoreUrl,nil);
+                            completitionHandler(true,blockSelf.appStoreVersion,blockSelf.appStoreUrl,blockSelf.releaseNotes,nil);
                         }
-                        [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@true,@"AppStoreVersion":blockSelf.appStoreVersion,@"AppStoreTrackUrl":blockSelf.appStoreUrl}];
+                        [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@true,@"AppStoreVersion":blockSelf.appStoreVersion,@"releaseNotes":blockSelf.releaseNotes,@"AppStoreTrackUrl":blockSelf.appStoreUrl}];
                     }
                         break;
                     case NSOrderedDescending:
@@ -147,9 +154,9 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
                         NSLog(@"【4】判断结果：当前版本号%@ > 商店版本号%@ 不需要更新\n================",blockSelf.currentVersion.stringValue,blockSelf.appStoreVersion.stringValue);
                         blockSelf.needUpdate = false;
                         if (completitionHandler) {
-                            completitionHandler(false,blockSelf.appStoreVersion,blockSelf.appStoreUrl,nil);
+                            completitionHandler(false,blockSelf.appStoreVersion,blockSelf.appStoreUrl,blockSelf.releaseNotes,nil);
                         }
-                        [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@false,@"AppStoreVersion":blockSelf.appStoreVersion,@"AppStoreTrackUrl":blockSelf.appStoreUrl,}];
+                        [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@false,@"AppStoreVersion":blockSelf.appStoreVersion,@"releaseNotes":blockSelf.releaseNotes,@"AppStoreTrackUrl":blockSelf.appStoreUrl,}];
                     }
                         break;
                     case NSOrderedSame:
@@ -157,9 +164,9 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
                         NSLog(@"【4】判断结果：当前版本号%@ = 商店版本号%@ 不需要更新\n================",blockSelf.currentVersion.stringValue,blockSelf.appStoreVersion.stringValue);
                         blockSelf.needUpdate = false;
                         if (completitionHandler) {
-                            completitionHandler(false,blockSelf.appStoreVersion,blockSelf.appStoreUrl,nil);
+                            completitionHandler(false,blockSelf.appStoreVersion,blockSelf.appStoreUrl,blockSelf.releaseNotes,nil);
                         }
-                        [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@false,@"AppStoreVersion":blockSelf.appStoreVersion,@"AppStoreTrackUrl":blockSelf.appStoreUrl}];
+                        [[NSNotificationCenter defaultCenter]postNotificationName:CCAppStoreVersionDidCheckNotification object:self userInfo:@{@"IsSuccess":@true,@"IsNeedUpdate":@false,@"AppStoreVersion":blockSelf.appStoreVersion,@"releaseNotes":blockSelf.releaseNotes,@"AppStoreTrackUrl":blockSelf.appStoreUrl}];
                     }
                         break;
                     default:

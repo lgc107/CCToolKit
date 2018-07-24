@@ -19,7 +19,7 @@ extern NSString *const CCAppStoreVersionDidCheckNotification;
 //failture : userInfo : @{@"IsSuccess":@false,@"IsNeedUpdate":@false,@"error":(NSError *)error}
 
 
-typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVersion, NSString *trackUrl,NSError *error);
+typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVersion, NSString *trackUrl,NSString *releaseNotes,NSError *error);
 
 @interface CCSoftwareManager : NSObject
 
@@ -65,7 +65,7 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
  */
 @property (nonatomic,copy,readonly) NSString *appStoreUrl;
 
-
+@property (nonatomic,copy,readonly) NSString *releaseNotes;
 /**
  Get App BundleId.
  */
