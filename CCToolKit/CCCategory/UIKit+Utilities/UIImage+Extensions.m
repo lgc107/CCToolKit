@@ -449,3 +449,45 @@ void releaseData(void *info,const void *  data, size_t size){
 
 
 
+@implementation UIImage (ScreenShot)
++ (UIImage *)cc_getScreenShotImage {
+  return [self cc_CaptureWithView:[UIApplication sharedApplication].keyWindow];
+}
+
+
+
++ (UIImage *)cc_CaptureWithView:(UIView *)view scope:(CGRect)scope{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self cc_CaptureWithView:view].CGImage, scope);
+    UIGraphicsBeginImageContext(scope.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGRect rect = CGRectMake(0, 0, scope.size.width, scope.size.height);
+    CGContextTranslateCTM(context, 0, rect.size.height);//下移
+    CGContextScaleCTM(context, 1.0f, -1.0f);//上翻
+    CGContextDrawImage(context, rect, imageRef);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    CGImageRelease(imageRef);
+    CGContextRelease(context);
+    return image;
+}
+
++ (UIImage *)cc_CaptureWithView:(UIView *)view{
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]){
+        
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
+        
+    } else {
+        
+        UIGraphicsBeginImageContext(view.bounds.size);
+        
+    }
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    // get resulting cropped screenshot
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    // end image context
+    UIGraphicsEndImageContext();
+    return screenshot;
+
+}
+
+@end

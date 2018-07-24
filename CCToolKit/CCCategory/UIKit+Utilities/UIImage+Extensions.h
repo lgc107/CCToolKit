@@ -190,3 +190,13 @@ the width or height. [0, Min(width | height) / 2)
 @end
 
 
+@interface UIImage (ScreenSnop)
+
++ (UIImage *)cc_getScreenShotImage;
+
++ (UIImage *)cc_CaptureWithView:(UIView *)view scope:(CGRect)scope;
+
++ (UIImage *)cc_CaptureWithView:(UIView *)view;
+
+@end
+
