@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "CCToolKit"
-  s.version          = "0.1.2"
+  s.version          = "0.1.3"
   s.summary          = "Custom Category used on iOS."
   s.description      = <<-DESC
                        Custom Category used on iOS, which implement by Objective-C.
