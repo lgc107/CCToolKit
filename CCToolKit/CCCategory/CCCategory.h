@@ -23,6 +23,7 @@
 #import "UIImage+Extensions.h"
 #import "UIColor+Extensions.h"
 #import "UIView+Extensions.h"
+#import "UIAlerView+Extensions.h"
 
 #import "WKWebView+Extensions.h"
 

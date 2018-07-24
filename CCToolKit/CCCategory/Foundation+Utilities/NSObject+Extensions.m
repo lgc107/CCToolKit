@@ -125,7 +125,7 @@ static const int block_key;
 
 @implementation NSObject (KVO)
 
-- (void)cc_addObserverBlockForKeyPath:(NSString *)keyPath block:(void (^)(__weak id obj, id oldVal, id newVal))block {
+- (void)cc_addObserverBlockForKeyPath:(NSString *)keyPath block:(void (^)(id _Nonnull, id _Nonnull, id _Nonnull))block{
     if (!keyPath || !block) return;
     _CCNSObjectKVOBlockTarget *target = [[_CCNSObjectKVOBlockTarget alloc] initWithBlock:block];
     NSMutableDictionary *dic = [self _cc_allNSObjectObserverBlocks];
@@ -138,7 +138,7 @@ static const int block_key;
     [self addObserver:target forKeyPath:keyPath options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
-- (void)cc_removeObserverBlocksForKeyPath:(NSString *)keyPath {
+- (void)cc_removeObserverBlocksForKeyPath:(NSString *)keyPath{
     if (!keyPath) return;
     NSMutableDictionary *dic = [self _cc_allNSObjectObserverBlocks];
     NSMutableArray *arr = dic[keyPath];
@@ -149,7 +149,7 @@ static const int block_key;
     [dic removeObjectForKey:keyPath];
 }
 
-- (void)cc_removeObserverBlocks {
+- (void)cc_removeObserverBlocks{
     NSMutableDictionary *dic = [self _cc_allNSObjectObserverBlocks];
     [dic enumerateKeysAndObjectsUsingBlock: ^(NSString *key, NSArray *arr, BOOL *stop) {
         [arr enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
