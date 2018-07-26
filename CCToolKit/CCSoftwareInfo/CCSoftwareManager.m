@@ -11,7 +11,6 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
-#import "NSString+Extensions.h"
 #import "CCKeyChain.h"
 
 #define UUID_KEYCHAIN @"CCUUIDKeyChain"
@@ -369,7 +368,10 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     if (!_uuid) {
         NSMutableDictionary *UUIDKeyChain = (NSMutableDictionary *)[CCKeyChain load:UUID_KEYCHAIN];
         if (![UUIDKeyChain objectForKey:@"uuidkey"]) {
-            _uuid = [NSString cc_uuidString];
+            CFUUIDRef    uuidObj = CFUUIDCreate(nil);//create a new UUID
+            //get the string representation of the UUID
+            _uuid = (NSString*)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
+            CFRelease(uuidObj);
             NSMutableDictionary * dic = [NSMutableDictionary dictionary];
             [dic setObject:_uuid forKey:@"uuidkey"];
             [CCKeyChain save:UUID_KEYCHAIN data:dic];

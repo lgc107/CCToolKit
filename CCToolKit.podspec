@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "CCToolKit"
-  s.version          = "0.1.3"
+  s.version          = "0.1.4"
   s.summary          = "Custom Category used on iOS."
   s.description      = <<-DESC
                        Custom Category used on iOS, which implement by Objective-C.
@@ -48,7 +48,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'CCStorage' do |ss|
     ss.source_files = 'CCToolKit/CCStorage/*.{h,m}'
-    ss.dependency 'CCToolKit/CCCategory/FoundationCategory'
   end
 
 end
