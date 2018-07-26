@@ -48,6 +48,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'CCStorage' do |ss|
     ss.source_files = 'CCToolKit/CCStorage/*.{h,m}'
+    ss.dependency 'CCToolKit/CCCategory/FoundationCategory'
   end
 
 end

@@ -114,5 +114,8 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
  */
 @property (nonatomic,readonly) NSString *carrierName;
 
+@property (nonatomic,readonly) NSString *uuid;
+
+- (void)deleteuuid;
 
 @end

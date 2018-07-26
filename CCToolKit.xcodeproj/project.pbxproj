@@ -24,6 +24,8 @@
 /* Begin PBXBuildFile section */
 		B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7320AAD3D700220F3F /* CCVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
+		B635B4622109A55900E4C0E2 /* CCKeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = B635B4602109A55900E4C0E2 /* CCKeyChain.h */; };
+		B635B4632109A55900E4C0E2 /* CCKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = B635B4612109A55900E4C0E2 /* CCKeyChain.m */; };
 		B6638B8E2102F94A007397A4 /* CCCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B66687EB20DE013E008EDB9E /* CCCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B66687D120DDFFE6008EDB9E /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687BA20DDFFE6008EDB9E /* UIColor+Extensions.m */; };
 		B66687D220DDFFE6008EDB9E /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B66687BB20DDFFE6008EDB9E /* UIView+Extensions.m */; };
@@ -86,6 +88,8 @@
 /* Begin PBXFileReference section */
 		B623DA7320AAD3D700220F3F /* CCVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVersion.h; sourceTree = "<group>"; };
 		B623DA7620AAD3D700220F3F /* CCVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVersion.m; sourceTree = "<group>"; };
+		B635B4602109A55900E4C0E2 /* CCKeyChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCKeyChain.h; sourceTree = "<group>"; };
+		B635B4612109A55900E4C0E2 /* CCKeyChain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCKeyChain.m; sourceTree = "<group>"; };
 		B66687BA20DDFFE6008EDB9E /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 		B66687BB20DDFFE6008EDB9E /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extensions.m"; sourceTree = "<group>"; };
 		B66687BC20DDFFE6008EDB9E /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extensions.h"; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 				B623DA7620AAD3D700220F3F /* CCVersion.m */,
 				B6C03FFF20B94CDE002A7ED0 /* CCSoftwareManager.h */,
 				B6C0400020B94CDE002A7ED0 /* CCSoftwareManager.m */,
+				B635B4602109A55900E4C0E2 /* CCKeyChain.h */,
+				B635B4612109A55900E4C0E2 /* CCKeyChain.m */,
 			);
 			path = CCSoftwareInfo;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				B66687DB20DDFFE6008EDB9E /* NSError+Extensions.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B66687DC20DDFFE6008EDB9E /* NSArray+Extensions.h in Headers */,
+				B635B4622109A55900E4C0E2 /* CCKeyChain.h in Headers */,
 				B66687D920DDFFE6008EDB9E /* NSData+Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +449,7 @@
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
 				B6D0C01C20E773ED0081CFBB /* WKWebView+Extensions.m in Sources */,
 				B66687E020DDFFE6008EDB9E /* NSNumber+Extensions.m in Sources */,
+				B635B4632109A55900E4C0E2 /* CCKeyChain.m in Sources */,
 				B66687E120DDFFE6008EDB9E /* NSHTTPCookie+Extensions.m in Sources */,
 				B6FEA8402106D0F200D25F01 /* UIAlertView+Extensions.m in Sources */,
 				B66687D620DDFFE6008EDB9E /* UIImage+Extensions.m in Sources */,

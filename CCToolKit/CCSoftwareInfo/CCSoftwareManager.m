@@ -11,7 +11,10 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
+#import "NSString+Extensions.h"
+#import "CCKeyChain.h"
 
+#define UUID_KEYCHAIN @"CCUUIDKeyChain"
 
 NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCheckNotification";
 
@@ -35,6 +38,8 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     NSString *_deviceModelName;
     
     NSString *_carrierName;
+    
+    NSString *_uuid;
     
 }
 @synthesize currentVersion = _currentVersion;
@@ -360,5 +365,26 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     return NO;
 }
 
+- (NSString *)uuid{
+    if (!_uuid) {
+        NSMutableDictionary *UUIDKeyChain = (NSMutableDictionary *)[CCKeyChain load:UUID_KEYCHAIN];
+        if (![UUIDKeyChain objectForKey:@"uuidkey"]) {
+            _uuid = [NSString cc_uuidString];
+            NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+            [dic setObject:_uuid forKey:@"uuidkey"];
+            [CCKeyChain save:UUID_KEYCHAIN data:dic];
+        }else{
+            _uuid = [UUIDKeyChain objectForKey:@"uuidkey"];
+        }
+        
+    }
+   
+    return _uuid;
+}
+
+
+- (void)deleteuuid{
+    [CCKeyChain deletekeychain:[CCKeyChain getKeychainQuery:UUID_KEYCHAIN]];
+}
 
 @end
