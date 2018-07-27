@@ -24,6 +24,18 @@
 /* Begin PBXBuildFile section */
 		B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = B623DA7320AAD3D700220F3F /* CCVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B623DA7620AAD3D700220F3F /* CCVersion.m */; };
+		B62E5964210B528200FC8448 /* CCNumberKeyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = B62E595E210B528100FC8448 /* CCNumberKeyboard.h */; };
+		B62E5965210B528200FC8448 /* CCKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B62E595F210B528100FC8448 /* CCKeyboardButton.m */; };
+		B62E5966210B528200FC8448 /* CCNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = B62E5960210B528100FC8448 /* CCNumberKeyboard.m */; };
+		B62E5967210B528200FC8448 /* CCKeyboardButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B62E5961210B528100FC8448 /* CCKeyboardButton.h */; };
+		B62E5968210B528200FC8448 /* CCTextInputDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B62E5962210B528100FC8448 /* CCTextInputDelegateProxy.h */; };
+		B62E5969210B528200FC8448 /* CCTextInputDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B62E5963210B528100FC8448 /* CCTextInputDelegateProxy.m */; };
+		B62E5971210B52D200FC8448 /* CCNumberKeyboardDeleteKey.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E596B210B52D200FC8448 /* CCNumberKeyboardDeleteKey.png */; };
+		B62E5972210B52D200FC8448 /* CCNumberKeyboardDismissKey.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E596C210B52D200FC8448 /* CCNumberKeyboardDismissKey.png */; };
+		B62E5973210B52D200FC8448 /* CCNumberKeyboardDismissKey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E596D210B52D200FC8448 /* CCNumberKeyboardDismissKey@3x.png */; };
+		B62E5974210B52D200FC8448 /* CCNumberKeyboardDeleteKey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E596E210B52D200FC8448 /* CCNumberKeyboardDeleteKey@3x.png */; };
+		B62E5975210B52D200FC8448 /* CCNumberKeyboardDeleteKey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E596F210B52D200FC8448 /* CCNumberKeyboardDeleteKey@2x.png */; };
+		B62E5976210B52D300FC8448 /* CCNumberKeyboardDismissKey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E5970210B52D200FC8448 /* CCNumberKeyboardDismissKey@2x.png */; };
 		B635B4622109A55900E4C0E2 /* CCKeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = B635B4602109A55900E4C0E2 /* CCKeyChain.h */; };
 		B635B4632109A55900E4C0E2 /* CCKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = B635B4612109A55900E4C0E2 /* CCKeyChain.m */; };
 		B6638B8E2102F94A007397A4 /* CCCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B66687EB20DE013E008EDB9E /* CCCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,6 +100,18 @@
 /* Begin PBXFileReference section */
 		B623DA7320AAD3D700220F3F /* CCVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVersion.h; sourceTree = "<group>"; };
 		B623DA7620AAD3D700220F3F /* CCVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVersion.m; sourceTree = "<group>"; };
+		B62E595E210B528100FC8448 /* CCNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNumberKeyboard.h; sourceTree = "<group>"; };
+		B62E595F210B528100FC8448 /* CCKeyboardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCKeyboardButton.m; sourceTree = "<group>"; };
+		B62E5960210B528100FC8448 /* CCNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNumberKeyboard.m; sourceTree = "<group>"; };
+		B62E5961210B528100FC8448 /* CCKeyboardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCKeyboardButton.h; sourceTree = "<group>"; };
+		B62E5962210B528100FC8448 /* CCTextInputDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextInputDelegateProxy.h; sourceTree = "<group>"; };
+		B62E5963210B528100FC8448 /* CCTextInputDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTextInputDelegateProxy.m; sourceTree = "<group>"; };
+		B62E596B210B52D200FC8448 /* CCNumberKeyboardDeleteKey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CCNumberKeyboardDeleteKey.png; sourceTree = "<group>"; };
+		B62E596C210B52D200FC8448 /* CCNumberKeyboardDismissKey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CCNumberKeyboardDismissKey.png; sourceTree = "<group>"; };
+		B62E596D210B52D200FC8448 /* CCNumberKeyboardDismissKey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CCNumberKeyboardDismissKey@3x.png"; sourceTree = "<group>"; };
+		B62E596E210B52D200FC8448 /* CCNumberKeyboardDeleteKey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CCNumberKeyboardDeleteKey@3x.png"; sourceTree = "<group>"; };
+		B62E596F210B52D200FC8448 /* CCNumberKeyboardDeleteKey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CCNumberKeyboardDeleteKey@2x.png"; sourceTree = "<group>"; };
+		B62E5970210B52D200FC8448 /* CCNumberKeyboardDismissKey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CCNumberKeyboardDismissKey@2x.png"; sourceTree = "<group>"; };
 		B635B4602109A55900E4C0E2 /* CCKeyChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCKeyChain.h; sourceTree = "<group>"; };
 		B635B4612109A55900E4C0E2 /* CCKeyChain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCKeyChain.m; sourceTree = "<group>"; };
 		B66687BA20DDFFE6008EDB9E /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
@@ -175,6 +199,33 @@
 				B635B4612109A55900E4C0E2 /* CCKeyChain.m */,
 			);
 			path = CCSoftwareInfo;
+			sourceTree = "<group>";
+		};
+		B62E595D210B525000FC8448 /* CCNumberKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				B62E596A210B52D200FC8448 /* Images */,
+				B62E5961210B528100FC8448 /* CCKeyboardButton.h */,
+				B62E595F210B528100FC8448 /* CCKeyboardButton.m */,
+				B62E595E210B528100FC8448 /* CCNumberKeyboard.h */,
+				B62E5960210B528100FC8448 /* CCNumberKeyboard.m */,
+				B62E5962210B528100FC8448 /* CCTextInputDelegateProxy.h */,
+				B62E5963210B528100FC8448 /* CCTextInputDelegateProxy.m */,
+			);
+			path = CCNumberKeyboard;
+			sourceTree = "<group>";
+		};
+		B62E596A210B52D200FC8448 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B62E596B210B52D200FC8448 /* CCNumberKeyboardDeleteKey.png */,
+				B62E596C210B52D200FC8448 /* CCNumberKeyboardDismissKey.png */,
+				B62E596D210B52D200FC8448 /* CCNumberKeyboardDismissKey@3x.png */,
+				B62E596E210B52D200FC8448 /* CCNumberKeyboardDeleteKey@3x.png */,
+				B62E596F210B52D200FC8448 /* CCNumberKeyboardDeleteKey@2x.png */,
+				B62E5970210B52D200FC8448 /* CCNumberKeyboardDismissKey@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		B66687B820DDFFE6008EDB9E /* CCCategory */ = {
@@ -273,6 +324,7 @@
 				B6FA0AC720A984EF000CECA0 /* Info.plist */,
 				B6FA0AC620A984EF000CECA0 /* CCToolKit.h */,
 				B66687B820DDFFE6008EDB9E /* CCCategory */,
+				B62E595D210B525000FC8448 /* CCNumberKeyboard */,
 				B67E50DB20D619C20007E4E8 /* CCXMLParser */,
 				B60BF8FC20AC4EB700EB3EAF /* CCStorage */,
 				B623DA7220AAD3D700220F3F /* CCSoftwareInfo */,
@@ -307,13 +359,16 @@
 				B66687D720DDFFE6008EDB9E /* NSNumber+Extensions.h in Headers */,
 				B6D0C01B20E773ED0081CFBB /* WKWebView+Extensions.h in Headers */,
 				B6FEA83F2106D0F200D25F01 /* UIAlertView+Extensions.h in Headers */,
+				B62E5967210B528200FC8448 /* CCKeyboardButton.h in Headers */,
 				B6FA0AD420A984EF000CECA0 /* CCToolKit.h in Headers */,
 				B6C0400120B94CDE002A7ED0 /* CCSoftwareManager.h in Headers */,
 				B66687DE20DDFFE6008EDB9E /* NSDictionary+Extensions.h in Headers */,
 				B690F9FF20AD736D00D3D086 /* CCFileManager.h in Headers */,
 				B6A7757320F9D1C3000E34F3 /* NSObject+Extensions.h in Headers */,
 				B6D0C02420E777500081CFBB /* NSHTTPCookieStorage+Extensions.h in Headers */,
+				B62E5964210B528200FC8448 /* CCNumberKeyboard.h in Headers */,
 				B66687DB20DDFFE6008EDB9E /* NSError+Extensions.h in Headers */,
+				B62E5968210B528200FC8448 /* CCTextInputDelegateProxy.h in Headers */,
 				B623DA7720AAD3D700220F3F /* CCVersion.h in Headers */,
 				B66687DC20DDFFE6008EDB9E /* NSArray+Extensions.h in Headers */,
 				B635B4622109A55900E4C0E2 /* CCKeyChain.h in Headers */,
@@ -407,6 +462,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B62E5974210B52D200FC8448 /* CCNumberKeyboardDeleteKey@3x.png in Resources */,
+				B62E5973210B52D200FC8448 /* CCNumberKeyboardDismissKey@3x.png in Resources */,
+				B62E5972210B52D200FC8448 /* CCNumberKeyboardDismissKey.png in Resources */,
+				B62E5976210B52D300FC8448 /* CCNumberKeyboardDismissKey@2x.png in Resources */,
+				B62E5971210B52D200FC8448 /* CCNumberKeyboardDeleteKey.png in Resources */,
+				B62E5975210B52D200FC8448 /* CCNumberKeyboardDeleteKey@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,14 +501,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B62E5965210B528200FC8448 /* CCKeyboardButton.m in Sources */,
 				B66687E620DDFFE6008EDB9E /* NSError+Extensions.m in Sources */,
 				B66687D820DDFFE6008EDB9E /* NSDate+Extensions.m in Sources */,
+				B62E5966210B528200FC8448 /* CCNumberKeyboard.m in Sources */,
 				B690F9FE20AD736D00D3D086 /* CCFileManager.m in Sources */,
 				B66687E520DDFFE6008EDB9E /* NSArray+Extensions.m in Sources */,
 				B66687E420DDFFE6008EDB9E /* NSString+Extensions.m in Sources */,
 				B66687E320DDFFE6008EDB9E /* NSDictionary+Extensions.m in Sources */,
 				B623DA7A20AAD3D700220F3F /* CCVersion.m in Sources */,
 				B6D0C01C20E773ED0081CFBB /* WKWebView+Extensions.m in Sources */,
+				B62E5969210B528200FC8448 /* CCTextInputDelegateProxy.m in Sources */,
 				B66687E020DDFFE6008EDB9E /* NSNumber+Extensions.m in Sources */,
 				B635B4632109A55900E4C0E2 /* CCKeyChain.m in Sources */,
 				B66687E120DDFFE6008EDB9E /* NSHTTPCookie+Extensions.m in Sources */,

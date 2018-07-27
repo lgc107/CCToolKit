@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "CCToolKit"
-  s.version          = "0.1.4"
+  s.version          = "0.1.5"
   s.summary          = "Custom Category used on iOS."
   s.description      = <<-DESC
                        Custom Category used on iOS, which implement by Objective-C.
@@ -16,15 +16,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = "CCToolKit/CCToolKit.h"
   s.public_header_files = "CCToolKit/CCToolKit.h"
-
-  s.subspec 'CCXMLParser' do |ss|
-    ss.source_files = 'CCToolKit/CCXMLParser/*.{h,m}'
-    ss.public_header_files = "CCToolKit/CCXMLParser/*.h"
-  end
-   
-  s.subspec 'CCSoftwareInfo' do |ss|
-    ss.source_files = 'CCToolKit/CCSoftwareInfo/*.{h,m}'
-  end
 
   s.subspec 'CCCategory' do |ss|
     ss.source_files = 'CCToolKit/CCCategory/CCCategory.h'
@@ -46,9 +37,26 @@ Pod::Spec.new do |s|
 
   end
 
+  s.subspec 'CCXMLParser' do |ss|
+    ss.source_files = 'CCToolKit/CCXMLParser/*.{h,m}'
+    ss.public_header_files = "CCToolKit/CCXMLParser/*.h"
+  end
+   
+  s.subspec 'CCSoftwareInfo' do |ss|
+    ss.source_files = 'CCToolKit/CCSoftwareInfo/*.{h,m}'
+  end
   s.subspec 'CCStorage' do |ss|
     ss.source_files = 'CCToolKit/CCStorage/*.{h,m}'
   end
+  s.subspec 'CCStorage' do |ss|
+    ss.source_files = 'CCToolKit/CCStorage/*.{h,m}'
+  end
+
+  s.subspec 'CCNumberKeyboard' do |ss|
+    ss.source_files = 'CCToolKit/CCNumberKeyboard/*.{h,m}'
+    ss.resources = 'CCToolKit/CCNumberKeyboard/Images/*.png'
+    ss.framework  = 'QuartzCore'
+  end 
 
 end
 
