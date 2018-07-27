@@ -30,7 +30,7 @@ FOUNDATION_EXPORT const unsigned char CCNumberKeyboardVersionString[];
  *  @param numberKeyboard The keyboard instance proposing the text insertion.
  *  @param text           The proposed text to be inserted.
  *
- *  @return Returns	@c YES if the text should be inserted or @c NO if it should not.
+ *  @return Returns    @c YES if the text should be inserted or @c NO if it should not.
  */
 - (BOOL)numberKeyboard:(CCNumberKeyboard *)numberKeyboard shouldInsertText:(NSString *)text;
 
@@ -39,7 +39,7 @@ FOUNDATION_EXPORT const unsigned char CCNumberKeyboardVersionString[];
  *
  *  @param numberKeyboard The keyboard whose return button was pressed.
  *
- *  @return Returns	@c YES if the keyboard should implement its default behavior for the return button; otherwise, @c NO.
+ *  @return Returns    @c YES if the keyboard should implement its default behavior for the return button; otherwise, @c NO.
  */
 - (BOOL)numberKeyboardShouldReturn:(CCNumberKeyboard *)numberKeyboard;
 
@@ -48,7 +48,7 @@ FOUNDATION_EXPORT const unsigned char CCNumberKeyboardVersionString[];
  *
  *  @param numberKeyboard The keyboard whose return button was pressed.
  *
- *  @return Returns	@c YES if the keyboard should implement its default behavior for the delete backward button; otherwise, @c NO.
+ *  @return Returns    @c YES if the keyboard should implement its default behavior for the delete backward button; otherwise, @c NO.
  */
 - (BOOL)numberKeyboardShouldDeleteBackward:(CCNumberKeyboard *)numberKeyboard;
 
@@ -142,10 +142,16 @@ typedef NS_ENUM(NSUInteger, CCNumberKeyboardButtonStyle) {
 /**
  *  If @c YES, the decimal separator key will be displayed.
  *
- *  @note The default value of this property is @c NO.
+ *  @note The default value of this property is @c true.
  */
 @property (assign, nonatomic) BOOL allowsDecimalPoint;
 
+/**
+ *  If @c YES, the number key will be random.
+ *
+ *  @note The default value of this property is @c false.
+ */
+@property (assign, nonatomic) BOOL allowsRandomNumber;
 /**
  *  The visible title of the Return key.
  *
@@ -154,9 +160,9 @@ typedef NS_ENUM(NSUInteger, CCNumberKeyboardButtonStyle) {
 @property (copy, nonatomic, null_resettable) NSString *returnKeyTitle;
 
 /**
- *  The visible title of the decimalPointKey key.
+ *  The visible title of the Return key.
  *
- *  @note The default visible title of the Return key is “X”.
+ *  @note The default visible title of the Return key is “Done”.
  */
 @property (copy, nonatomic, null_resettable) NSString *decimalPointKeyTitle;
 

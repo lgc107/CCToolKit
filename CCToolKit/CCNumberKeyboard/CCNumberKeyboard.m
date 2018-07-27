@@ -108,6 +108,9 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
     // Add default return key style.
     [self setReturnKeyButtonStyle:CCNumberKeyboardButtonStyleDone];
     
+    [self setAllowsRandomNumber:false];
+    
+    [self setAllowsDecimalPoint:true];
     // If an input view contains the .flexibleHeight option, the view will be sized as the default keyboard. This doesn't make much sense in the iPad, as we prefer a more compact keyboard.
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
         [self setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
@@ -170,7 +173,10 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
     [buttonDictionary setObject:doneButton forKey:@(CCNumberKeyboardButtonDone)];
     
     UIButton *decimalPointButton = [CCKeyboardButton keyboardButtonWithStyle:CCNumberKeyboardButtonStyleWhite];
-    [decimalPointButton setTitle:@"X" forState:UIControlStateNormal];
+    
+    NSLocale *locale = self.locale ?: [NSLocale currentLocale];
+    NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
+    [decimalPointButton setTitle:decimalSeparator ?: @"." forState:UIControlStateNormal];
     
     [buttonDictionary setObject:decimalPointButton forKey:@(CCNumberKeyboardButtonDecimalPoint)];
     
@@ -276,11 +282,11 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
     // Handle backspace.
     else if (keyboardButton == CCNumberKeyboardButtonBackspace) {
         BOOL shouldDeleteBackward = YES;
-		
+        
         if ([delegate respondsToSelector:@selector(numberKeyboardShouldDeleteBackward:)]) {
             shouldDeleteBackward = [delegate numberKeyboardShouldDeleteBackward:self];
         }
-		
+        
         if (shouldDeleteBackward) {
             [keyInput deleteBackward];
         }
@@ -454,6 +460,13 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
     }
 }
 
+- (void)setAllowsRandomNumber:(BOOL)allowsRandomNumber{
+    if (allowsRandomNumber != _allowsRandomNumber) {
+        _allowsRandomNumber = allowsRandomNumber;
+        
+        [self setNeedsLayout];
+    }
+}
 - (void)setReturnKeyTitle:(NSString *)title
 {
     if (!title) {
@@ -472,14 +485,16 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
 - (void)setDecimalPointKeyTitle:(NSString *)decimalPointKeyTitle
 {
     if (!decimalPointKeyTitle) {
-        decimalPointKeyTitle = @"X";
+        NSLocale *locale = self.locale ?: [NSLocale currentLocale];
+        NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
+        decimalPointKeyTitle = decimalSeparator ?: @".";
     }
     
     if (![decimalPointKeyTitle isEqualToString:self.decimalPointKeyTitle]) {
         UIButton *button = self.buttonDictionary[@(CCNumberKeyboardButtonDecimalPoint)];
         if (button) {
-            NSString *decimalPointKeyTitle1 = (decimalPointKeyTitle != nil && decimalPointKeyTitle.length > 0) ? decimalPointKeyTitle : @"X";
-            [button setTitle:decimalPointKeyTitle1 forState:UIControlStateNormal];
+            NSString *returnKeyTitle = (decimalPointKeyTitle != nil && decimalPointKeyTitle.length > 0) ? decimalPointKeyTitle : @".";
+            [button setTitle:returnKeyTitle forState:UIControlStateNormal];
         }
     }
 }
@@ -493,7 +508,9 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
             return title;
         }
     }
-    return @"X";
+    NSLocale *locale = self.locale ?: [NSLocale currentLocale];
+    NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
+    return decimalSeparator ?: @".";
 }
 
 - (NSString *)returnKeyTitle
@@ -606,7 +623,7 @@ NS_INLINE CGRect CCButtonRectMake(CGRect rect, CGRect contentRect, BOOL usesRoun
     const CGFloat spacing = (usesRoundedButtons) ? CCNumberKeyboardPadBorder : 0.0f;
     const CGFloat maximumWidth = (usesRoundedButtons) ? 400.0f : CGRectGetWidth(bounds);
     const BOOL allowsDecimalPoint = self.allowsDecimalPoint;
-    
+    const BOOL allowsRandomNumber = self.allowsRandomNumber;
     const CGFloat width = MIN(maximumWidth, CGRectGetWidth(bounds) - (spacing * 2.0f));
     
     CGRect contentRect = (CGRect){
@@ -629,34 +646,70 @@ NS_INLINE CGRect CCButtonRectMake(CGRect rect, CGRect contentRect, BOOL usesRoun
     const NSInteger numberMax = CCNumberKeyboardButtonNumberMax;
     
     const NSInteger numbersPerLine = 3;
-    
-    for (CCNumberKeyboardButton key = numberMin; key < numberMax; key++) {
-        UIButton *button = buttonDictionary[@(key)];
-        NSInteger digit = key - numberMin;
-        
-        CGRect rect = (CGRect){ .size = numberSize };
-        
-        if (digit == 0) {
-            rect.origin.y = numberSize.height * 3;
-            rect.origin.x = numberSize.width;
+    if (allowsRandomNumber) {
+        NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:0];
+        while (titleArray.count<10) {
+            NSInteger titlerNum = arc4random()%10;
+            NSNumber *title = [NSNumber numberWithInteger:titlerNum];
+            if (![titleArray containsObject:title]) {
+                [titleArray addObject:title];
+            }
+        }
+        for (int i = 0; i < 10; i++) {
+            UIButton *button = buttonDictionary[titleArray[i]];
             
-            if (!allowsDecimalPoint) {
-                rect.origin.x = numberSize.width * 2.0;
+            
+            CGRect rect = (CGRect){ .size = numberSize };
+            
+            if (i == 0) {
+                rect.origin.y = numberSize.height * 3;
+                rect.origin.x = numberSize.width;
+                
+                if (!allowsDecimalPoint) {
+                    rect.origin.x = numberSize.width * 2.0;
+                }
+                
+            } else {
+                NSUInteger idx = (i - 1);
+                
+                NSInteger line = idx / numbersPerLine;
+                NSInteger pos = idx % numbersPerLine;
+                
+                rect.origin.y = line * numberSize.height;
+                rect.origin.x = pos * numberSize.width;
             }
             
-        } else {
-            NSUInteger idx = (digit - 1);
-            
-            NSInteger line = idx / numbersPerLine;
-            NSInteger pos = idx % numbersPerLine;
-            
-            rect.origin.y = line * numberSize.height;
-            rect.origin.x = pos * numberSize.width;
+            [button setFrame:CCButtonRectMake(rect, contentRect, usesRoundedButtons)];
         }
-        
-        [button setFrame:CCButtonRectMake(rect, contentRect, usesRoundedButtons)];
     }
-    
+    else{
+        for (CCNumberKeyboardButton key = numberMin; key < numberMax; key++) {
+            UIButton *button = buttonDictionary[@(key)];
+            NSInteger digit = key - numberMin;
+            
+            CGRect rect = (CGRect){ .size = numberSize };
+            
+            if (digit == 0) {
+                rect.origin.y = numberSize.height * 3;
+                rect.origin.x = numberSize.width;
+                
+                if (!allowsDecimalPoint) {
+                    rect.origin.x = numberSize.width * 2.0;
+                }
+                
+            } else {
+                NSUInteger idx = (digit - 1);
+                
+                NSInteger line = idx / numbersPerLine;
+                NSInteger pos = idx % numbersPerLine;
+                
+                rect.origin.y = line * numberSize.height;
+                rect.origin.x = pos * numberSize.width;
+            }
+            
+            [button setFrame:CCButtonRectMake(rect, contentRect, usesRoundedButtons)];
+        }
+    }
     // Layout special key.
     UIButton *specialKey = buttonDictionary[@(CCNumberKeyboardButtonSpecial)];
     if (specialKey) {
@@ -794,14 +847,14 @@ NS_INLINE CGRect CCButtonRectMake(CGRect rect, CGRect contentRect, BOOL usesRoun
     if (!resource.length) {
         return nil;
     }
-
+    
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *resourcePath = [bundle pathForResource:resource ofType:extension];
-
+    
     if (resourcePath.length) {
         return [UIImage imageWithContentsOfFile:resourcePath];
     }
-
+    
     return [UIImage imageNamed:resource];
 }
 
