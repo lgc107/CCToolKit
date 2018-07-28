@@ -21,6 +21,6 @@ FOUNDATION_EXPORT const unsigned char CCToolKitVersionString[];
 #import <CCToolKit/CCVersion.h>
 #import <CCToolKit/CCCategory.h>
 #import <CCToolKit/CCXMLDictionaryParser.h>
-
+#import <CCToolKit/CCNumberKeyboard.h>
 
 

@@ -173,10 +173,7 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
     [buttonDictionary setObject:doneButton forKey:@(CCNumberKeyboardButtonDone)];
     
     UIButton *decimalPointButton = [CCKeyboardButton keyboardButtonWithStyle:CCNumberKeyboardButtonStyleWhite];
-    
-    NSLocale *locale = self.locale ?: [NSLocale currentLocale];
-    NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
-    [decimalPointButton setTitle:decimalSeparator ?: @"." forState:UIControlStateNormal];
+    [decimalPointButton setTitle:@"X" forState:UIControlStateNormal];
     
     [buttonDictionary setObject:decimalPointButton forKey:@(CCNumberKeyboardButtonDecimalPoint)];
     
@@ -485,16 +482,14 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
 - (void)setDecimalPointKeyTitle:(NSString *)decimalPointKeyTitle
 {
     if (!decimalPointKeyTitle) {
-        NSLocale *locale = self.locale ?: [NSLocale currentLocale];
-        NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
-        decimalPointKeyTitle = decimalSeparator ?: @".";
+        decimalPointKeyTitle = @"X";
     }
     
     if (![decimalPointKeyTitle isEqualToString:self.decimalPointKeyTitle]) {
         UIButton *button = self.buttonDictionary[@(CCNumberKeyboardButtonDecimalPoint)];
         if (button) {
-            NSString *returnKeyTitle = (decimalPointKeyTitle != nil && decimalPointKeyTitle.length > 0) ? decimalPointKeyTitle : @".";
-            [button setTitle:returnKeyTitle forState:UIControlStateNormal];
+            NSString *decimalPointKeyTitle1 = (decimalPointKeyTitle != nil && decimalPointKeyTitle.length > 0) ? decimalPointKeyTitle : @"X";
+            [button setTitle:decimalPointKeyTitle1 forState:UIControlStateNormal];
         }
     }
 }
@@ -508,9 +503,7 @@ static const CGFloat CCNumberKeyboardPadSpacing = 8.0f;
             return title;
         }
     }
-    NSLocale *locale = self.locale ?: [NSLocale currentLocale];
-    NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
-    return decimalSeparator ?: @".";
+    return @"X";
 }
 
 - (NSString *)returnKeyTitle
@@ -847,14 +840,14 @@ NS_INLINE CGRect CCButtonRectMake(CGRect rect, CGRect contentRect, BOOL usesRoun
     if (!resource.length) {
         return nil;
     }
-    
+
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *resourcePath = [bundle pathForResource:resource ofType:extension];
-    
+
     if (resourcePath.length) {
         return [UIImage imageWithContentsOfFile:resourcePath];
     }
-    
+
     return [UIImage imageNamed:resource];
 }
 

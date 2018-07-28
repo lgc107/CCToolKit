@@ -160,9 +160,9 @@ typedef NS_ENUM(NSUInteger, CCNumberKeyboardButtonStyle) {
 @property (copy, nonatomic, null_resettable) NSString *returnKeyTitle;
 
 /**
- *  The visible title of the Return key.
+ *  The visible title of the decimalPointKey key.
  *
- *  @note The default visible title of the Return key is “Done”.
+ *  @note The default visible title of the Return key is “X”.
  */
 @property (copy, nonatomic, null_resettable) NSString *decimalPointKeyTitle;
 
