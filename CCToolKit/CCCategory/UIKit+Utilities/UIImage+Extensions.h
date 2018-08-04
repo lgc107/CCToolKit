@@ -186,6 +186,9 @@ the width or height. [0, Min(width | height) / 2)
  */
 -(nullable UIImage *)dealImageWithCornerRadius:(CGFloat)radius;
 
+/**
+ return  blur image With special image
+ */
 - (UIImage *)cc_applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage;
 
 @end

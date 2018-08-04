@@ -137,7 +137,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSUInteger)cc_unsignedIntegerValueForKey:(NSString *)key default:(NSUInteger)def;
 
 - (nullable NSNumber *)cc_numberValueForKey:(NSString *)key default:(nullable NSNumber *)def;
+
 - (nullable NSString *)cc_stringValueForKey:(NSString *)key default:(nullable NSString *)def;
+
+- (nullable NSArray *)cc_arrayValueForKey:(NSString *)key default:(nullable NSArray *)def;
+
 
 @end
 

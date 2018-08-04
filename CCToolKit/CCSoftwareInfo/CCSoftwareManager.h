@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CCVersion.h"
-
+#import "CCKeyChain.h"
 
 @class CCVersion;
 
@@ -114,8 +114,21 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
  */
 @property (nonatomic,readonly) NSString *carrierName;
 
+/**
+ The name of the user's wifi name. Default is "4G".
+ */
+@property (nonatomic,readonly) NSString *wifiName;
+
+/**
+ The unique Id With App's bundleId
+ */
 @property (nonatomic,readonly) NSString *uuid;
 
+
+
+/**
+ delete unique Id
+ */
 - (void)deleteuuid;
 
 @end

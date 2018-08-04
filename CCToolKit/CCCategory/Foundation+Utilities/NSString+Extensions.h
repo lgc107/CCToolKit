@@ -549,6 +549,12 @@ typedef enum : NSUInteger {
 @interface NSString (Regular)
 
 /**
+
+ @return handle the json Text.
+ */
+- (NSString *)cc_jsonText;
+
+/**
   Verify if instance is a mobile number
  */
 - (BOOL)cc_isMobilePhoneNumberRegex;

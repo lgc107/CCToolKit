@@ -619,6 +619,33 @@
 
 @implementation NSString (Regular)
 
+- (NSString *)cc_jsonText{
+    NSString *text;
+    text = [self stringByReplacingOccurrencesOfString:@"    " withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"(\\\\)"
+                                           withString:@"\\\\\\\\" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [ text length])];
+    text = [text stringByReplacingOccurrencesOfString:@"(\r)"
+                                           withString:@"\\\\r" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [ text length])];
+    text = [text stringByReplacingOccurrencesOfString:@"(\n)"
+                                           withString:@"\\\\n" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [text length])];
+    text = [text stringByReplacingOccurrencesOfString:@"(\b)"
+                                           withString:@"\\\\b" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [ text length])];
+    text = [text stringByReplacingOccurrencesOfString:@"(\t)"
+                                           withString:@"\\\\t" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [ text length])];
+    text = [text stringByReplacingOccurrencesOfString:@"(\f)"
+                                           withString:@"\\\\f" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [ text length])];
+    text = [text stringByReplacingOccurrencesOfString:@"(\")"
+                                           withString:@"\\\"" options:NSRegularExpressionSearch
+                                                range:NSMakeRange(0, [ text length])];
+    return text;
+}
+
 - (BOOL)cc_isMobilePhoneNumberRegex{
     /**
      * 手机号码

@@ -9,11 +9,12 @@
 #import "CCSoftwareManager.h"
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
-#import "CCKeyChain.h"
 
-#define UUID_KEYCHAIN @"CCUUIDKeyChain"
+
+
 
 NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCheckNotification";
 
@@ -39,6 +40,8 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     NSString *_carrierName;
     
     NSString *_uuid;
+    
+    NSString *_wifiName;
     
 }
 @synthesize currentVersion = _currentVersion;
@@ -364,9 +367,26 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     return NO;
 }
 
+- (NSString *)wifiName
+{
+    if (!_wifiName) {
+        _wifiName = @"\"4G\"";
+        NSArray *ifs = (__bridge   id)CNCopySupportedInterfaces();
+        for (NSString *ifname in ifs) {
+            NSDictionary *info = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifname);
+            if (info[@"SSID"])
+            {
+                _wifiName = [[@"\"" stringByAppendingString:info[@"SSID"]] stringByAppendingString:@"\""] ;
+            }
+        }
+    }
+    return _wifiName;
+}
+
+
 - (NSString *)uuid{
     if (!_uuid) {
-        NSMutableDictionary *UUIDKeyChain = (NSMutableDictionary *)[CCKeyChain load:UUID_KEYCHAIN];
+        NSMutableDictionary *UUIDKeyChain = (NSMutableDictionary *)[CCKeyChain load:self.bundleId];
         if (![UUIDKeyChain objectForKey:@"uuidkey"]) {
             CFUUIDRef    uuidObj = CFUUIDCreate(nil);//create a new UUID
             //get the string representation of the UUID
@@ -374,7 +394,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
             CFRelease(uuidObj);
             NSMutableDictionary * dic = [NSMutableDictionary dictionary];
             [dic setObject:_uuid forKey:@"uuidkey"];
-            [CCKeyChain save:UUID_KEYCHAIN data:dic];
+            [CCKeyChain save:self.bundleId data:dic];
         }else{
             _uuid = [UUIDKeyChain objectForKey:@"uuidkey"];
         }
@@ -386,7 +406,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
 
 
 - (void)deleteuuid{
-    [CCKeyChain deletekeychain:[CCKeyChain getKeychainQuery:UUID_KEYCHAIN]];
+    [CCKeyChain deletekeychain:[CCKeyChain getKeychainQuery:self.bundleId]];
 }
 
 @end

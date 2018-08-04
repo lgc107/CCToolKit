@@ -125,6 +125,7 @@ static NSNumber *NSNumberFromID(id value) {
 
 #define RETURN_VALUE(_type_)                                                     \
 if (!key) return def;                                                            \
+if (![self cc_containsObjectForKey:key]) return def;                              \
 id value = self[key];                                                            \
 if (!value || value == [NSNull null]) return def;                                \
 if ([value isKindOfClass:[NSNumber class]]) return ((NSNumber *)value)._type_;   \
@@ -133,6 +134,7 @@ return def;
 
 
 - (BOOL)cc_boolValueForKey:(NSString *)key default:(BOOL)def {
+
     RETURN_VALUE(boolValue);
 }
 
@@ -194,6 +196,7 @@ return def;
 
 - (NSNumber *)cc_numberValueForKey:(NSString *)key default:(NSNumber *)def {
     if (!key) return def;
+    if (![self cc_containsObjectForKey:key]) return def;
     id value = self[key];
     if (!value || value == [NSNull null]) return def;
     if ([value isKindOfClass:[NSNumber class]]) return value;
@@ -203,6 +206,7 @@ return def;
 
 - (NSString *)cc_stringValueForKey:(NSString *)key default:(NSString *)def {
     if (!key) return def;
+    if (![self cc_containsObjectForKey:key]) return def;
     id value = self[key];
     if (!value || value == [NSNull null]) return def;
     if ([value isKindOfClass:[NSString class]]) return value;
@@ -210,6 +214,20 @@ return def;
     return def;
 }
 
+- (NSArray *)cc_arrayValueForKey:(NSString *)key default:(NSArray *)def{
+    if (!key) return def;
+    if (![self cc_containsObjectForKey:key]) return def;
+    id value = self[key];
+    if (!value || value == [NSNull null]) return def;
+    if ([value isKindOfClass:[NSArray class]]) return value;
+    if ([value isKindOfClass:[NSString class]]){
+        id json = [[value cc_jsonText] cc_jsonValueDecoded];
+        if (json && [json isKindOfClass:[NSArray class]]) {
+            return json;
+        }
+    }
+    return def;
+}
 
 @end
 
