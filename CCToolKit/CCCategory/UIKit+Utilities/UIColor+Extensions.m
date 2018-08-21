@@ -17,7 +17,7 @@
 }
 
 + (UIColor *)colorWithHexNumber:(int)hexNumber{
-    return [self colorWithHexNumber:hexNumber];
+    return [self colorWithHex:hexNumber alpha:1.0];
 }
 
 + (UIColor *)colorWithHex:(int)hexNumber alpha:(CGFloat)alpha{

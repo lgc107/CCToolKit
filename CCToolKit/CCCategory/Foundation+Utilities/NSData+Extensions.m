@@ -698,12 +698,13 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
     [keyData autorelease];
     [ivData autorelease];
 #endif
-    CCPadding paddingMode = ((padding == ccPKCS7Padding) ? ccPKCS7Padding:ccNoPadding) ;
     
+    //    CCPadding paddingMode = ((padding == ccPKCS7Padding && self.length > keyData.length) ? ccPKCS7Padding:ccNoPadding) ;
+    CCPadding paddingMode = ccNoPadding;
     // ensure correct lengths for key and iv data, based on algorithms
     SettingKeyLengths( algorithm, keyData, ivData );
     
-    NSData *sourceData =  bitPadding(operation, algorithm, padding, self);
+    NSData *sourceData =  bitPadding(operation, algorithm, padding, self, paddingMode);
     
     //    status = CCCryptorCreateWithMode(operation, mode, algorithm, ccNoPadding, ivData.bytes, keyData.bytes, keyData.length, NULL, 0, 0, kCCModeOptionCTR_LE, &cryptor);
     status = CCCryptorCreateWithMode(operation, mode, algorithm, paddingMode, ivData.bytes, keyData.bytes, keyData.length, NULL, 0, 0, kCCModeOptionCTR_LE, &cryptor);
@@ -743,20 +744,20 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
     //  It is not necessary to call CCCryptorFinal() when performing
     //symmetric encryption or decryption if padding is disabled, or
     //   when using a stream cipher.
-    if (mode == CcCryptorPKCS7Padding) {
-    status = CCCryptorFinal( cryptor, buf + bufused, bufsize - bufused, &bufused );
-    if ( status != kCCSuccess )
-    {
-        free( buf );
-        return ( nil );
-    }
-    bytesTotal += bufused;
+    if (mode == CcCryptorPKCS7Padding && paddingMode == ccPKCS7Padding) {
+        status = CCCryptorFinal( cryptor, buf + bufused, bufsize - bufused, &bufused );
+        if ( status != kCCSuccess )
+        {
+            free( buf );
+            return ( nil );
+        }
+        bytesTotal += bufused;
     }
     
     
     NSData *result = [NSData dataWithBytesNoCopy: buf length: bytesTotal];
     
-    result = removeBitPadding(operation, algorithm, padding, result);
+    result = removeBitPadding(operation, algorithm, padding, result,paddingMode);
     
     if ( (result == nil) && (error != NULL) )
         *error = status;
@@ -847,12 +848,10 @@ static void SettingKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, N
 }
 
 // Fill in the bytes that need to be encrypted.
-static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *data)
+static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *data ,  CCPadding mode)
 {
     
-    if (padding == CcCryptorPKCS7Padding) {
-        return  data;
-    }
+    
     if (operation == kCCEncrypt && (algorithm != CcCryptoAlgorithmRC4)  ) {
         NSMutableData *sourceData = data.mutableCopy;
         int blockSize = 8;
@@ -900,14 +899,15 @@ static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
                 [sourceData appendBytes:&diff length:1];
             }
                 break;
-                //            case CcCryptorPKCS7Padding:
-                //            {
-                //                int diff =  blockSize - ([sourceData length] % blockSize);
-                //                for (int i = 0; i <diff; i++) {
-                //                    [sourceData appendBytes:&diff length:1];
-                //                }
-                //
-                //            }
+            case CcCryptorPKCS7Padding:
+            {
+                if (mode = ccNoPadding) {
+                    int diff =  blockSize - ([sourceData length] % blockSize);
+                    for (int i = 0; i <diff; i++) {
+                        [sourceData appendBytes:&diff length:1];
+                    }
+                }
+            }
             default:
                 break;
         }
@@ -918,9 +918,9 @@ static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
 }
 
 //Remove the filled character  for the decrypted data.
-static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *sourceData)
+static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCryptorPadding padding, NSData *sourceData ,CCPadding mode)
 {
-    if (padding == CcCryptorPKCS7Padding) {
+    if (padding == CcCryptorPKCS7Padding && mode == ccPKCS7Padding) {
         return sourceData;
     }
     if (operation == kCCDecrypt && (algorithm != CcCryptoAlgorithmRC4) ) {
@@ -941,26 +941,28 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
                 break;
         }
         Byte *testByte = (Byte *)[sourceData bytes];
-        char end = testByte[sourceData.length - 1];
-        // 去除可能填充字符
-        //        if ((padding == CcCryptorZeroPadding && end == 0) || (padding == ccPKCS7Padding && (end > 0 && end < blockSize + 1))) {
-        if (padding == CcCryptorZeroPadding && end == 0) {
-            for (int i = (short)sourceData.length - 1; i > 0 ; i--) {
-                if (testByte[i] != end) {
-                    correctLength = i + 1;
-                    break;
+        if (testByte) {
+            char end = testByte[sourceData.length - 1];
+            // 去除可能填充字符
+            if ((padding == CcCryptorZeroPadding && end == 0) || (padding == ccPKCS7Padding && (end > 0 && end < blockSize + 1) && mode == ccNoPadding)) {
+                //        if (padding == CcCryptorZeroPadding && end == 0) {
+                for (int i = (short)sourceData.length - 1; i > 0 ; i--) {
+                    if (testByte[i] != end) {
+                        correctLength = i + 1;
+                        break;
+                    }
                 }
             }
-        }
-        else if ((padding == CcCryptorANSIX923 || padding == CcCryptorISO10126) && (end > 0 && end < blockSize + 1)){
-            if (padding == CcCryptorISO10126 || ( testByte[sourceData.length - 2] == 0 &&  testByte[sourceData.length - end] == 0)) {
-                correctLength = (short)sourceData.length - end;
+            else if ((padding == CcCryptorANSIX923 || padding == CcCryptorISO10126) && (end > 0 && end < blockSize + 1)){
+                if (padding == CcCryptorISO10126 || ( testByte[sourceData.length - 2] == 0 &&  testByte[sourceData.length - end] == 0)) {
+                    correctLength = (short)sourceData.length - end;
+                }
             }
+            
+            NSData *data = [NSData dataWithBytes:testByte length:correctLength];
+            return data;
+            
         }
-        
-        NSData *data = [NSData dataWithBytes:testByte length:correctLength];
-        return data;
-        
     }
     return sourceData;
     
@@ -1149,7 +1151,7 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
 @implementation NSData (Plist)
 - (NSArray *)cc_plistArray{
     if (!self) return nil;
-     NSArray *array = [NSPropertyListSerialization propertyListWithData:self options:NSPropertyListImmutable format:NULL error:NULL];
+    NSArray *array = [NSPropertyListSerialization propertyListWithData:self options:NSPropertyListImmutable format:NULL error:NULL];
     if ([array isKindOfClass:[NSArray class]]) return array;
     return nil;
 }
