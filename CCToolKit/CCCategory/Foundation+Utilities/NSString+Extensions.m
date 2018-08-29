@@ -791,7 +791,7 @@
 
 
 - (BOOL)cc_checkWithRegularExpression:(NSString *)expression{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:expression];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",expression];
     return [predicate evaluateWithObject:self];
 }
 
