@@ -901,7 +901,7 @@ static NSData * bitPadding(CCOperation operation, CCAlgorithm algorithm ,CcCrypt
                 break;
             case CcCryptorPKCS7Padding:
             {
-                if (mode = ccNoPadding) {
+                if (mode == ccNoPadding) {
                     int diff =  blockSize - ([sourceData length] % blockSize);
                     for (int i = 0; i <diff; i++) {
                         [sourceData appendBytes:&diff length:1];
