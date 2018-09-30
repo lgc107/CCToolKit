@@ -83,7 +83,7 @@ typedef void(^CCVersionCheckResultBlock)(BOOL needUpdate, CCVersion *appStoreVer
 /**
  whether the device is iphoneX
  */
-@property (nonatomic,assign) BOOL isIphoneX;
+@property (nonatomic,assign) BOOL isIphoneXSeries;
 
 /**
  The name identifying the device.

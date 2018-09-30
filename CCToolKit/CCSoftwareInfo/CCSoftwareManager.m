@@ -335,27 +335,32 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     
 }
 
--(BOOL)isIphoneX{
-    if (!_isIphoneX) {
+-(BOOL)isIphoneXSeries{
+    if (!_isIphoneXSeries) {
         struct utsname systemInfo;
         uname(&systemInfo);
         NSString *platform = [NSString stringWithCString:systemInfo.machine
                                                 encoding:NSUTF8StringEncoding];
         if ([platform isEqualToString:@"iPhone10,3"] || [platform isEqualToString:@"iPhone10,6"]){
-            _isIphoneX = true;
+            _isIphoneXSeries = true;
             
         }
         else if (CGSizeEqualToSize(CGSizeMake(375.f, 812.f), [UIScreen mainScreen].bounds.size) || CGSizeEqualToSize(CGSizeMake(812.f, 375.f), [UIScreen mainScreen].bounds.size)){
-            _isIphoneX = true;
+            _isIphoneXSeries = true;
             
         }
         else{
-            _isIphoneX = false;
+            if ([UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom > 0) {
+                _isIphoneXSeries = true;
+            }
+            else{
+                _isIphoneXSeries = false;
+            }
         }
     }
     
     
-    return _isIphoneX;
+    return _isIphoneXSeries;
 }
 
 

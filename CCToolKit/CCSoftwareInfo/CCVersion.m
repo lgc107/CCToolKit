@@ -16,6 +16,7 @@ static NSString *const kBundleVerionIdentifier = @"CFBundleVersion";
 @implementation CCVersion
 {
     NSString *versionString;
+    NSString *oString;
 }
 @synthesize versionComponents;
 
@@ -42,6 +43,7 @@ static NSString *const kBundleVerionIdentifier = @"CFBundleVersion";
 - (instancetype)initWithString:(NSString *)aString{
     self = [super init];
     if (self) {
+        oString = aString;
         NSArray <NSString *>*intComponents = [aString componentsSeparatedByString:@"."];
         NSMutableString *tmpString = [NSMutableString string];
         [intComponents enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -65,7 +67,7 @@ static NSString *const kBundleVerionIdentifier = @"CFBundleVersion";
 
 #pragma mark -- property Get Method
 -(NSString *)stringValue{
-    return [versionString copy];
+    return [oString copy];
 }
 
 #pragma mark -- Compare
