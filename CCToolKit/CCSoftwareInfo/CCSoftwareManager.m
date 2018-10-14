@@ -350,12 +350,24 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
             
         }
         else{
-            if ([UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom > 0) {
-                _isIphoneXSeries = true;
+            if (UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPhone) {
+                _isIphoneXSeries = false;
+            }
+            
+            if (@available(iOS 11.0, *)) {
+                UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+                if (mainWindow.safeAreaInsets.bottom > 0.0) {
+                    _isIphoneXSeries = YES;
+                }
+                else{
+                    _isIphoneXSeries = false;
+                }
             }
             else{
                 _isIphoneXSeries = false;
             }
+            
+        
         }
     }
     

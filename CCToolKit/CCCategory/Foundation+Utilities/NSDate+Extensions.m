@@ -241,7 +241,20 @@
     return weekAllDays;
 }
 
-
+- (NSInteger)cc_daysToToday
+{
+    NSTimeInterval late=[self timeIntervalSince1970]*1;
+    NSDate* date = [NSDate date];
+    NSString *nowDateString = [date cc_stringWithFormat:@"YYYY-MM-dd"];
+    NSDate *todayDate = [NSDate cc_dateWithString:nowDateString format:@"YYYY-MM-dd"];
+    NSTimeInterval now=[todayDate timeIntervalSince1970]*1;
+    NSTimeInterval cha=now-late;
+    
+    NSString * timeString = [NSString stringWithFormat:@"%f", cha/86400];
+    timeString = [timeString substringToIndex:timeString.length-7];
+    return [timeString integerValue];
+    
+}
 
 @end
 
