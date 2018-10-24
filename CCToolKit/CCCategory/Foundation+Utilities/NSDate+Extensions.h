@@ -244,6 +244,8 @@
  */
 - (NSArray <NSDate *> *)cc_getWeekAllDays;
 
+- (NSInteger)cc_daysToToday;
+
 @end
 
 
