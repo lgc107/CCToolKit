@@ -111,7 +111,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
         NSLog(@"【1】当前为APPID检测，您设置的APPID为:%@  当前版本号为:%@",appId, self.currentVersion.stringValue);
     }
     else {
-        request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@&country=cn",bundleId]]];
+        request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/lookup?bundleId=%@&country=cn",bundleId]]];
         NSLog(@"【1】当前为BundelId检测，您设置的bundelId为:%@  当前版本号为:%@",bundleId, self.currentVersion.stringValue);
     }
     
@@ -119,7 +119,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
     __block typeof(self) blockSelf = self;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
- 
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completitionHandler) {
                     completitionHandler(false,nil,nil,nil,error);
@@ -143,7 +143,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
                 
                 blockSelf.appStoreVersion =  [CCVersion versionWithString: appInfoDic[@"results"][0][@"version"]];
                 blockSelf.appStoreUrl = appInfoDic[@"results"][0][@"trackViewUrl"];
-                blockSelf.releaseNotes= appInfoDic[@"results"][0][@"releaseNotes"];
+                blockSelf.releaseNotes= appInfoDic[@"results"][0][@"releaseNotes"] ? appInfoDic[@"results"][0][@"releaseNotes"] : @"";
                 
                 switch ([blockSelf.currentVersion compare:blockSelf.appStoreVersion]) {
                     case NSOrderedAscending:
@@ -367,7 +367,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
                 _isIphoneXSeries = false;
             }
             
-        
+            
         }
     }
     
@@ -417,7 +417,7 @@ NSString *const CCAppStoreVersionDidCheckNotification = @"CCAppStoreVersionDidCh
         }
         
     }
-   
+    
     return _uuid;
 }
 
