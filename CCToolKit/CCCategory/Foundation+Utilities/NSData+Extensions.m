@@ -923,6 +923,9 @@ static NSData * removeBitPadding(CCOperation operation, CCAlgorithm algorithm ,C
     if (padding == CcCryptorPKCS7Padding && mode == ccPKCS7Padding) {
         return sourceData;
     }
+    if (padding == CcCryptorNoPadding){
+        return  sourceData;
+    }
     if (operation == kCCDecrypt && (algorithm != CcCryptoAlgorithmRC4) ) {
         
         int correctLength = 0;
